@@ -13,15 +13,22 @@
 @end
 
 @implementation MainViewController
+{
+    NSArray *items;//用于存储国家名称
+    NSArray *images;//用于存储图片
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    //可以在这里设置左右导航按钮
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    items = [@"USA CNY JPY" componentsSeparatedByString:@" "];
+    
+    images = [@"usa china jp"componentsSeparatedByString:@" "];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -31,14 +38,17 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+//    表格的区段数
 #warning Incomplete implementation, return the number of sections
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+//    该区段的行数
 #warning Incomplete implementation, return the number of rows
-    return 1;
+    return items.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -52,8 +62,8 @@
     
     ConvertCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     
-    cell.countryName.text = @"USA";
-    cell.countryImage.image = [UIImage imageNamed:@"jp"];
+    cell.countryName.text = [items objectAtIndex:indexPath.row];
+    cell.countryImage.image = [UIImage imageNamed:[images objectAtIndex:indexPath.row]];
     
 
     
