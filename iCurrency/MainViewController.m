@@ -7,7 +7,7 @@
 //
 
 #import "MainViewController.h"
-
+#import "ConvertCell.h"
 @interface MainViewController ()
 
 @end
@@ -33,17 +33,38 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 #warning Incomplete implementation, return the number of sections
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete implementation, return the number of rows
-    return 0;
+    return 1;
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 75.f;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *reuseIdentifier = @"convertCell";
+    
+    ConvertCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+    
+    cell.countryName.text = @"USA";
+    cell.countryImage.image = [UIImage imageNamed:@"jp"];
+    
+
+    
+    return cell;
+}
+
+
 
 /*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:tab forIndexPath:indexPath];
     
     // Configure the cell...
     
