@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MainViewController.h"
 
-@interface ConvertCell : UITableViewCell
+@interface ConvertCell : UITableViewCell<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *countryImage;
 @property (weak, nonatomic) IBOutlet UILabel *countryName;
 @property (weak, nonatomic) IBOutlet UITextField *inputNumField;
