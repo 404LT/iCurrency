@@ -38,10 +38,10 @@
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
 //    以下数据均经网络由雅虎财经获取
 //    有可能需要把每个国家的信息用字典来装载
-    nameitems = [@"USA CNY JPY UK" componentsSeparatedByString:@" "];
-    currencyUnit = [@"美元 人民币 日元 英镑"componentsSeparatedByString:@" "];
-    images = [@"usa china jp uk"componentsSeparatedByString:@" "];
-    nowCurrency = [@"100 300 500 128"componentsSeparatedByString:@" "];
+    nameitems = [@"USA CNY JPY HKD GBP AUD CAD EUR SWIZ MOP KOR" componentsSeparatedByString:@" "];
+    currencyUnit = [@"美元 人民币 日元 港币 英镑 澳大利亚元 加拿大美元 欧元 瑞士法郎 葡币 韩元"componentsSeparatedByString:@" "];
+    images = [@"usa china jp hkd uk aud cad eur swiz mop kor"componentsSeparatedByString:@" "];
+    nowCurrency = [@"100 300 500 128 778 879 227 998 657 887 367"componentsSeparatedByString:@" "];
     
 //    UITapGestureRecognizer *gestureRecognizer = [[UIGestureRecognizer alloc]initWithTarget:self action:@selector(hideKeyboard)];
 //    gestureRecognizer.cancelsTouchesInView = NO;
@@ -104,75 +104,14 @@
 
 
 #pragma mark - 隐藏键盘
-//- (IBAction)inputFieldBeginEdit:(id)sender {
-//    NSLog(@"//文本输入框开始编辑");
-//    self.firstResponder=sender;
-//    NSLog(@"firstResponder exists22 ,%p",self.firstResponder);
-//    
-//}
-
-//- (void)hideKeyboard
-//{
-//    NSLog(@"关闭键盘");
-//    ConvertCell *cell = [[ConvertCell alloc]init];
-//    [cell.inputNumField resignFirstResponder];
-//}
-
-////设置第一响应者
-//-(void) setFirstResponder{
-//    NSIndexPath *path=[NSIndexPath indexPathForItem:0 inSection:0];
-//    UITextField *field=((ConvertCell*)[self.tableView cellForRowAtIndexPath:path]).inputNumField;
-//    [self setFirstResponder:field];
-//}
-//
-////关闭键盘
-//- (void) dismissKeyboard{
-//    NSLog(@"关闭键盘");
-//    //    if(self.firstResponder && self.keyBoardShown)
-//    {
-//        [self.firstResponder resignFirstResponder];
-//        ConvertCell *cell = [[ConvertCell alloc]init];
-//        [cell.inputNumField resignFirstResponder];
-//         NSLog(@"成功关闭键盘");
-//        //        self.firstResponder=nil;
-//    }
-//}
-//
-//-(void) setupForDismissKeyboard{
-//    UITapGestureRecognizer *tapRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
-//    [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardDidShowNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
-//        [self.tableView addGestureRecognizer:tapRecognizer];
-//        self.keyBoardShown=YES;
-//        //        self.tableView.showsPullToRefresh=NO;
-//    }];
-//    [[NSNotificationCenter defaultCenter]addObserverForName:UIKeyboardDidHideNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
-//        [self.tableView removeGestureRecognizer:tapRecognizer];
-//        self.keyBoardShown=NO;
-//        //        self.tableView.showsPullToRefresh=YES;
-//        
-//    }];
-//}
-
-
-
-
-
-
-
+//最终可用版本
 - (void)setupKeyboardDismissGestures
 {
-    
     //    Example for a swipe gesture recognizer. it was not set-up since we use scrollViewDelegate for dissmin-on-swiping, but it could be useful to keep in mind for views that do not inherit from UIScrollView
-    //    UISwipeGestureRecognizer *swipeUpGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
-    //    swipeUpGestureRecognizer.cancelsTouchesInView = NO;
-    //    swipeUpGestureRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
-    //    [self.tableView addGestureRecognizer:swipeUpGestureRecognizer];
-    
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     //this prevents the gestureRecognizer to override other Taps, such as Cell Selection
     tapGestureRecognizer.cancelsTouchesInView = NO;
     [self.tableView addGestureRecognizer:tapGestureRecognizer];
-    
 }
 
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
@@ -180,163 +119,110 @@
     [self dismissKeyboard];
 }
 
-
-//- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
-//{
-//    [self dismissKeyboard];
-//}
-
 - (void)dismissKeyboard
 {
-    NSLog(@"dismissKeyboard");
-//    ConvertCell *customCell =[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:[self.tableView indexPathForSelectedRow] inSection:0]];
-    
-//    ConvertCell *customCell =[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-//    [customCell.inputNumField resignFirstResponder];
-//    
-    
+    NSLog(@"dismissKeyboard is called");
     [self.tableView endEditing:YES];
-    //这个方法不错，当执行隐藏键盘事件的时候  把整个tableView 的编辑功能结束从而实现隐藏键盘
-    //this convenience method on UITableView sends a nested message to all subviews, and they resign responders if they have hold of the keyboard
-   
-    
-//    [customCell.inputNumField resignFirstResponder];
-//    
-//    ConvertCell *customCell2 = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-//    [customCell2.inputNumField resignFirstResponder];
-//    
-//    ConvertCell *customCell3= [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
-//    [customCell3.inputNumField resignFirstResponder];
-//    
-//    ConvertCell *customCell4 = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
-//    [customCell4.inputNumField resignFirstResponder];
-    
 }
 
-//
-//- (void)setupKeyboardDismissTaps{
-//    
-//    UISwipeGestureRecognizer *swipeUpGestureRecognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
-//    swipeUpGestureRecognizer.cancelsTouchesInView = NO;
-//    swipeUpGestureRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
-//    [self.tableView addGestureRecognizer:swipeUpGestureRecognizer];
-//    
-//    UISwipeGestureRecognizer *swipeDownGestureRecognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
-//    swipeDownGestureRecognizer.cancelsTouchesInView = NO;
-//    swipeDownGestureRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
-//    [self.tableView addGestureRecognizer:swipeDownGestureRecognizer];
-//    
-//    UISwipeGestureRecognizer *swipeLeftGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
-//    swipeLeftGestureRecognizer.cancelsTouchesInView = NO;
-//    swipeLeftGestureRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
-//    [self.tableView addGestureRecognizer:swipeLeftGestureRecognizer];
-//    
-//    UISwipeGestureRecognizer *swipeRightGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
-//    swipeRightGestureRecognizer.cancelsTouchesInView = NO;
-//    swipeRightGestureRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
-//    [self.tableView addGestureRecognizer:swipeRightGestureRecognizer];
-//    
-//    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
-//    tapGestureRecognizer.cancelsTouchesInView = NO;
-//    [self.tableView addGestureRecognizer:tapGestureRecognizer];
-//}
+ 
+ //-------------------
+#pragma mark -  备选隐藏键盘方法
+
+/*
+ //以下方法也可以使用来隐藏键盘，点击其他地方即可隐藏，使用此方法需要在viewDidLoad()函数中加入[self setupForDismissKeyboard];
+ //设置第一响应者
+ -(void) setFirstResponder{
+ NSIndexPath *path=[NSIndexPath indexPathForItem:0 inSection:0];
+ UITextField *field=((ConvertCell*)[self.tableView cellForRowAtIndexPath:path]).inputNumField;
+ [self setFirstResponder:field];
+ }
+ 
+ //关闭键盘
+ - (void) dismissKeyboard{
+ NSLog(@"关闭键盘");
+ //    if(self.firstResponder && self.keyBoardShown)
+ {
+     
+      NSLog(@"dismissKeyboard is called");
+     [self.tableView endEditing:YES];
+ 
+ }
+ }
+ 
+ -(void) setupForDismissKeyboard{
+ UITapGestureRecognizer *tapRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
+ [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardDidShowNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+ [self.tableView addGestureRecognizer:tapRecognizer];
+ self.keyBoardShown=YES;
+ //        self.tableView.showsPullToRefresh=NO;
+ }];
+ [[NSNotificationCenter defaultCenter]addObserverForName:UIKeyboardDidHideNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+ [self.tableView removeGestureRecognizer:tapRecognizer];
+ self.keyBoardShown=NO;
+ //        self.tableView.showsPullToRefresh=YES;
+ 
+ }];
+ }
+ 
+ */
+ 
+
+
+    //这个方法不错，当执行隐藏键盘事件的时候  把整个tableView 的编辑功能结束从而实现隐藏键盘
+    //this convenience method on UITableView sends a nested message to all subviews, and they resign responders if they have hold of the keyboard
+   /*
+        用indexPath来分别检索每一个cell然后隐藏他的键盘，但是当cell多了之后不好控制。
+        ConvertCell *customCell =[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:[self.tableView indexPathForSelectedRow] inSection:0]];
+    
+        ConvertCell *customCell =[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        [customCell.inputNumField resignFirstResponder];
+    
+
+        [customCell.inputNumField resignFirstResponder];
+    
+        ConvertCell *customCell2 = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+        [customCell2.inputNumField resignFirstResponder];
+    
+        ConvertCell *customCell3= [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
+        [customCell3.inputNumField resignFirstResponder];
+    
+        ConvertCell *customCell4 = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+        [customCell4.inputNumField resignFirstResponder];
+    
+    */
+
+/* ---------------------------------------------------------------------------------上下左右滑动的监听器
+- (void)setupKeyboardDismissTaps{
+
+    UISwipeGestureRecognizer *swipeUpGestureRecognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
+    swipeUpGestureRecognizer.cancelsTouchesInView = NO;
+    swipeUpGestureRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
+    [self.tableView addGestureRecognizer:swipeUpGestureRecognizer];
+
+    UISwipeGestureRecognizer *swipeDownGestureRecognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
+    swipeDownGestureRecognizer.cancelsTouchesInView = NO;
+    swipeDownGestureRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
+    [self.tableView addGestureRecognizer:swipeDownGestureRecognizer];
+
+    UISwipeGestureRecognizer *swipeLeftGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    swipeLeftGestureRecognizer.cancelsTouchesInView = NO;
+    swipeLeftGestureRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.tableView addGestureRecognizer:swipeLeftGestureRecognizer];
+
+    UISwipeGestureRecognizer *swipeRightGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    swipeRightGestureRecognizer.cancelsTouchesInView = NO;
+    swipeRightGestureRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.tableView addGestureRecognizer:swipeRightGestureRecognizer];
+
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    tapGestureRecognizer.cancelsTouchesInView = NO;
+    [self.tableView addGestureRecognizer:tapGestureRecognizer];
+}
 
 //SS上面的滑动隐藏键盘 但是不能在第二个cell上面实现
 //
-//*/
-
-
-
-
-
-
-
-
-//- (void)setFirstResponder:(UITextField *)firstResponder
-//{
-//    NSLog(@"设置首个响应者");
-//    NSIndexPath *path = [NSIndexPath indexPathForItem:0 inSection:0];
-//    UITextField *field = ((ConvertCell *)[self.tableView cellForRowAtIndexPath:path]).inputNumField;
-//    [self setFirstResponder:field];
-//    
-//    UITapGestureRecognizer *tapRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
-//    [self.tableView addGestureRecognizer:tapRecognizer];
-//    
-//}
-//
-//-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
-//{
-////    if (![touch.view isKindOfClass: [UITextField class]]) {
-////        [self hideKeyBoard];
-////        return NO;
-////    }
-////    NSLog(@"shouldReceiveTouch = yes");
-////    return YES;
-//    UITapGestureRecognizer *tapRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
-//    [self.tableView addGestureRecognizer:tapRecognizer];
-//    
-//}
-//
-//
-//- (void)dismissKeyboard{
-//    NSLog(@"关闭键盘");
-//    if (self.firstResponder && self.keyBoardShown) {
-//        [self.firstResponder resignFirstResponder];
-//        self.firstResponder = nil;
-//    }
-//    NSLog(@"已经关闭键盘");
-//
-//}
-//
-//-(void) setupForDismissKeyboard{
-//    UITapGestureRecognizer *tapRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
-//    [self.tableView addGestureRecognizer:tapRecognizer];
-//    tapRecognizer.cancelsTouchesInView =NO;
-//    
-////    [self.view addGestureRecognizer:tapRecognizer];
-//    [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardDidShowNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
-//        [self.tableView addGestureRecognizer:tapRecognizer];
-//        self.keyBoardShown=YES;
-//        //        self.tableView.showsPullToRefresh=NO;
-//    }];
-//    [[NSNotificationCenter defaultCenter]addObserverForName:UIKeyboardDidHideNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
-//        [self.tableView removeGestureRecognizer:tapRecognizer];
-//        self.keyBoardShown=NO;
-//        //        self.tableView.showsPullToRefresh=YES;
-//        
-//    }];
-//
-//}
-
-
-
-
-
-
-
-//- (void)setFirstResponder:(UITextField *)firstResponder
-//{
-//    NSLog(@"设置第一响应者");
-//    NSIndexPath *path = [NSIndexPath indexPathForItem:0 inSection:0];
-//    UITextField *field = ((ConvertCell *)[self.tableView cellForRowAtIndexPath:path]).inputNumField;
-//    [self setFirstResponder:field];
-//}
-//
-//- (void)hideKeyBoard{
-//    NSLog(@"hidekeyboard is called");
-//    //创建第0区第1行的indexPath
-////    NSUInteger newIndex[] = {0, 1};
-////    NSIndexPath *newPath = [[NSIndexPath alloc] initWithIndexes:newIndex length:2];
-//        NSIndexPath *newPath = [NSIndexPath indexPathForItem:0 inSection:0];
-//    //    UITextField *field = ((ConvertCell *)[self.tableView cellForRowAtIndexPath:path]).inputNumField;
-//    //    [self setFirstResponder:field];
-//    
-//    
-//    //找到对应的cell
-//    ConvertCell *nextCell = (ConvertCell*)[self.tableView cellForRowAtIndexPath:newPath];
-//    
-//    [nextCell.inputNumField resignFirstResponder];//numText就是UITextField
-//}
+*/
 
 
 

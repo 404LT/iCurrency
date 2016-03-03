@@ -18,41 +18,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="5Cd-sz-LaM">
-                                <rect key="frame" x="177" y="313" width="20" height="20"/>
-                            </activityIndicatorView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome Back" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="URq-ZL-3NU">
-                                <rect key="frame" x="82" y="225" width="211" height="85"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="URq-ZL-3NU">
+                                <rect key="frame" x="82" y="291" width="211" height="85"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="85" id="eeH-ym-6yh"/>
-                                    <constraint firstAttribute="width" constant="211" id="qma-Re-OE8"/>
+                                    <constraint firstAttribute="height" constant="85" id="tJP-dl-iAD"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="67"/>
+                                <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="qma-Re-OE8"/>
-                                    </mask>
-                                </variation>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.50588235294117645" green="0.84705882352941175" blue="0.80784313725490198" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="URq-ZL-3NU" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="205" id="HRh-qF-BqH"/>
-                            <constraint firstItem="URq-ZL-3NU" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="66" id="HX9-er-KLr"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="URq-ZL-3NU" secondAttribute="trailing" constant="62" id="K5e-9J-YNx"/>
-                            <constraint firstItem="5Cd-sz-LaM" firstAttribute="centerX" secondItem="URq-ZL-3NU" secondAttribute="centerX" id="PP2-yo-T9v"/>
-                            <constraint firstItem="5Cd-sz-LaM" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="ViL-Kg-WGV"/>
-                            <constraint firstItem="5Cd-sz-LaM" firstAttribute="top" secondItem="URq-ZL-3NU" secondAttribute="bottom" constant="3" id="WTo-a3-47C"/>
-                            <constraint firstItem="URq-ZL-3NU" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="62" id="jm6-5K-PPB"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="URq-ZL-3NU" secondAttribute="trailing" constant="62" id="Dzr-tO-pxX"/>
+                            <constraint firstItem="URq-ZL-3NU" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="271" id="U45-mf-Nom"/>
+                            <constraint firstItem="URq-ZL-3NU" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="62" id="eYT-uC-Rpn"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="URq-ZL-3NU" secondAttribute="bottom" constant="291" id="t27-UY-bb5"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="K5e-9J-YNx"/>
-                                <exclude reference="jm6-5K-PPB"/>
-                            </mask>
-                        </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
