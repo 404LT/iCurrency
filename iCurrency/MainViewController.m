@@ -8,6 +8,8 @@
 
 #import "MainViewController.h"
 #import "ConvertCell.h"
+
+
 @interface MainViewController ()
 
 @property (strong,nonatomic)UITextField *firstResponder;
@@ -21,7 +23,8 @@
     NSMutableArray *nameitems;//用于存储国家名称
     NSMutableArray *currencyUnit;//用于存储货币单位
     NSArray *images;//用于存储图片
-    NSMutableArray *nowCurrency;//用于存储当前汇率
+    NSMutableArray *nowCurrency;
+    NSNumber *staticCurrency;//用于存储当前汇率，这个NSMutableString是用于测试动态更新cell内容的，一个静态值
 }
 
 - (IBAction)editMode:(id)sender {
@@ -42,9 +45,11 @@
     currencyUnit = [@"美元 人民币 日元 港币 英镑 澳大利亚元 加拿大美元 欧元 瑞士法郎 葡币 韩元"componentsSeparatedByString:@" "];
     images = [@"usa china jp hkd uk aud cad eur swiz mop kor"componentsSeparatedByString:@" "];
     nowCurrency = [@"100 300 500 128 778 879 227 998 657 887 367"componentsSeparatedByString:@" "];
+    staticCurrency = @"100";
     
-//    UITapGestureRecognizer *gestureRecognizer = [[UIGestureRecognizer alloc]initWithTarget:self action:@selector(hideKeyboard)];
-//    gestureRecognizer.cancelsTouchesInView = NO;
+    self.tableView.allowsSelection = false;
+    
+    
 //    
     
 }
@@ -53,6 +58,15 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - 动态改变cell里的内容
+
+- (IBAction)inputEditingChanged:(id)sender {
+    
+}
+
+
+
 
 #pragma mark - 表格协议的代理
 
@@ -83,6 +97,7 @@
     
     ConvertCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     
+    cell.backgroundColor = [UIColor lightGrayColor];
     cell.countryName.text = [nameitems objectAtIndex:indexPath.row];
     cell.countryImage.image = [UIImage imageNamed:[images objectAtIndex:indexPath.row]];
     cell.currencyUnit.text = [currencyUnit objectAtIndex:indexPath.row];
@@ -241,9 +256,6 @@
 //
 //}
 
-
-
-
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
 //    self.navigationItem.leftBarButtonItem = self.editButtonItem;
@@ -320,12 +332,14 @@
     return YES;
 }
 
-
-
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
 //    NSLog(@"可以编辑行");
     return YES;
 }
+
+
+
+
 
 #pragma mark - 还没用的上的函数
 
