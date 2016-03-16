@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5568E30B1C7F0254002266D0 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5568E30A1C7F0254002266D0 /* MainViewController.m */; };
+		55015C501C969E500079632F /* SettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55015C4F1C969E500079632F /* SettingCell.m */; };
+		55015C531C96E0780079632F /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55015C521C96E0780079632F /* MainViewController.m */; };
+		5568E30B1C7F0254002266D0 /* ConvertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5568E30A1C7F0254002266D0 /* ConvertViewController.m */; };
 		55A539F41C7C692D0035043F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A539F31C7C692D0035043F /* main.m */; };
 		55A539F71C7C692D0035043F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A539F61C7C692D0035043F /* AppDelegate.m */; };
 		55A539FD1C7C692D0035043F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55A539FB1C7C692D0035043F /* Main.storyboard */; };
@@ -21,8 +23,8 @@
 		55FAE3A91C8E9EDC00B4C620 /* AddCurrencyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FAE3A81C8E9EDC00B4C620 /* AddCurrencyCell.m */; };
 		55FAE3AC1C8E9F0B00B4C620 /* AddCurrencyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FAE3AB1C8E9F0B00B4C620 /* AddCurrencyViewController.m */; };
 		55FAE3AF1C8E9F3300B4C620 /* ExchangeRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FAE3AE1C8E9F3300B4C620 /* ExchangeRate.m */; };
-		55FAE3B21C8E9F4D00B4C620 /* YahooFinance.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FAE3B11C8E9F4D00B4C620 /* YahooFinance.m */; };
 		55FAE3B51C8E9F5900B4C620 /* CurrencyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FAE3B41C8E9F5900B4C620 /* CurrencyManager.m */; };
+		55FAE3B91C8F25DB00B4C620 /* YahooFinanceClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FAE3B81C8F25DB00B4C620 /* YahooFinanceClient.m */; };
 		BA694D4CD03031F862749A76 /* libPods-iCurrency.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 584460ABA5C2A82E8771DF5D /* libPods-iCurrency.a */; };
 /* End PBXBuildFile section */
 
@@ -45,8 +47,12 @@
 
 /* Begin PBXFileReference section */
 		2A4920C7A013940A9A389B4C /* Pods-iCurrency.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iCurrency.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iCurrency/Pods-iCurrency.debug.xcconfig"; sourceTree = "<group>"; };
-		5568E3091C7F0254002266D0 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		5568E30A1C7F0254002266D0 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		55015C4E1C969E500079632F /* SettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingCell.h; sourceTree = "<group>"; };
+		55015C4F1C969E500079632F /* SettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingCell.m; sourceTree = "<group>"; };
+		55015C511C96E0780079632F /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		55015C521C96E0780079632F /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		5568E3091C7F0254002266D0 /* ConvertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConvertViewController.h; sourceTree = "<group>"; };
+		5568E30A1C7F0254002266D0 /* ConvertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConvertViewController.m; sourceTree = "<group>"; };
 		55A539EF1C7C692D0035043F /* iCurrency.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iCurrency.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55A539F31C7C692D0035043F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		55A539F51C7C692D0035043F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -72,10 +78,10 @@
 		55FAE3AB1C8E9F0B00B4C620 /* AddCurrencyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCurrencyViewController.m; sourceTree = "<group>"; };
 		55FAE3AD1C8E9F3300B4C620 /* ExchangeRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExchangeRate.h; sourceTree = "<group>"; };
 		55FAE3AE1C8E9F3300B4C620 /* ExchangeRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExchangeRate.m; sourceTree = "<group>"; };
-		55FAE3B01C8E9F4D00B4C620 /* YahooFinance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YahooFinance.h; sourceTree = "<group>"; };
-		55FAE3B11C8E9F4D00B4C620 /* YahooFinance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YahooFinance.m; sourceTree = "<group>"; };
 		55FAE3B31C8E9F5900B4C620 /* CurrencyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrencyManager.h; sourceTree = "<group>"; };
 		55FAE3B41C8E9F5900B4C620 /* CurrencyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrencyManager.m; sourceTree = "<group>"; };
+		55FAE3B71C8F25DB00B4C620 /* YahooFinanceClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YahooFinanceClient.h; sourceTree = "<group>"; };
+		55FAE3B81C8F25DB00B4C620 /* YahooFinanceClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YahooFinanceClient.m; sourceTree = "<group>"; };
 		584460ABA5C2A82E8771DF5D /* libPods-iCurrency.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iCurrency.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		85DAD87BD5772DB54A920210 /* Pods-iCurrency.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iCurrency.release.xcconfig"; path = "Pods/Target Support Files/Pods-iCurrency/Pods-iCurrency.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -172,11 +178,13 @@
 		55CAAD0E1C848C2D00360F6B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				55A539FB1C7C692D0035043F /* Main.storyboard */,
 				55CAAD131C848CFA00360F6B /* ConvertCell.h */,
 				55CAAD141C848CFA00360F6B /* ConvertCell.m */,
+				55015C4E1C969E500079632F /* SettingCell.h */,
+				55015C4F1C969E500079632F /* SettingCell.m */,
 				55FAE3A71C8E9EDC00B4C620 /* AddCurrencyCell.h */,
 				55FAE3A81C8E9EDC00B4C620 /* AddCurrencyCell.m */,
-				55A539FB1C7C692D0035043F /* Main.storyboard */,
 				55A53A011C7C692D0035043F /* Assets.xcassets */,
 				55A53A031C7C692D0035043F /* LaunchScreen.storyboard */,
 			);
@@ -186,12 +194,14 @@
 		55CAAD0F1C848C3400360F6B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				5568E3091C7F0254002266D0 /* MainViewController.h */,
-				5568E30A1C7F0254002266D0 /* MainViewController.m */,
-				55B81E6E1C89544500C668C3 /* SettingViewController.h */,
-				55B81E6F1C89544500C668C3 /* SettingViewController.m */,
+				55015C511C96E0780079632F /* MainViewController.h */,
+				55015C521C96E0780079632F /* MainViewController.m */,
 				55FAE3AA1C8E9F0B00B4C620 /* AddCurrencyViewController.h */,
 				55FAE3AB1C8E9F0B00B4C620 /* AddCurrencyViewController.m */,
+				5568E3091C7F0254002266D0 /* ConvertViewController.h */,
+				5568E30A1C7F0254002266D0 /* ConvertViewController.m */,
+				55B81E6E1C89544500C668C3 /* SettingViewController.h */,
+				55B81E6F1C89544500C668C3 /* SettingViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -201,10 +211,10 @@
 			children = (
 				55FAE3AD1C8E9F3300B4C620 /* ExchangeRate.h */,
 				55FAE3AE1C8E9F3300B4C620 /* ExchangeRate.m */,
-				55FAE3B01C8E9F4D00B4C620 /* YahooFinance.h */,
-				55FAE3B11C8E9F4D00B4C620 /* YahooFinance.m */,
 				55FAE3B31C8E9F5900B4C620 /* CurrencyManager.h */,
 				55FAE3B41C8E9F5900B4C620 /* CurrencyManager.m */,
+				55FAE3B71C8F25DB00B4C620 /* YahooFinanceClient.h */,
+				55FAE3B81C8F25DB00B4C620 /* YahooFinanceClient.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -410,13 +420,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55FAE3B91C8F25DB00B4C620 /* YahooFinanceClient.m in Sources */,
 				55A539F71C7C692D0035043F /* AppDelegate.m in Sources */,
+				55015C501C969E500079632F /* SettingCell.m in Sources */,
 				55FAE3AC1C8E9F0B00B4C620 /* AddCurrencyViewController.m in Sources */,
+				55015C531C96E0780079632F /* MainViewController.m in Sources */,
 				55A53A001C7C692D0035043F /* iCurrency.xcdatamodeld in Sources */,
-				55FAE3B21C8E9F4D00B4C620 /* YahooFinance.m in Sources */,
 				55FAE3B51C8E9F5900B4C620 /* CurrencyManager.m in Sources */,
 				55FAE3A91C8E9EDC00B4C620 /* AddCurrencyCell.m in Sources */,
-				5568E30B1C7F0254002266D0 /* MainViewController.m in Sources */,
+				5568E30B1C7F0254002266D0 /* ConvertViewController.m in Sources */,
 				55FAE3AF1C8E9F3300B4C620 /* ExchangeRate.m in Sources */,
 				55A539F41C7C692D0035043F /* main.m in Sources */,
 				55CAAD151C848CFA00360F6B /* ConvertCell.m in Sources */,

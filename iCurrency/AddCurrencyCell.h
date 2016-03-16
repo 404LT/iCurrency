@@ -11,4 +11,9 @@
 //添加国家view当中的tableviewcell
 @interface AddCurrencyCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIImageView *countryImage;
+@property (weak, nonatomic) IBOutlet UILabel *countryName;
+//@property (weak, nonatomic) IBOutlet UITextField *inputNumField;
+//@property (weak, nonatomic) IBOutlet UILabel *currencyUnit;
+
 @end

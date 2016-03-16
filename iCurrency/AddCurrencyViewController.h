@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AddCurrencyViewController : UITableViewController
+@interface AddCurrencyViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 
 @end

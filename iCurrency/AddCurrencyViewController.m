@@ -7,21 +7,57 @@
 //
 
 #import "AddCurrencyViewController.h"
-
-@interface AddCurrencyViewController ()
+#import "MainViewController.h"
+#import "AddCurrencyCell.h"
+#import "SettingViewController.h"
+@interface AddCurrencyViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>
+@property (retain, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (retain, nonatomic) IBOutlet UITableView *addCurrencyTableView;
 
 @end
 
 @implementation AddCurrencyViewController
+{
+    NSMutableArray *nameitems;//用于存储国家名称
+    NSArray *images;//用于存储国旗图片
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    [self.navigationItem setTitle:@"添加货币"];
+    //将tableview表头设置为搜索栏
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 30)];
+    
+//    self.addCurrencyTableView.tableHeaderView = self.searchBar;
+    
+    
+//    self.navigationItem.rightBarButtonItem = backButton;
+    
+     nameitems = [@"USA CNY JPY HKD GBP AUD CAD EUR SWIZ MOP KOR" componentsSeparatedByString:@" "];
+     images = [@"usa china jp hkd uk aud cad eur swiz mop kor"componentsSeparatedByString:@" "];
+    
+}
+- (void)backToMain{
+    MainViewController *mainVC = [[MainViewController alloc]init];
+//    [self.navigationController pushViewController:mainVC animated:YES];
+    mainVC = [self.storyboard instantiateViewControllerWithIdentifier:@"MainViewController"];
+    mainVC.modalTransitionStyle = UIModalTransitionStylePartialCurl;
+   
+
+}
+- (IBAction)finishedPressed:(id)sender {
+    
+    NSLog(@"cancelPressed is called");
+    if ([self respondsToSelector:@selector(cancelled)]) {
+        [self cancelled];
+    }
+    
+}
+- (void)cancelled
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -31,68 +67,54 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+
+    return 1;
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
     
-    // Configure the cell...
+    NSString *reuseIdentifier = @"AddCurrencyCell";
+    AddCurrencyCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier ];
     
+    if (cell == nil) {
+        cell = [[AddCurrencyCell alloc] init];
+    }
+    
+    cell.backgroundColor = [UIColor lightGrayColor];
+    cell.countryName.text =[nameitems objectAtIndex:indexPath.row];
+    cell.countryImage.image = [UIImage imageNamed:[images objectAtIndex:indexPath.row]];
     return cell;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
+#pragma ---------------------------------UISearcherBar Delegate------------------
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
+//在搜索框内搜索内容，并展示搜索结果
+//- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+//{
+//    //移除mArr2中所有元素，来存放搜索结果
+//    [self.mArr2removeAllObjects];
+//    //对数组mArr1遍历，看数组中是否包含搜索框里的内容
+//    for(NSString *pstrin self.mArr1)
+//    {
+//        //如果包含搜索框里的内容，就把数组中的元素添加到mArr2中
+//        if([pstr hasPrefix:searchBar.text])
+//        {
+//            [self.mArr2addObject:pstr];
+//        }
+//    }
+//    
+//    [self.mSearcherBarresignFirstResponder];
+//    //展示搜索结果
+//    [self.mTableViewreloadData];
+//    
+//}
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
