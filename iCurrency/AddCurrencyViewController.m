@@ -10,6 +10,7 @@
 #import "MainViewController.h"
 #import "AddCurrencyCell.h"
 #import "SettingViewController.h"
+#import "CurrencyManager.h"
 @interface AddCurrencyViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>
 @property (retain, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (retain, nonatomic) IBOutlet UITableView *addCurrencyTableView;

@@ -30,7 +30,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="货币单位" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0gz-ul-laS">
-                                        <rect key="frame" x="109" y="42" width="97" height="24"/>
+                                        <rect key="frame" x="109" y="42" width="125" height="24"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -39,40 +39,39 @@
                                         <rect key="frame" x="177" y="8" width="190" height="48"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad" keyboardAppearance="alert"/>
+                                        <connections>
+                                            <action selector="sourceChanged:" destination="Udx-RI-zoq" eventType="editingChanged" id="UsF-cb-8cq"/>
+                                            <outlet property="delegate" destination="Udx-RI-zoq" id="lcV-k8-Xa4"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L0z-cd-er8">
-                                <rect key="frame" x="0.0" y="138" width="375" height="529"/>
-                                <connections>
-                                    <segue destination="IT7-qa-t90" kind="embed" id="2mw-vy-A8J"/>
-                                </connections>
-                            </containerView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AhZ-Uh-ONQ">
-                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="632" width="375" height="35"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="最后更新时间：2016年3月14日" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y14-et-1rK" userLabel="Last Updated Label">
-                                        <rect key="frame" x="0.0" y="0.0" width="264" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="35"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="设置" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Qo-Wr-2gc">
-                                        <rect key="frame" x="272" y="0.0" width="83" height="50"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.42983324379999999" green="1" blue="0.27797849400000002" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
+                            <containerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L0z-cd-er8">
+                                <rect key="frame" x="0.0" y="138" width="375" height="529"/>
+                                <connections>
+                                    <segue destination="IT7-qa-t90" kind="embed" id="2mw-vy-A8J"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="汇率转换" id="hZZ-uC-b7e" userLabel="汇率转换"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="baseView" destination="eVq-R7-XId" id="lCc-QB-OkN"/>
                         <outlet property="lastUpdateTime" destination="Y14-et-1rK" id="88u-Wu-2dO"/>
                         <outlet property="sourceCurrencyFlag" destination="f15-Dq-nsZ" id="oVR-yY-w24"/>
                         <outlet property="sourceCurrencyInputField" destination="EEM-Mf-7CP" id="Lg1-If-gO1"/>
@@ -111,7 +110,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0t2-iX-oVv" id="RRH-gY-zkN">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -217,12 +216,12 @@
             </objects>
             <point key="canvasLocation" x="1434.5" y="211.5"/>
         </scene>
-        <!--汇率转换-->
+        <!--Convert View Controller-->
         <scene sceneID="BdH-in-eTb">
             <objects>
                 <tableViewController id="IT7-qa-t90" customClass="ConvertViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="85" sectionHeaderHeight="28" sectionFooterHeight="28" id="vkx-GQ-e6e">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="529"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -230,30 +229,38 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="85"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Egm-O3-hrL" id="giA-zw-F6N">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="84.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xrR-Ml-zLY">
                                             <rect key="frame" x="8" y="11" width="96" height="64"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="USA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="00Z-Wi-RFV">
-                                            <rect key="frame" x="112" y="11" width="107" height="40"/>
+                                            <rect key="frame" x="112" y="11" width="92" height="40"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="货币单位" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XUV-xE-2BL">
-                                            <rect key="frame" x="112" y="54" width="68" height="21"/>
+                                            <rect key="frame" x="112" y="54" width="131" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GSi-fP-Vat">
-                                            <rect key="frame" x="205" y="11" width="149" height="50"/>
+                                            <rect key="frame" x="217" y="11" width="137" height="50"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gza-t9-FrR">
+                                            <rect key="frame" x="175" y="11" width="45" height="45"/>
+                                            <state key="normal" title="Trend" image="trend3.png"/>
+                                            <connections>
+                                                <action selector="segueToTrend:" destination="Egm-O3-hrL" eventType="touchUpInside" id="1mL-HB-6a1"/>
+                                                <action selector="segueToTrend:" destination="IT7-qa-t90" eventType="touchUpInside" id="BMu-7x-dvr"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.59363934279999997" green="1" blue="0.88787548270000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -270,14 +277,7 @@
                             <outlet property="delegate" destination="IT7-qa-t90" id="Uyn-aX-grs"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="汇率转换" id="osh-LG-Gj4">
-                        <barButtonItem key="leftBarButtonItem" title="设置" id="UqN-x7-IXl"/>
-                        <barButtonItem key="rightBarButtonItem" title="编辑" id="zby-BB-YXj"/>
-                    </navigationItem>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-                    <connections>
-                        <outlet property="tableView" destination="vkx-GQ-e6e" id="NYJ-2t-Na2"/>
-                    </connections>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                 </tableViewController>
                 <containerView opaque="NO" contentMode="scaleToFill" id="Lwc-qz-Yfr">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="427"/>
@@ -285,7 +285,101 @@
                 </containerView>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Dx-ei-3Dc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1002.5" y="211.5"/>
+            <point key="canvasLocation" x="1011.5" y="116.5"/>
+        </scene>
+        <!--Trend View Controller-->
+        <scene sceneID="a7o-pz-MqE">
+            <objects>
+                <viewController storyboardIdentifier="Trend" id="Qmc-kK-2pi" customClass="TrendViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MjW-A3-gj5"/>
+                        <viewControllerLayoutGuide type="bottom" id="hQJ-I3-hnF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="WIF-rx-anZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uVr-6o-Cec">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="汇率走势" id="XZh-A9-hNQ">
+                                        <barButtonItem key="leftBarButtonItem" title="返回" id="Qfw-4h-Hgr">
+                                            <connections>
+                                                <action selector="backToMain:" destination="Qmc-kK-2pi" id="x8s-gb-c37"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dzi-mm-2tu">
+                                <rect key="frame" x="0.0" y="220" width="375" height="403"/>
+                                <color key="backgroundColor" red="0.50588235290000005" green="0.84705882349999995" blue="0.80784313730000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="United-States-of-America.png" translatesAutoresizingMaskIntoConstraints="NO" id="QZf-NO-px1">
+                                <rect key="frame" x="96" y="93" width="70" height="45"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="China.png" translatesAutoresizingMaskIntoConstraints="NO" id="JRF-bW-0xH">
+                                <rect key="frame" x="222" y="93" width="70" height="45"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="最高：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ggj-n2-4UP">
+                                <rect key="frame" x="20" y="623" width="53" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="最低：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SJR-9S-6CM">
+                                <rect key="frame" x="133" y="631" width="51" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="当前：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dnu-EG-n5f">
+                                <rect key="frame" x="253" y="627" width="51" height="28"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="refresh.png" translatesAutoresizingMaskIntoConstraints="NO" id="UAJ-Ln-Qz5">
+                                <rect key="frame" x="174" y="96" width="40" height="40"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="High" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a4T-2R-RZC">
+                                <rect key="frame" x="58" y="630" width="60" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Low" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="baP-jJ-sFp">
+                                <rect key="frame" x="169" y="631" width="60" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Now" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Wz-Tc-t4m">
+                                <rect key="frame" x="293" y="630" width="68" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="VLp-5L-rT3">
+                                <rect key="frame" x="20" y="163" width="335" height="29"/>
+                                <segments>
+                                    <segment title="1天"/>
+                                    <segment title="7天"/>
+                                    <segment title="1月"/>
+                                    <segment title="3月"/>
+                                    <segment title="6月"/>
+                                    <segment title="1年"/>
+                                    <segment title="3年"/>
+                                </segments>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" red="0.92021446019999997" green="0.87480078009999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zle-2W-7Hm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="981.5" y="1119.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="maH-ZB-WhW">
@@ -305,4 +399,10 @@
             <point key="canvasLocation" x="121.5" y="211.5"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="China.png" width="70" height="47"/>
+        <image name="United-States-of-America.png" width="70" height="47"/>
+        <image name="refresh.png" width="448" height="512"/>
+        <image name="trend3.png" width="512" height="512"/>
+    </resources>
 </document>

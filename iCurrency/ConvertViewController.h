@@ -9,4 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface ConvertViewController : UITableViewController<UIScrollViewDelegate>
+
+
+@property (nonatomic) double baseAmount;
 @end

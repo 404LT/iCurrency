@@ -15,4 +15,8 @@
 
 @interface ExchangeRate : NSObject
 
+- (double)convertRate:(NSString *)baseCurrencyName
+                   to:(NSString *)targetCurrencyName
+                 with:(float)number;
+
 @end

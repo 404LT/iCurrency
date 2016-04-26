@@ -11,6 +11,12 @@
 
 #import <Foundation/Foundation.h>
 
+
+
 @interface YahooFinanceClient : NSObject
+- (NSData *)communicateWithYahooFinance;
+- (NSDictionary *)getParsedDictionaryFromResults;
+
+- (NSDictionary *)reserveLatestDic;
 
 @end

@@ -6,15 +6,16 @@
 //  Copyright © 2016年 LunTao. All rights reserved.
 //
 
-/*
- 该方法用于管理汇率信息，具体功能待定
- 
- 
- */
-
 
 #import <Foundation/Foundation.h>
 
 @interface CurrencyManager : NSObject
+
+- (NSArray *)allCurrencyCodes;
+
+//用于定位plist里面存储的 国家名称  国旗   货币单位 
+- (UIImage *)imageForCountriesFlag:(NSString *)countryName;
+- (NSString *)nameForCurrency:(NSString *)countryName;
+- (NSString *)unitForCurrency:(NSString *)countryName;
 
 @end

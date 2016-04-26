@@ -8,14 +8,11 @@
 
 //主界面操作汇率转换的自定义cell
 #import <UIKit/UIKit.h>
-#import "ConvertViewController.h"
-
 @interface ConvertCell : UITableViewCell<UITextFieldDelegate>
+
 @property (weak, nonatomic) IBOutlet UIImageView *countryImage;
 @property (weak, nonatomic) IBOutlet UILabel *countryName;
-//@property (weak, nonatomic) IBOutlet UITextField *inputNumField;
 @property (weak, nonatomic) IBOutlet UILabel *currencyUnit;
-
 @property (weak, nonatomic) IBOutlet UILabel *targetCurrency;
 
 
