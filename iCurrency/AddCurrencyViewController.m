@@ -11,6 +11,7 @@
 #import "AddCurrencyCell.h"
 #import "SettingViewController.h"
 #import "CurrencyManager.h"
+#import "CurrencyManager.h"
 @interface AddCurrencyViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>
 @property (retain, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (retain, nonatomic) IBOutlet UITableView *addCurrencyTableView;
@@ -26,28 +27,32 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.navigationItem setTitle:@"添加货币"];
-    //将tableview表头设置为搜索栏
-    
-    self.searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 30)];
-    
-//    self.addCurrencyTableView.tableHeaderView = self.searchBar;
-    
-    
-//    self.navigationItem.rightBarButtonItem = backButton;
-    
-     nameitems = [@"USA CNY JPY HKD GBP AUD CAD EUR SWIZ MOP KOR" componentsSeparatedByString:@" "];
-     images = [@"usa china jp hkd uk aud cad eur swiz mop kor"componentsSeparatedByString:@" "];
-    
+    [self initNavigationItems];
+    [self initSearchBar];
 }
-- (void)backToMain{
-    MainViewController *mainVC = [[MainViewController alloc]init];
-//    [self.navigationController pushViewController:mainVC animated:YES];
-    mainVC = [self.storyboard instantiateViewControllerWithIdentifier:@"MainViewController"];
-    mainVC.modalTransitionStyle = UIModalTransitionStylePartialCurl;
-   
 
+- (void)initNavigationItems
+{
+    //初始化导航栏按钮
+    [self.navigationItem setTitle:@"添加货币"];
 }
+
+- (void)initSearchBar
+{
+    //初始化搜索栏
+    //将tableview表头设置为搜索栏
+    self.searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 30)];
+}
+
+
+//- (void)backToMain{
+//    MainViewController *mainVC = [[MainViewController alloc]init];
+////    [self.navigationController pushViewController:mainVC animated:YES];
+//    mainVC = [self.storyboard instantiateViewControllerWithIdentifier:@"MainViewController"];
+//    mainVC.modalTransitionStyle = UIModalTransitionStylePartialCurl;
+//   
+//
+//}
 - (IBAction)finishedPressed:(id)sender {
     
     NSLog(@"cancelPressed is called");
@@ -75,7 +80,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
     return 1;
 }
 
@@ -88,9 +92,15 @@
         cell = [[AddCurrencyCell alloc] init];
     }
     
-    cell.backgroundColor = [UIColor lightGrayColor];
-    cell.countryName.text =[nameitems objectAtIndex:indexPath.row];
-    cell.countryImage.image = [UIImage imageNamed:[images objectAtIndex:indexPath.row]];
+    CurrencyManager *manager = [[CurrencyManager alloc]init];
+    
+//    cell.countryImage.image = [manager imageForCountriesFlag:coutryName.text];
+    
+    
+//    
+//    cell.backgroundColor = [UIColor lightGrayColor];
+//    cell.countryName.text =[nameitems objectAtIndex:indexPath.row];
+//    cell.countryImage.image = [UIImage imageNamed:[images objectAtIndex:indexPath.row]];
     return cell;
 }
 

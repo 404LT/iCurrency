@@ -30,19 +30,19 @@
     
     if([baseCurrencyName  isEqualToString:@"USD"])
     {
-        NSLog(@"判断是不是USD为基础汇率");
+//        NSLog(@"判断是不是USD为基础汇率");
         float targetRateValue = [[latestRateDictionary valueForKey:[NSString stringWithFormat:@"USD/%@",targetCurrencyName]]floatValue];
         float convertResult = targetRateValue * number;
-        NSLog(@"+++++++++++换算结束");
+//        NSLog(@"是的，换算已完成");
         return convertResult;
     }
     else
     {
-        NSLog(@"USD不是基础汇率");
+//        NSLog(@"USD不是基础汇率");
         float baseTargetRate = [[latestRateDictionary valueForKey:[NSString stringWithFormat:@"USD/%@",baseCurrencyName]]floatValue];
         float targetRateValue = [[latestRateDictionary valueForKey:[NSString stringWithFormat:@"USD/%@",targetCurrencyName]]floatValue];
         float convertResult = targetRateValue/baseTargetRate*number;
-        NSLog(@"+++++++++换算结束");
+//        NSLog(@"换算已完成");
         return convertResult;
     }
     

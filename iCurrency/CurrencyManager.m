@@ -13,6 +13,16 @@
 
 @implementation CurrencyManager
 
++ (instancetype)default
+{
+    static CurrencyManager *_manager = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _manager = [[CurrencyManager alloc] init];
+    });
+    return _manager;
+}
+
 - (id)init
 {
     NSLog(@"从plist里面取出汇率相关的属性放在currencies里面");
@@ -34,7 +44,7 @@
 
 - (UIImage *)imageForCountriesFlag:(NSString *)countryName
 {
-    NSLog(@"设置界面显示的国家国旗");
+//    NSLog(@"设置界面显示的国家国旗");
     UIImage *flag;
     NSDictionary *flagInfo = [self.currencies objectForKey:countryName];
     //就是那些三位数简写国家名称的countryName
@@ -48,14 +58,14 @@
 
 - (NSString *)nameForCurrency:(NSString *)countryName
 {
-    NSLog(@"设置界面显示的货币名称");
+//    NSLog(@"设置界面显示的货币名称");
     NSDictionary *nameInfo = [self.currencies objectForKey:countryName];
     return [nameInfo objectForKey:@"name"];
 }
 
 - (NSString *)unitForCurrency:(NSString *)countryName
 {
-    NSLog(@"设置界面显示的货币单位");
+//    NSLog(@"设置界面显示的货币单位");
     NSDictionary *unitInfo = [self.currencies objectForKey:countryName];
     return [unitInfo objectForKey:@"unit"];
 }

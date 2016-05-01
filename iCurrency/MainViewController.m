@@ -13,20 +13,80 @@
 #import "ConvertViewController.h"
 #import "CurrencyManager.h"
 #import "SettingViewController.h"
+
+#define DEFAULTS_KEY_SOURCE_CURRENCY @"baseCurrency"
+
 @interface MainViewController ()
 
 @end
 
 @implementation MainViewController
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self initDefaultBaseCurrency];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initInputField];
     [self initBarButtomItems];
-    [self initBaseCurrrencyView];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchBaseCurrency:) name:@"switchBaseCurrency" object:nil];
     
 //    [self someTest];
+}
+
+
+
+#pragma mark -  初始化基准汇率
+- (NSString *)getCurrenctCountry
+{
+    //获取当前基准汇率国家
+    NSString *str = self.baseCurrency;
+    NSLog(@"这就有点 %@",str);
+    return str;
+}
+
+-(void)switchBaseCurrency:(NSNotification*)notification{
+    
+    NSString *receivedBaseRate = notification.object;
+    [self setupBaseCurrency:receivedBaseRate];
+    self.baseCurrency = receivedBaseRate;
+    
+}
+
+- (void)initDefaultBaseCurrency
+{
+//    初始化基准汇率国家
+    NSString *baseCurrency = [[NSUserDefaults standardUserDefaults]objectForKey:DEFAULTS_KEY_SOURCE_CURRENCY];
+    if (baseCurrency) {
+        [self setupBaseCurrency:baseCurrency];
+    }
+    else{
+        [self setupBaseCurrency:@"USD"];
+    }
+    //初始化为USD
+//    [self setupBaseCurrency:@"USD"];
+}
+
+- (void)setupBaseCurrency:(NSString *)countryName
+{
+    NSLog(@"设定基准汇率");
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:countryName forKey:DEFAULTS_KEY_SOURCE_CURRENCY];
+    [defaults synchronize];
+    
+    self.baseCurrency = countryName;
+    
+    CurrencyManager *manager = [CurrencyManager default];
+    self.sourceCurrencyFlag.image = [manager imageForCountriesFlag:self.baseCurrency];//国旗
+    self.sourceCurrencyName.text = [manager nameForCurrency:self.baseCurrency];//名称
+    self.sourceCurrencyUnit.text = [manager unitForCurrency:self.baseCurrency];//单位
+    
+    
 }
 
 #pragma mark - 一些需要初始化的方法
@@ -40,16 +100,9 @@
 }
 
 
-- (void)initBaseCurrrencyView
-{
-    NSLog(@"初始化 基准利率这一片view的信息");
-    self.sourceCurrencyFlag.image = [UIImage imageNamed:@"usa"];
-    self.sourceCurrencyUnit.text = @"美元";
-    
-}
 
 -(void)initBarButtomItems
-{   NSLog(@"初始化主界面导航栏的按钮");
+{
     //初始化主界面导航栏的按钮
     UIBarButtonItem *settingBar=[[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(jumpToSetting)];
     self.navigationItem.leftBarButtonItem=settingBar;
@@ -97,6 +150,10 @@
     [super didReceiveMemoryWarning];
 }
 
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 #pragma mark - 输入框代理UITextFieldDelegate
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
@@ -122,6 +179,14 @@
     NSMutableString *baseString = [NSMutableString stringWithFormat:self.sourceCurrencyInputField.text];
     return [baseString doubleValue];
 }
+
+//- (NSString *)baseCurrency
+//{
+//   
+//    NSMutableString *baseStr = [NSMutableString stringWithFormat:self.sourceCurrencyName.text];
+//     NSLog(@"此刻基准汇率国家是:%@",baseStr);
+//    return baseStr;
+//}
 
 - (IBAction)sourceChanged:(id)sender {
     //    输入框一旦有变动就触发该事件

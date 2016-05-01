@@ -13,6 +13,8 @@
 
 - (NSArray *)allCurrencyCodes;
 
++ (instancetype)default;
+
 //用于定位plist里面存储的 国家名称  国旗   货币单位 
 - (UIImage *)imageForCountriesFlag:(NSString *)countryName;
 - (NSString *)nameForCurrency:(NSString *)countryName;

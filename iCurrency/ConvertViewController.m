@@ -37,8 +37,8 @@
     
     [self initCuurenciesInfo];
     [self initTableViewSetting];
-    NSLog(@"viewDidLoad方法被调用");
     
+    self.tableView.tableFooterView = [[UIView alloc]init];
 }
 #pragma mark - 一些初始化的方法
 - (void)initCuurenciesInfo
@@ -61,6 +61,8 @@
     self.tableView.allowsSelection = YES;
 }
 
+#pragma mark - 设置基准汇率
+
 - (void)setBaseAmount:(double)baseAmount
 {
     _baseAmount = baseAmount;
@@ -69,10 +71,15 @@
     
 }
 
+- (void)setBaseCurrency:(NSString *)baseCurrency
+{
+    self.baseCurrency = baseCurrency;
+}
+
 #pragma mark - 表格数据源--Data Source Delegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"------------cellForRowAtIndexPath---------方法start");
+    NSLog(@"cellForRowAtIndexPath---------方法start");
     static NSString *reuseIdentifier = @"convertCell";
     ConvertCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
     if (cell == nil) {
@@ -90,38 +97,51 @@
     cell.currencyUnit.text = [manager unitForCurrency:targetCountryName];
 
     double baseAmount = [self baseAmount];
-    double targetAmount =[exchange convertRate:@"USD" to:[nameitems objectAtIndex:indexPath.row] with:baseAmount];
+    
+    MainViewController *mvc = [[MainViewController alloc]init];
+    [mvc initDefaultBaseCurrency];
+   
+    id currentBaseRate = mvc.baseCurrency;
+    
+    double targetAmount =[exchange convertRate:currentBaseRate to:[nameitems objectAtIndex:indexPath.row] with:baseAmount];
     
     cell.targetCurrency.text =[NSString stringWithFormat:@"%f",targetAmount];
-    NSLog(@"baseAmount 现在是：%f",baseAmount);
-    NSLog(@"---------cell---------方法end");
+    NSLog(@"基准汇率输入值现在是：%f",baseAmount);
+//    NSLog(@"---------cell---------方法end");
     
     return cell;
 }
 
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    //    表格的区段数
-    NSLog(@"1个区段");
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    //    该区段的行数
-    
-    NSLog(@"此时一共加载了%lu个国家",nameitems.count);
-    return nameitems.count;
-}
 
 #pragma mark - 选中该row即切换成基准利率
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //当选中当前的row时候，自动将其切换成基准汇率
+//    NSString *willBeBaseCurrency = [self->nameitems objectAtIndex:indexPath.row];
     
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"switchBaseCurrency" object:[self->nameitems objectAtIndex:indexPath.row]];
+    
+    
+    
+    MainViewController *mvc = [[MainViewController alloc]init];
+//    [mvc initDefaultBaseCurrency];
+   
+    
+    //替换成当前主VC的基准汇率
+    //获取当前主vc的基准汇率
+//    [self->nameitems replaceObjectAtIndex:indexPath.row withObject:[mvc getCurrenctCountry]];
+
+    NSLog(@"卧槽：%@",mvc.baseCurrency);
+    [self.tableView reloadData];
 
 }
+
+
+
+
+
 #pragma mark - 编辑模式下的样式设置
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -144,7 +164,21 @@
     }
     
 }
-#pragma mark - 表格一些琐碎的设置
+#pragma mark - 表格一些其它的设置
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    //    表格的区段数
+    NSLog(@"1个区段");
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    //    该区段的行数
+    
+    NSLog(@"此时一共加载了%lu个国家",nameitems.count);
+    return nameitems.count;
+}
+
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
 {
     //移动行
@@ -168,7 +202,7 @@
 
 -(NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
 //    本函数用于修改 删除按钮显示的信息
-    return @"delete this country";
+    return @"删除";
 }
 
 
@@ -187,6 +221,8 @@
     [super didReceiveMemoryWarning];
     
 }
+
+#pragma mark - 转跳到历史趋势页面
 - (IBAction)segueToTrend:(id)sender {
     
     NSLog(@"走势被点击了");
@@ -198,6 +234,8 @@
     [self presentViewController:trendVC animated:YES completion:nil];
     
 }
-#pragma mark - 更新表格数据部分
+
+
+
 
 @end

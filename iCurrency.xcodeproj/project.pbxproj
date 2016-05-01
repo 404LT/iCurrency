@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		55015C501C969E500079632F /* SettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55015C4F1C969E500079632F /* SettingCell.m */; };
 		55015C531C96E0780079632F /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55015C521C96E0780079632F /* MainViewController.m */; };
+		551763BC1CD5AB5700C4DC29 /* MCNumberKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 551763BA1CD5AB5700C4DC29 /* MCNumberKeyboard.m */; };
+		551763BD1CD5AB5700C4DC29 /* MCNumberKeyboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 551763BB1CD5AB5700C4DC29 /* MCNumberKeyboard.xib */; };
 		552F28141CCF47F6004FC902 /* TrendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 552F28131CCF47F6004FC902 /* TrendViewController.m */; };
 		552F281B1CCF4A47004FC902 /* trend1.png in Resources */ = {isa = PBXBuildFile; fileRef = 552F28161CCF4A47004FC902 /* trend1.png */; };
 		552F281C1CCF4A47004FC902 /* trend2.png in Resources */ = {isa = PBXBuildFile; fileRef = 552F28171CCF4A47004FC902 /* trend2.png */; };
@@ -16,6 +18,7 @@
 		552F281E1CCF4A47004FC902 /* trend4.png in Resources */ = {isa = PBXBuildFile; fileRef = 552F28191CCF4A47004FC902 /* trend4.png */; };
 		552F281F1CCF4A47004FC902 /* trend5.png in Resources */ = {isa = PBXBuildFile; fileRef = 552F281A1CCF4A47004FC902 /* trend5.png */; };
 		552F28211CCF584D004FC902 /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 552F28201CCF584D004FC902 /* refresh.png */; };
+		552F28231CCF821A004FC902 /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 552F28221CCF821A004FC902 /* cancel.png */; };
 		5568E30B1C7F0254002266D0 /* ConvertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5568E30A1C7F0254002266D0 /* ConvertViewController.m */; };
 		55A539F41C7C692D0035043F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A539F31C7C692D0035043F /* main.m */; };
 		55A539F71C7C692D0035043F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A539F61C7C692D0035043F /* AppDelegate.m */; };
@@ -258,6 +261,9 @@
 		55015C4F1C969E500079632F /* SettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingCell.m; sourceTree = "<group>"; };
 		55015C511C96E0780079632F /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		55015C521C96E0780079632F /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		551763B91CD5AB5700C4DC29 /* MCNumberKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCNumberKeyboard.h; sourceTree = "<group>"; };
+		551763BA1CD5AB5700C4DC29 /* MCNumberKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCNumberKeyboard.m; sourceTree = "<group>"; };
+		551763BB1CD5AB5700C4DC29 /* MCNumberKeyboard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCNumberKeyboard.xib; sourceTree = "<group>"; };
 		552F28121CCF47F6004FC902 /* TrendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrendViewController.h; sourceTree = "<group>"; };
 		552F28131CCF47F6004FC902 /* TrendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrendViewController.m; sourceTree = "<group>"; };
 		552F28161CCF4A47004FC902 /* trend1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trend1.png; sourceTree = "<group>"; };
@@ -266,6 +272,7 @@
 		552F28191CCF4A47004FC902 /* trend4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trend4.png; sourceTree = "<group>"; };
 		552F281A1CCF4A47004FC902 /* trend5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trend5.png; sourceTree = "<group>"; };
 		552F28201CCF584D004FC902 /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
+		552F28221CCF821A004FC902 /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel.png; sourceTree = "<group>"; };
 		5568E3091C7F0254002266D0 /* ConvertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConvertViewController.h; sourceTree = "<group>"; };
 		5568E30A1C7F0254002266D0 /* ConvertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConvertViewController.m; sourceTree = "<group>"; };
 		55A539EF1C7C692D0035043F /* iCurrency.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iCurrency.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -527,9 +534,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		551763BE1CD5AB6200C4DC29 /* Keyboard */ = {
+			isa = PBXGroup;
+			children = (
+				551763B91CD5AB5700C4DC29 /* MCNumberKeyboard.h */,
+				551763BA1CD5AB5700C4DC29 /* MCNumberKeyboard.m */,
+				551763BB1CD5AB5700C4DC29 /* MCNumberKeyboard.xib */,
+			);
+			name = Keyboard;
+			sourceTree = "<group>";
+		};
 		552F28151CCF4A0F004FC902 /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				552F28221CCF821A004FC902 /* cancel.png */,
 				552F28201CCF584D004FC902 /* refresh.png */,
 				552F28161CCF4A47004FC902 /* trend1.png */,
 				552F28171CCF4A47004FC902 /* trend2.png */,
@@ -606,6 +624,7 @@
 		55CAAD0E1C848C2D00360F6B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				551763BE1CD5AB6200C4DC29 /* Keyboard */,
 				55A539FB1C7C692D0035043F /* Main.storyboard */,
 				55A53A031C7C692D0035043F /* LaunchScreen.storyboard */,
 				55CAAD131C848CFA00360F6B /* ConvertCell.h */,
@@ -626,12 +645,12 @@
 				55015C521C96E0780079632F /* MainViewController.m */,
 				5568E3091C7F0254002266D0 /* ConvertViewController.h */,
 				5568E30A1C7F0254002266D0 /* ConvertViewController.m */,
+				552F28121CCF47F6004FC902 /* TrendViewController.h */,
+				552F28131CCF47F6004FC902 /* TrendViewController.m */,
 				55FAE3AA1C8E9F0B00B4C620 /* AddCurrencyViewController.h */,
 				55FAE3AB1C8E9F0B00B4C620 /* AddCurrencyViewController.m */,
 				55B81E6E1C89544500C668C3 /* SettingViewController.h */,
 				55B81E6F1C89544500C668C3 /* SettingViewController.m */,
-				552F28121CCF47F6004FC902 /* TrendViewController.h */,
-				552F28131CCF47F6004FC902 /* TrendViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1010,6 +1029,7 @@
 				55FE1ED71CBB9BC500EA1D84 /* Eritrea.png in Resources */,
 				55FE1F251CBB9BC500EA1D84 /* Palau.png in Resources */,
 				55FE1EE01CBB9BC500EA1D84 /* Germany.png in Resources */,
+				551763BD1CD5AB5700C4DC29 /* MCNumberKeyboard.xib in Resources */,
 				55FE1EAB1CBB9BC500EA1D84 /* Bahamas.png in Resources */,
 				55FE1EFA1CBB9BC500EA1D84 /* Korea,-South.png in Resources */,
 				55FE1ECE1CBB9BC500EA1D84 /* Denmark.png in Resources */,
@@ -1085,6 +1105,7 @@
 				55FE1EBB1CBB9BC500EA1D84 /* Burundi.png in Resources */,
 				55FE1ED21CBB9BC500EA1D84 /* East-Timor.png in Resources */,
 				55FE1F041CBB9BC500EA1D84 /* Liechtenstein.png in Resources */,
+				552F28231CCF821A004FC902 /* cancel.png in Resources */,
 				55FE1F0D1CBB9BC500EA1D84 /* Malta.png in Resources */,
 				55FE1F3C1CBB9BC500EA1D84 /* Singapore.png in Resources */,
 				55FE1F551CBB9BC500EA1D84 /* Tuvalu.png in Resources */,
@@ -1277,6 +1298,7 @@
 				55FAE3B91C8F25DB00B4C620 /* YahooFinanceClient.m in Sources */,
 				55A539F71C7C692D0035043F /* AppDelegate.m in Sources */,
 				55015C501C969E500079632F /* SettingCell.m in Sources */,
+				551763BC1CD5AB5700C4DC29 /* MCNumberKeyboard.m in Sources */,
 				55FAE3AC1C8E9F0B00B4C620 /* AddCurrencyViewController.m in Sources */,
 				55015C531C96E0780079632F /* MainViewController.m in Sources */,
 				55A53A001C7C692D0035043F /* iCurrency.xcdatamodeld in Sources */,

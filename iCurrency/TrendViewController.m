@@ -17,24 +17,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self initNavigationBars];
+   
+    
+    
 
 
 }
 
-- (void)initNavigationBars
-{
-    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(backToMain)];
-    
-    self.navigationItem.rightBarButtonItem = barButtonItem;
-}
-
-- (void)backToMain
-{
-    
-    [self dismissViewControllerAnimated:YES completion:nil];
-    
-}
 
 
 - (void)didReceiveMemoryWarning {
