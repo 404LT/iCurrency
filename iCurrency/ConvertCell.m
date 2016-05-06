@@ -30,8 +30,4 @@
 }
 
 
-
-
-- (IBAction)segueToTrend:(id)sender {
-}
 @end

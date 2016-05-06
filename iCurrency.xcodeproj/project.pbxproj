@@ -11,6 +11,7 @@
 		55015C531C96E0780079632F /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55015C521C96E0780079632F /* MainViewController.m */; };
 		551763BC1CD5AB5700C4DC29 /* MCNumberKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 551763BA1CD5AB5700C4DC29 /* MCNumberKeyboard.m */; };
 		551763BD1CD5AB5700C4DC29 /* MCNumberKeyboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 551763BB1CD5AB5700C4DC29 /* MCNumberKeyboard.xib */; };
+		551763C11CD5DDC100C4DC29 /* MCCalculate.m in Sources */ = {isa = PBXBuildFile; fileRef = 551763C01CD5DDC100C4DC29 /* MCCalculate.m */; };
 		552F28141CCF47F6004FC902 /* TrendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 552F28131CCF47F6004FC902 /* TrendViewController.m */; };
 		552F281B1CCF4A47004FC902 /* trend1.png in Resources */ = {isa = PBXBuildFile; fileRef = 552F28161CCF4A47004FC902 /* trend1.png */; };
 		552F281C1CCF4A47004FC902 /* trend2.png in Resources */ = {isa = PBXBuildFile; fileRef = 552F28171CCF4A47004FC902 /* trend2.png */; };
@@ -235,6 +236,7 @@
 		55FE1F6F1CBBCFDD00EA1D84 /* Mop.png in Resources */ = {isa = PBXBuildFile; fileRef = 55FE1F6C1CBBCFDD00EA1D84 /* Mop.png */; };
 		55FE1F741CBBD10600EA1D84 /* Hongkong.png in Resources */ = {isa = PBXBuildFile; fileRef = 55FE1F721CBBD10600EA1D84 /* Hongkong.png */; };
 		55FE1F751CBBD10600EA1D84 /* Europe.png in Resources */ = {isa = PBXBuildFile; fileRef = 55FE1F731CBBD10600EA1D84 /* Europe.png */; };
+		55FFBF881CD9CE2800E77FAE /* Names.json in Resources */ = {isa = PBXBuildFile; fileRef = 55FFBF871CD9CE2800E77FAE /* Names.json */; };
 		BA694D4CD03031F862749A76 /* libPods-iCurrency.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 584460ABA5C2A82E8771DF5D /* libPods-iCurrency.a */; };
 /* End PBXBuildFile section */
 
@@ -264,6 +266,8 @@
 		551763B91CD5AB5700C4DC29 /* MCNumberKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCNumberKeyboard.h; sourceTree = "<group>"; };
 		551763BA1CD5AB5700C4DC29 /* MCNumberKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCNumberKeyboard.m; sourceTree = "<group>"; };
 		551763BB1CD5AB5700C4DC29 /* MCNumberKeyboard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCNumberKeyboard.xib; sourceTree = "<group>"; };
+		551763BF1CD5DDC100C4DC29 /* MCCalculate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCalculate.h; sourceTree = "<group>"; };
+		551763C01CD5DDC100C4DC29 /* MCCalculate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCalculate.m; sourceTree = "<group>"; };
 		552F28121CCF47F6004FC902 /* TrendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrendViewController.h; sourceTree = "<group>"; };
 		552F28131CCF47F6004FC902 /* TrendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrendViewController.m; sourceTree = "<group>"; };
 		552F28161CCF4A47004FC902 /* trend1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trend1.png; sourceTree = "<group>"; };
@@ -277,13 +281,13 @@
 		5568E30A1C7F0254002266D0 /* ConvertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConvertViewController.m; sourceTree = "<group>"; };
 		55A539EF1C7C692D0035043F /* iCurrency.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iCurrency.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55A539F31C7C692D0035043F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		55A539F51C7C692D0035043F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		55A539F61C7C692D0035043F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		55A539F51C7C692D0035043F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = iCurrency/AppDelegate.h; sourceTree = "<group>"; };
+		55A539F61C7C692D0035043F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = iCurrency/AppDelegate.m; sourceTree = "<group>"; };
 		55A539FC1C7C692D0035043F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		55A539FF1C7C692D0035043F /* iCurrency.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iCurrency.xcdatamodel; sourceTree = "<group>"; };
 		55A53A011C7C692D0035043F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		55A53A041C7C692D0035043F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		55A53A061C7C692D0035043F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		55A53A061C7C692D0035043F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = iCurrency/Info.plist; sourceTree = "<group>"; };
 		55A53A0B1C7C692D0035043F /* iCurrencyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iCurrencyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		55A53A0F1C7C692D0035043F /* iCurrencyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iCurrencyTests.m; sourceTree = "<group>"; };
 		55A53A111C7C692D0035043F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -504,6 +508,7 @@
 		55FE1F6C1CBBCFDD00EA1D84 /* Mop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Mop.png; sourceTree = "<group>"; };
 		55FE1F721CBBD10600EA1D84 /* Hongkong.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Hongkong.png; sourceTree = "<group>"; };
 		55FE1F731CBBD10600EA1D84 /* Europe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Europe.png; sourceTree = "<group>"; };
+		55FFBF871CD9CE2800E77FAE /* Names.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Names.json; sourceTree = "<group>"; };
 		584460ABA5C2A82E8771DF5D /* libPods-iCurrency.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iCurrency.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		85DAD87BD5772DB54A920210 /* Pods-iCurrency.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iCurrency.release.xcconfig"; path = "Pods/Target Support Files/Pods-iCurrency/Pods-iCurrency.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -537,6 +542,8 @@
 		551763BE1CD5AB6200C4DC29 /* Keyboard */ = {
 			isa = PBXGroup;
 			children = (
+				551763BF1CD5DDC100C4DC29 /* MCCalculate.h */,
+				551763C01CD5DDC100C4DC29 /* MCCalculate.m */,
 				551763B91CD5AB5700C4DC29 /* MCNumberKeyboard.h */,
 				551763BA1CD5AB5700C4DC29 /* MCNumberKeyboard.m */,
 				551763BB1CD5AB5700C4DC29 /* MCNumberKeyboard.xib */,
@@ -562,6 +569,9 @@
 			isa = PBXGroup;
 			children = (
 				55A539F11C7C692D0035043F /* iCurrency */,
+				55A539F51C7C692D0035043F /* AppDelegate.h */,
+				55A539F61C7C692D0035043F /* AppDelegate.m */,
+				55A53A061C7C692D0035043F /* Info.plist */,
 				55A53A0E1C7C692D0035043F /* iCurrencyTests */,
 				55A53A191C7C692D0035043F /* iCurrencyUITests */,
 				55A539F01C7C692D0035043F /* Products */,
@@ -586,9 +596,6 @@
 				55FAE3B61C8E9F6200B4C620 /* Model */,
 				55CAAD0F1C848C3400360F6B /* Controller */,
 				55CAAD0E1C848C2D00360F6B /* View */,
-				55A539F51C7C692D0035043F /* AppDelegate.h */,
-				55A539F61C7C692D0035043F /* AppDelegate.m */,
-				55A53A061C7C692D0035043F /* Info.plist */,
 				55FE1C551CBB9A1900EA1D84 /* Images */,
 				55A539F21C7C692D0035043F /* Supporting Files */,
 			);
@@ -665,6 +672,7 @@
 				55FAE3B71C8F25DB00B4C620 /* YahooFinanceClient.h */,
 				55FAE3B81C8F25DB00B4C620 /* YahooFinanceClient.m */,
 				55FE1C531CBB987700EA1D84 /* currencies.plist */,
+				55FFBF871CD9CE2800E77FAE /* Names.json */,
 				55A539FE1C7C692D0035043F /* iCurrency.xcdatamodeld */,
 			);
 			name = Model;
@@ -1087,6 +1095,7 @@
 				55FE1F1F1CBB9BC500EA1D84 /* Nicaragua.png in Resources */,
 				55FE1F481CBB9BC500EA1D84 /* Sweden.png in Resources */,
 				55FE1F401CBB9BC500EA1D84 /* Somalia.png in Resources */,
+				55FFBF881CD9CE2800E77FAE /* Names.json in Resources */,
 				55FE1F4C1CBB9BC500EA1D84 /* Tajikistan.png in Resources */,
 				55FE1F1B1CBB9BC500EA1D84 /* Nauru.png in Resources */,
 				552F28211CCF584D004FC902 /* refresh.png in Resources */,
@@ -1300,6 +1309,7 @@
 				55015C501C969E500079632F /* SettingCell.m in Sources */,
 				551763BC1CD5AB5700C4DC29 /* MCNumberKeyboard.m in Sources */,
 				55FAE3AC1C8E9F0B00B4C620 /* AddCurrencyViewController.m in Sources */,
+				551763C11CD5DDC100C4DC29 /* MCCalculate.m in Sources */,
 				55015C531C96E0780079632F /* MainViewController.m in Sources */,
 				55A53A001C7C692D0035043F /* iCurrency.xcdatamodeld in Sources */,
 				55FAE3B51C8E9F5900B4C620 /* CurrencyManager.m in Sources */,

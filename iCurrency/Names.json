@@ -1,0 +1,578 @@
+{
+  "HRK" : [
+    "Croatia",
+    "克罗地亚库纳"
+  ],
+  "HUF" : [
+    "Hungary",
+    "匈牙利福林"
+  ],
+  "CDF" : [
+    "Congo-(Republic)",
+    "刚果法郎"
+  ],
+  "ILS" : [
+    "Israel",
+    "以色列新谢克尔"
+  ],
+  "NGN" : [
+    "Nigeria",
+    "尼日利亚奈拉"
+  ],
+  "GYD" : [
+    "Guyana",
+    "圭亚那元"
+  ],
+  "BYR" : [
+    "Belarus",
+    "白俄罗斯卢布"
+  ],
+  "BHD" : [
+    "Bahrain",
+    "巴林第纳尔"
+  ],
+  "SZL" : [
+    "Swaziland",
+    "斯威士兰里兰吉尼"
+  ],
+  "INR" : [
+    "India",
+    "印度卢比"
+  ],
+  "SDG" : [
+    "Sudan",
+    "苏丹第纳尔"
+  ],
+  "PEN" : [
+    "Peru",
+    "秘鲁新索尔"
+  ],
+  "EUR" : [
+    "Europe",
+    "欧元"
+  ],
+  "QAR" : [
+    "Qatar",
+    "卡塔尔里亚尔"
+  ],
+  "PGK" : [
+    "Papua-New-Guinea",
+    "巴布亚新几内亚基那"
+  ],
+  "LRD" : [
+    "Liberia",
+    "利比里亚元"
+  ],
+  "ISK" : [
+    "Iceland",
+    "冰岛克朗"
+  ],
+  "SYP" : [
+    "Syria",
+    "叙利亚镑"
+  ],
+  "TRY" : [
+    "Turkey",
+    "土耳其新里拉"
+  ],
+  "UAH" : [
+    "Ukraine",
+    "乌克兰赫夫米"
+  ],
+  "SGD" : [
+    "Singapore",
+    "新加坡元"
+  ],
+  "MMK" : [
+    "Myanmar",
+    "缅甸元"
+  ],
+  "NIO" : [
+    "Nicaragua",
+    "尼加拉瓜科多巴"
+  ],
+  "BIF" : [
+    "Burundi",
+    "布隆迪法郎"
+  ],
+  "AFN" : [
+    "Afghanistan",
+    "阿富汗尼"
+  ],
+  "LKR" : [
+    "Sri-Lanka",
+    "斯里兰卡卢比"
+  ],
+  "GTQ" : [
+    "Guatemala",
+    "危地马拉查尔"
+  ],
+  "CHF" : [
+    "Switzerland",
+    "瑞士法郎"
+  ],
+  "THB" : [
+    "Thailand",
+    "泰铢"
+  ],
+  "AMD" : [
+    "Armenia",
+    "亚美尼亚德拉姆"
+  ],
+  "SEK" : [
+    "Sweden",
+    "瑞典克朗"
+  ],
+  "SAR" : [
+    "Saudi-Arabia",
+    "沙特里亚尔"
+  ],
+  "KWD" : [
+    "Kuwait",
+    "科威特第纳尔"
+  ],
+  "IRR" : [
+    "Iran",
+    "伊朗里亚尔"
+  ],
+  "WST" : [
+    "Samoa",
+    "萨摩亚塔拉"
+  ],
+  "BGN" : [
+    "Bulgaria",
+    "保加利亚列弗"
+  ],
+  "PHP" : [
+    "Philippines",
+    "菲律宾比索"
+  ],
+  "ZMW" : [
+    "Zambia",
+    "Zambian Kwacha"
+  ],
+  "BDT" : [
+    "Bangladesh",
+    "孟加拉塔卡"
+  ],
+  "NOK" : [
+    "Norway",
+    "挪威克朗"
+  ],
+  "BOB" : [
+    "Bolivia",
+    "玻利维亚币"
+  ],
+  "TZS" : [
+    "Tanzania",
+    "坦桑尼亚先令"
+  ],
+  "BND" : [
+    "Brunei",
+    "文莱元"
+  ],
+  "SCR" : [
+    "Seychelles",
+    "塞舌尔卢比"
+  ],
+  "VUV" : [
+    "Vanuatu",
+    "瓦努阿图瓦图"
+  ],
+  "VEF" : [
+    "Venezuela",
+    "委内瑞拉玻利瓦尔"
+  ],
+  "DJF" : [
+    "Djibouti",
+    "吉布提法郎"
+  ],
+  "CLF" : [
+    "Chile",
+    "Chilean Unit of Account (UF)"
+  ],
+  "LSL" : [
+    "Lesotho",
+    "莱索托洛蒂"
+  ],
+  "MOP" : [
+    "Mop",
+    "澳门元"
+  ],
+  "ALL" : [
+    "Albania",
+    "阿尔巴尼亚列克"
+  ],
+  "UZS" : [
+    "Uzbekistan",
+    "乌兹别克斯坦苏姆"
+  ],
+  "UYU" : [
+    "Uruguay",
+    "乌拉圭比索"
+  ],
+  "PLN" : [
+    "Poland",
+    "波兰兹罗提"
+  ],
+  "LTL" : [
+    "Lithuania",
+    "立陶宛立特"
+  ],
+  "LYD" : [
+    "Libya",
+    "利比亚第纳尔"
+  ],
+  "JPY" : [
+    "Japan",
+    "日元"
+  ],
+  "MNT" : [
+    "Mongolia",
+    "蒙古图格里克"
+  ],
+  "FJD" : [
+    "Fiji",
+    "斐济元"
+  ],
+  "ZWL" : [
+    "Zimbabwe",
+    "Zimbabwean Dollar"
+  ],
+  "KPW" : [
+    "Korea,-North",
+    "北韩元"
+  ],
+  "PKR" : [
+    "Pakistan",
+    "巴基斯坦卢比"
+  ],
+  "MRO" : [
+    "Mauritania",
+    "毛里塔尼亚乌吉亚"
+  ],
+  "OMR" : [
+    "Oman",
+    "阿曼里亚尔"
+  ],
+  "GBP" : [
+    "United-Kingdom",
+    "英镑"
+  ],
+  "LVL" : [
+    "Latvia",
+    "拉脱维亚拉特"
+  ],
+  "GEL" : [
+    "Georgia",
+    "格鲁吉亚拉里"
+  ],
+  "TND" : [
+    "Tunisia",
+    "突尼斯第纳尔"
+  ],
+  "DKK" : [
+    "Denmark",
+    "丹麦克朗"
+  ],
+  "NPR" : [
+    "Nepal",
+    "尼泊尔卢比"
+  ],
+  "KRW" : [
+    "Korea,-South",
+    "南韩元"
+  ],
+  "BSD" : [
+    "Bahamas",
+    "巴哈马元"
+  ],
+  "CRC" : [
+    "Costa-Rica",
+    "哥斯达黎加科朗"
+  ],
+  "EGP" : [
+    "Egypt",
+    "埃及镑"
+  ],
+  "MAD" : [
+    "Morocco",
+    "摩洛哥迪拉姆"
+  ],
+  "AUD" : [
+    "Australia",
+    "澳大利亚元"
+  ],
+  "SLL" : [
+    "Sierra-Leone",
+    "塞拉利昂利昂"
+  ],
+  "MWK" : [
+    "Malawi",
+    "马拉维克瓦查"
+  ],
+  "RSD" : [
+    "Serbia",
+    "塞尔维亚第纳尔"
+  ],
+  "NZD" : [
+    "New-Zealand",
+    "新西兰元"
+  ],
+  "SRD" : [
+    "Suriname",
+    "苏里南元"
+  ],
+  "CLP" : [
+    "Chile",
+    "智利比索"
+  ],
+  "RUB" : [
+    "Russia",
+    "俄罗斯卢布"
+  ],
+  "NAD" : [
+    "Namibia",
+    "纳米比亚元"
+  ],
+  "HKD" : [
+    "Hongkong",
+    "港币"
+  ],
+  "GMD" : [
+    "Gambia",
+    "冈比亚达拉西"
+  ],
+  "VND" : [
+    "Vietnam",
+    "越南盾"
+  ],
+  "LAK" : [
+    "Laos",
+    "老挝基普"
+  ],
+  "RON" : [
+    "Romania",
+    "罗马尼亚塑胶币"
+  ],
+  "MUR" : [
+    "Mauritius",
+    "毛里求斯卢比"
+  ],
+  "MXN" : [
+    "Mexico",
+    "墨西哥比索"
+  ],
+  "BRL" : [
+    "Brazil",
+    "巴西里尔"
+  ],
+  "MVR" : [
+    "Maldives",
+    "马尔代夫拉菲亚"
+  ],
+  "PAB" : [
+    "Panama",
+    "巴拿马巴波亚"
+  ],
+  "TJS" : [
+    "Tajikistan",
+    "塔吉克斯坦索莫尼"
+  ],
+  "GNF" : [
+    "Guinea",
+    "几内亚法郎"
+  ],
+  "MGA" : [
+    "Madagascar",
+    "马达加斯加阿里亚里"
+  ],
+  "ETB" : [
+    "Ethiopia",
+    "埃塞俄比亚比尔"
+  ],
+  "ZAR" : [
+    "South-Africa",
+    "南非兰特"
+  ],
+  "COP" : [
+    "Colombia",
+    "哥伦比亚比索"
+  ],
+  "IDR" : [
+    "Indonesia",
+    "印度尼西亚卢比"
+  ],
+  "CVE" : [
+    "Cape-Verde",
+    "埃斯库多"
+  ],
+  "TTD" : [
+    "Trinidad-and-Tobago",
+    "特立尼达\/多巴哥元"
+  ],
+  "PYG" : [
+    "Paraguay",
+    "巴拉圭瓜尼"
+  ],
+  "MZN" : [
+    "Mozambique",
+    "莫桑比克美提卡"
+  ],
+  "KZT" : [
+    "Kazakhstan",
+    "哈萨克斯坦腾格"
+  ],
+  "USD" : [
+    "United-States-of-America",
+    "美元"
+  ],
+  "UGX" : [
+    "Uganda",
+    "乌干达先令"
+  ],
+  "RWF" : [
+    "Rwanda",
+    "卢旺达法郎"
+  ],
+  "GHS" : [
+    "Ghana",
+    "加纳新赛地"
+  ],
+  "ARS" : [
+    "Argentina",
+    "阿根廷比索"
+  ],
+  "DOP" : [
+    "Dominica",
+    "多米尼加比索"
+  ],
+  "LBP" : [
+    "Lebanon",
+    "黎巴嫩镑"
+  ],
+  "BZD" : [
+    "Belarus",
+    "伯利兹元"
+  ],
+  "BTN" : [
+    "Bhutan",
+    "不丹努尔特鲁姆"
+  ],
+  "MYR" : [
+    "Malaysia",
+    "马来西亚林吉特"
+  ],
+  "YER" : [
+    "Yemen",
+    "也门里亚尔"
+  ],
+  "JMD" : [
+    "Jamaica",
+    "牙买加元"
+  ],
+  "TOP" : [
+    "Tonga",
+    "汤加潘加"
+  ],
+  "SOS" : [
+    "Somalia",
+    "索马里先令"
+  ],
+  "TMT" : [
+    "Turkmenistan",
+    "土库曼斯坦马纳特"
+  ],
+  "MDL" : [
+    "Moldova",
+    "摩尔多瓦列伊"
+  ],
+  "TWD" : [
+    "Taiwan",
+    "台币"
+  ],
+  "BBD" : [
+    "Barbados",
+    "巴巴多斯元"
+  ],
+  "CAD" : [
+    "Canada",
+    "加拿大元"
+  ],
+  "CNY" : [
+    "China",
+    "人民币"
+  ],
+  "JOD" : [
+    "Jordan",
+    "约旦第纳尔"
+  ],
+  "IQD" : [
+    "Iraq",
+    "伊拉克第纳尔"
+  ],
+  "HNL" : [
+    "Honduras",
+    "洪都拉斯皮拉"
+  ],
+  "AED" : [
+    "United-Arab-Emirates",
+    "阿联酋迪拉姆"
+  ],
+  "ERN" : [
+    "Eritrea",
+    "厄立特里亚纳克法"
+  ],
+  "KES" : [
+    "Kenya",
+    "肯尼亚先令"
+  ],
+  "KMF" : [
+    "Comoros",
+    "科摩罗法郎"
+  ],
+  "MKD" : [
+    "Macedonia",
+    "马其顿第纳尔"
+  ],
+  "DZD" : [
+    "Algeria",
+    "阿尔及利亚第纳尔"
+  ],
+  "CUP" : [
+    "Cuba",
+    "古巴比索"
+  ],
+  "BWP" : [
+    "Botswana",
+    "博茨瓦纳普拉"
+  ],
+  "SBD" : [
+    "Solomon-Islands",
+    "所罗门群岛元"
+  ],
+  "AZN" : [
+    "Azerbaijan",
+    "阿塞拜疆马纳特"
+  ],
+  "KGS" : [
+    "Kyrgyzstan",
+    "吉尔吉斯斯坦索姆"
+  ],
+  "KHR" : [
+    "Cambodia",
+    "柬埔寨瑞尔"
+  ],
+  "HTG" : [
+    "Haiti",
+    "海地古德"
+  ],
+  "CZK" : [
+    "Czech-Republic",
+    "捷克克朗"
+  ],
+  "BAM" : [
+    "Bosnia-and-Herzegovina",
+    "波斯尼亚马克"
+  ]
+}

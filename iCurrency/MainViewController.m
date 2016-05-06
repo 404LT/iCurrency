@@ -13,10 +13,11 @@
 #import "ConvertViewController.h"
 #import "CurrencyManager.h"
 #import "SettingViewController.h"
+#import "MCNumberKeyboard.h"
 
 #define DEFAULTS_KEY_SOURCE_CURRENCY @"baseCurrency"
 
-@interface MainViewController ()
+@interface MainViewController ()<MCNumberKeyboardDelegate>
 
 @end
 
@@ -33,8 +34,10 @@
     [self initInputField];
     [self initBarButtomItems];
     
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchBaseCurrency:) name:@"switchBaseCurrency" object:nil];
+
+    
+    
     
 //    [self someTest];
 }
@@ -81,7 +84,8 @@
     
     self.baseCurrency = countryName;
     
-    CurrencyManager *manager = [CurrencyManager default];
+    CurrencyManager *manager = [CurrencyManager sharedInstance];
+    
     self.sourceCurrencyFlag.image = [manager imageForCountriesFlag:self.baseCurrency];//国旗
     self.sourceCurrencyName.text = [manager nameForCurrency:self.baseCurrency];//名称
     self.sourceCurrencyUnit.text = [manager unitForCurrency:self.baseCurrency];//单位
@@ -158,11 +162,68 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     //    监听输入框开始输入的方法
-    NSLog(@"输入框开始输入textFieldDidBeginEditing: is called ");
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
-    tapGesture.delegate = self;
-    [self.view addGestureRecognizer:tapGesture];
+//    NSLog(@"输入框开始输入textFieldDidBeginEditing: is called ");
+//    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
+//    tapGesture.delegate = self;
+//    [self.view addGestureRecognizer:tapGesture];
+    
+    
+    NSLog(@"调用自定义键盘");
+    MCNumberKeyboard *keyboardView=[[NSBundle mainBundle]loadNibNamed:@"MCNumberKeyboard" owner:nil options:nil][0];
+    keyboardView.delegate=self;
+    [keyboardView showInView:self.navigationController.view];
+    
+    
 }
+
+#pragma mark - 自定义键盘的委托
+#pragma mark - NumberKeyboard Delegate
+
+- (void)numberKeyboardWillShow:(MCNumberKeyboard *)numberKeyboard
+{
+    
+}
+
+-(void)numberKeyboardDidShow:(MCNumberKeyboard *)numberKeyboard
+{
+    
+}
+
+-(void)numberKeyboardWillDismiss:(MCNumberKeyboard *)numberKeyboard
+{
+    
+}
+
+-(void)numberKeyboardClickNumberButton:(MCNumberKeyboard *)numberKeyboard
+{
+//    [self.sourceCurrencyInputField setCount]
+}
+
+-(void)numberKeyboardClickClearButton:(MCNumberKeyboard *)numberKeyboard
+{
+    
+}
+
+-(void)numberKeyboardDidDismiss:(MCNumberKeyboard *)numberKeyboard
+{
+    
+}
+
+-(void)numberKeyboardClickPointButton:(MCNumberKeyboard *)numberKeyboard
+{
+    
+}
+-(void)numberKeyboardClickOperationButton:(MCNumberKeyboard *)numberKeyboard
+{
+    
+}
+
+
+
+
+
+
+
 
 #pragma mark - 隐藏键盘
 - (void)viewTapped:(UIGestureRecognizer *)gesture

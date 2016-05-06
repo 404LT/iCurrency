@@ -18,6 +18,8 @@
 @property (strong,nonatomic)YahooFinanceClient *info;//用于传输抓取的信息
 @property (strong,nonatomic) NSMutableArray   * currencyDisplay;
 
+@property(strong,nonatomic)CurrencyManager *cManager;//实例对象
+
 //@property (weak,nonatomic)UITextField *inputNumField;
 
 @end
@@ -51,7 +53,23 @@
     //把nameitems数组用作默认在主界面显示的几个汇率国家
     
     NSLog(@"初始化nameitems---");
-    nameitems = [@"CNY JPY EUR HKD" componentsSeparatedByString:@" "];
+//    nameitems = [@"CNY JPY EUR HKD" componentsSeparatedByString:@" "];
+    
+    //写一个判断，当首次打开应用的时候，此时的 自选国家 数组 里面是空的，就加载三个默认的国家
+//    以后呢就从数据模型那边获取已经选择和保存的nameArray
+    
+    
+    //先从数据层那边把 数据传过来
+    //再做以下这个判断，如果namesItems还是为空就跳到else去加载初始化的几个国家
+    
+    //namesitems = _namesArray
+    nameitems = _cManager.namesArray;
+    if (!nameitems)
+    {
+        NSLog(@"用了自定义的国家");
+        nameitems = [@"CNY JPY EUR HKD" componentsSeparatedByString:@" "];
+    }
+    
     
 }
 
@@ -79,35 +97,40 @@
 #pragma mark - 表格数据源--Data Source Delegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"cellForRowAtIndexPath---------方法start");
+ 
     static NSString *reuseIdentifier = @"convertCell";
     ConvertCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
     if (cell == nil) {
         cell = [[ConvertCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     }
     cell.backgroundColor = [UIColor whiteColor];
-    
+   
     CurrencyManager *manager = [[CurrencyManager alloc]init];
     ExchangeRate *exchange = [[ExchangeRate alloc]init];
     
+    //以cell行号来索引nameitems数组
     NSString *targetCountryName =[nameitems objectAtIndex:indexPath.row];
+    
+    NSLog(@"targetCountryName is %@",targetCountryName);
     
     cell.countryName.text = [manager nameForCurrency:targetCountryName];
     cell.countryImage.image = [manager imageForCountriesFlag:targetCountryName];
     cell.currencyUnit.text = [manager unitForCurrency:targetCountryName];
-
-    double baseAmount = [self baseAmount];
     
+    
+   // NSString *name = _cManager.namesArray[indexPath.r]
+    
+    
+    
+    
+    //转换汇率操作
+    double baseAmount = [self baseAmount];
     MainViewController *mvc = [[MainViewController alloc]init];
     [mvc initDefaultBaseCurrency];
-   
     id currentBaseRate = mvc.baseCurrency;
-    
     double targetAmount =[exchange convertRate:currentBaseRate to:[nameitems objectAtIndex:indexPath.row] with:baseAmount];
-    
     cell.targetCurrency.text =[NSString stringWithFormat:@"%f",targetAmount];
-    NSLog(@"基准汇率输入值现在是：%f",baseAmount);
-//    NSLog(@"---------cell---------方法end");
+
     
     return cell;
 }
@@ -167,14 +190,12 @@
 #pragma mark - 表格一些其它的设置
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    //    表格的区段数
-    NSLog(@"1个区段");
+
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    //    该区段的行数
-    
+
     NSLog(@"此时一共加载了%lu个国家",nameitems.count);
     return nameitems.count;
 }
@@ -195,13 +216,11 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //表格高度
-//    NSLog(@"行高是80");
     return 80.f;
 }
 
--(NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    本函数用于修改 删除按钮显示的信息
+-(NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     return @"删除";
 }
 

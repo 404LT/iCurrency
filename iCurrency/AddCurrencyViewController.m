@@ -11,10 +11,12 @@
 #import "AddCurrencyCell.h"
 #import "SettingViewController.h"
 #import "CurrencyManager.h"
-#import "CurrencyManager.h"
+
 @interface AddCurrencyViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>
-@property (retain, nonatomic) IBOutlet UISearchBar *searchBar;
-@property (retain, nonatomic) IBOutlet UITableView *addCurrencyTableView;
+@property (retain, nonatomic) IBOutlet UISearchBar *searchBar;//搜索栏
+@property (retain, nonatomic) IBOutlet UITableView *addCurrencyTableView;//表格
+
+@property(strong,nonatomic)CurrencyManager *cManager;
 
 @end
 
@@ -27,10 +29,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    //CurrencyManager单例
+    _cManager = [CurrencyManager sharedInstance];
+    
     [self initNavigationItems];
     [self initSearchBar];
 }
 
+#pragma mark - 初始化方法
 - (void)initNavigationItems
 {
     //初始化导航栏按钮
@@ -44,15 +50,7 @@
     self.searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 30)];
 }
 
-
-//- (void)backToMain{
-//    MainViewController *mainVC = [[MainViewController alloc]init];
-////    [self.navigationController pushViewController:mainVC animated:YES];
-//    mainVC = [self.storyboard instantiateViewControllerWithIdentifier:@"MainViewController"];
-//    mainVC.modalTransitionStyle = UIModalTransitionStylePartialCurl;
-//   
-//
-//}
+#pragma mark - 返回主界面的方法
 - (IBAction)finishedPressed:(id)sender {
     
     NSLog(@"cancelPressed is called");
@@ -66,45 +64,97 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+
+
+#pragma mark - Table view data source
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    NSLog(@"number of row");
+    return _cManager.namesArray.count;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    static NSString *reuseIdentifier = @"AddCurrencyCell";
+    AddCurrencyCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+    if (cell == nil) {
+        cell = [[AddCurrencyCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+    }
+    NSString *names = _cManager.namesArray[indexPath.row];
+    NSString *flags = _cManager.flagImage[indexPath.row];
+
+    cell.countryImage.image = [UIImage imageNamed:flags];
+    cell.countryName.text = names;
+
+    return cell;
+}
+#pragma mark - 表格主要的方法
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
+
+#pragma mark - 表格次要的方法
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+//{
+//    return 1;
+//}
+
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return 60;
+//}
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+
+
+
+#pragma ------------UISearcherBar Delegate---------
+
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
 {
-    return 1;
+    return YES;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
-    return 1;
+    
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar
+{
+    return YES;
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
+{
     
-    NSString *reuseIdentifier = @"AddCurrencyCell";
-    AddCurrencyCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier ];
-    
-    if (cell == nil) {
-        cell = [[AddCurrencyCell alloc] init];
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    [self refreshTableView];
+}
+
+- (void)refreshTableView
+{
+    if ([self.searchBar isFirstResponder]) {
+//        NSString *searchString =
     }
-    
-    CurrencyManager *manager = [[CurrencyManager alloc]init];
-    
-//    cell.countryImage.image = [manager imageForCountriesFlag:coutryName.text];
-    
-    
-//    
-//    cell.backgroundColor = [UIColor lightGrayColor];
-//    cell.countryName.text =[nameitems objectAtIndex:indexPath.row];
-//    cell.countryImage.image = [UIImage imageNamed:[images objectAtIndex:indexPath.row]];
-    return cell;
 }
 
-#pragma ---------------------------------UISearcherBar Delegate------------------
+
+
+
+
+
 
 //在搜索框内搜索内容，并展示搜索结果
 //- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
