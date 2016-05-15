@@ -13,6 +13,9 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *countryImage;
 @property (weak, nonatomic) IBOutlet UILabel *countryName;
+
+@property(nonatomic,assign)BOOL isSelected;//用于判断当前国家是否被选中
+
 //@property (weak, nonatomic) IBOutlet UITextField *inputNumField;
 //@property (weak, nonatomic) IBOutlet UILabel *currencyUnit;
 

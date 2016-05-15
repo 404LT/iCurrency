@@ -57,7 +57,6 @@ NSString * yahoolURL=@"https://finance.yahoo.com/webservice/v1/symbols/allcurren
                         
                     }
                 }
-              //  NSLog(@"-----------------------%@",parsedResults);
                 return parsedResults;
             }
             
@@ -70,6 +69,8 @@ NSString * yahoolURL=@"https://finance.yahoo.com/webservice/v1/symbols/allcurren
 
 - (NSDictionary *)reserveLatestDic
 {
+    //要用到归档解档
+    //用的时候是直接用解档出来的结果
     static NSDictionary *reserveLatestDic;
     reserveLatestDic = [self getParsedDictionaryFromResults];
     return reserveLatestDic;

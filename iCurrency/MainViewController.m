@@ -17,7 +17,7 @@
 
 #define DEFAULTS_KEY_SOURCE_CURRENCY @"baseCurrency"
 
-@interface MainViewController ()<MCNumberKeyboardDelegate>
+@interface MainViewController ()<MCNumberKeyboardDelegate,AddCurrencyViewControllerDelegate>
 
 @end
 
@@ -32,26 +32,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initInputField];
+    [self initAddSignToNavBar];
     [self initBarButtomItems];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchBaseCurrency:) name:@"switchBaseCurrency" object:nil];
 
-    
-    
-    
-//    [self someTest];
 }
 
 
 
 #pragma mark -  初始化基准汇率
-- (NSString *)getCurrenctCountry
-{
-    //获取当前基准汇率国家
-    NSString *str = self.baseCurrency;
-    NSLog(@"这就有点 %@",str);
-    return str;
-}
 
 -(void)switchBaseCurrency:(NSNotification*)notification{
     
@@ -75,6 +65,7 @@
 //    [self setupBaseCurrency:@"USD"];
 }
 
+#pragma mark - 设定基准汇率
 - (void)setupBaseCurrency:(NSString *)countryName
 {
     NSLog(@"设定基准汇率");
@@ -86,11 +77,15 @@
     
     CurrencyManager *manager = [CurrencyManager sharedInstance];
     
-    self.sourceCurrencyFlag.image = [manager imageForCountriesFlag:self.baseCurrency];//国旗
-    self.sourceCurrencyName.text = [manager nameForCurrency:self.baseCurrency];//名称
-    self.sourceCurrencyUnit.text = [manager unitForCurrency:self.baseCurrency];//单位
-    
-    
+//    self.sourceCurrencyFlag.image = [manager imageForCountriesFlag:self.baseCurrency];//国旗
+//    self.sourceCurrencyName.text = [manager nameForCurrency:self.baseCurrency];//名称
+//    self.sourceCurrencyUnit.text = [manager unitForCurrency:self.baseCurrency];//单位
+
+    self.sourceCurrencyFlag.image = [UIImage imageNamed:@"United-States-of-America"];//国旗
+    self.sourceCurrencyName.text = @"USD";
+    self.sourceCurrencyUnit.text = @"美元";//单位
+
+
 }
 
 #pragma mark - 一些需要初始化的方法
@@ -103,17 +98,23 @@
     
 }
 
+//添加按钮
+- (void)initAddSignToNavBar
+{
+    //初始化添加国家按钮
+    ConvertViewController *cvc = (ConvertViewController *)[self.childViewControllers lastObject];
+    UIBarButtonItem *addBar = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:cvc action:@selector(addTargetCurrency)];
+    self.navigationItem.rightBarButtonItem = addBar;
+    
+}
 
 
 -(void)initBarButtomItems
 {
     //初始化主界面导航栏的按钮
+    //设置按钮
     UIBarButtonItem *settingBar=[[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(jumpToSetting)];
     self.navigationItem.leftBarButtonItem=settingBar;
-//    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    
-    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(jumpToAdd)];
-    self.navigationItem.rightBarButtonItem = barButtonItem;
 }
 
 -(void)initInputField
@@ -122,25 +123,7 @@
     self.sourceCurrencyInputField.clearsOnBeginEditing = YES;
 }
 
-#pragma mark - 测试一些小的模块~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- (void)someTest
-{
-    //
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 #pragma mark - 页面转跳的方法
-- (void)jumpToAdd
-{
-    NSLog(@"jumpToAdd is called");
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    AddCurrencyViewController *addVC = (AddCurrencyViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"AddCurrencyView"];
-    [self presentViewController:addVC animated:YES completion:nil];
-}
-
 - (void)jumpToSetting
 {
     NSLog(@"jumpToSetting is called");
@@ -148,7 +131,13 @@
     [self.navigationController pushViewController:settingVC animated:YES];
 }
 
-#pragma mark - 一些琐碎的方法
+//实现委托的cancelled方法
+- (void)cancelled
+{
+    NSLog(@"3-1关闭添加国家的view的方法实现");
+}
+
+#pragma mark - 析构函数
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -162,16 +151,17 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     //    监听输入框开始输入的方法
-//    NSLog(@"输入框开始输入textFieldDidBeginEditing: is called ");
-//    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
-//    tapGesture.delegate = self;
-//    [self.view addGestureRecognizer:tapGesture];
+    NSLog(@"输入框开始输入textFieldDidBeginEditing: is called ");
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
+    tapGesture.delegate = self;
+    [self.view addGestureRecognizer:tapGesture];
     
     
-    NSLog(@"调用自定义键盘");
-    MCNumberKeyboard *keyboardView=[[NSBundle mainBundle]loadNibNamed:@"MCNumberKeyboard" owner:nil options:nil][0];
-    keyboardView.delegate=self;
-    [keyboardView showInView:self.navigationController.view];
+//   方案2 自定义键盘
+//    NSLog(@"调用自定义键盘");
+//    MCNumberKeyboard *keyboardView=[[NSBundle mainBundle]loadNibNamed:@"MCNumberKeyboard" owner:nil options:nil][0];
+//    keyboardView.delegate=self;
+//    [keyboardView showInView:self.navigationController.view];
     
     
 }
@@ -181,7 +171,7 @@
 
 - (void)numberKeyboardWillShow:(MCNumberKeyboard *)numberKeyboard
 {
-    
+    //配置一些约束
 }
 
 -(void)numberKeyboardDidShow:(MCNumberKeyboard *)numberKeyboard
@@ -193,17 +183,6 @@
 {
     
 }
-
--(void)numberKeyboardClickNumberButton:(MCNumberKeyboard *)numberKeyboard
-{
-//    [self.sourceCurrencyInputField setCount]
-}
-
--(void)numberKeyboardClickClearButton:(MCNumberKeyboard *)numberKeyboard
-{
-    
-}
-
 -(void)numberKeyboardDidDismiss:(MCNumberKeyboard *)numberKeyboard
 {
     
@@ -217,15 +196,20 @@
 {
     
 }
-
-
-
-
-
-
+-(void)numberKeyboardClickNumberButton:(MCNumberKeyboard *)numberKeyboard
+{
+    //点击数字按钮后向各国家返回计算结果
+    //    [self.sourceCurrencyInputField setCount]
+}
+-(void)numberKeyboardClickClearButton:(MCNumberKeyboard *)numberKeyboard
+{
+    //配置清空按钮的功能
+    [self.sourceCurrencyInputField clearsOnBeginEditing];
+}
 
 
 #pragma mark - 隐藏键盘
+//最开始的方案的时候用这个
 - (void)viewTapped:(UIGestureRecognizer *)gesture
 {
     NSLog(@"viewTapped is called 关闭键盘");
@@ -258,6 +242,16 @@
     NSLog(@"输入了新的数字 %f",cvc.baseAmount);
 
 }
+
+#pragma mark - 添加汇率 
+//- (void)selectedCurrency:(NSString *)selectedCurrencyCode
+//{
+//    NSLog(@"更换基准汇率");
+//    //    根据countryCode来设置基准汇率，还是以USD为基础汇率。。
+//    [self setupSourceCurrency:selectedCurrencyCode];
+//    [self dismissViewControllerAnimated:YES completion:nil];
+//}
+
 
 
 @end

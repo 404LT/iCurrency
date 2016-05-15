@@ -652,10 +652,10 @@
 				55015C521C96E0780079632F /* MainViewController.m */,
 				5568E3091C7F0254002266D0 /* ConvertViewController.h */,
 				5568E30A1C7F0254002266D0 /* ConvertViewController.m */,
-				552F28121CCF47F6004FC902 /* TrendViewController.h */,
-				552F28131CCF47F6004FC902 /* TrendViewController.m */,
 				55FAE3AA1C8E9F0B00B4C620 /* AddCurrencyViewController.h */,
 				55FAE3AB1C8E9F0B00B4C620 /* AddCurrencyViewController.m */,
+				552F28121CCF47F6004FC902 /* TrendViewController.h */,
+				552F28131CCF47F6004FC902 /* TrendViewController.m */,
 				55B81E6E1C89544500C668C3 /* SettingViewController.h */,
 				55B81E6F1C89544500C668C3 /* SettingViewController.m */,
 			);

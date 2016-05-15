@@ -40,6 +40,7 @@
 
 - (void)cancelled
 {
+    NSLog(@"trend dismiss");
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

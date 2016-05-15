@@ -7,6 +7,13 @@
 //
 #import "YahooFinanceClient.h"
 #import "ExchangeRate.h"
+
+NSString *const kKeyBaseCurrencyName = @"baseCurrencyName";
+NSString *const kKeyRates = @"rates";
+NSString *const kKeyLastUpdated = @"lastUpdated";
+
+
+
 @interface ExchangeRate()
 @property(nonatomic,weak)YahooFinanceClient *yahooClient;
 @end
@@ -16,35 +23,82 @@
                    to:(NSString *)targetCurrencyName
                  with:(float)number
 {
-    NSLog(@"+++++++++开始换算");
     NSLog(@"换算中~~~~~~：");
+
+    //    应该在这里使用解档的汇率
     YahooFinanceClient *financeClient = [[YahooFinanceClient alloc]init];
-//    NSDictionary *latestRateDictionary = [financeClient getParsedDictionaryFromResults];//这里发送一个获取静态dic的方法
+
     NSDictionary *latestRateDictionary = [financeClient reserveLatestDic];
     
-//你这样的意思就是每次执行换算的时候都从雅虎那里重新申请获取全部汇率信息了。。。
-//应该直接获取一个本地的静态存储汇率的dic，而不是每次需要使用都调用网络获取的方法去获取。。
-    
+
+
     NSLog(@"初始化汇率的dic");
-    
     
     if([baseCurrencyName  isEqualToString:@"USD"])
     {
-//        NSLog(@"判断是不是USD为基础汇率");
         float targetRateValue = [[latestRateDictionary valueForKey:[NSString stringWithFormat:@"USD/%@",targetCurrencyName]]floatValue];
         float convertResult = targetRateValue * number;
-//        NSLog(@"是的，换算已完成");
         return convertResult;
     }
     else
     {
-//        NSLog(@"USD不是基础汇率");
         float baseTargetRate = [[latestRateDictionary valueForKey:[NSString stringWithFormat:@"USD/%@",baseCurrencyName]]floatValue];
         float targetRateValue = [[latestRateDictionary valueForKey:[NSString stringWithFormat:@"USD/%@",targetCurrencyName]]floatValue];
         float convertResult = targetRateValue/baseTargetRate*number;
-//        NSLog(@"换算已完成");
         return convertResult;
     }
-    
 }
+
+#pragma mark - NSCoding
+
+//- (id)initWithCoder:(NSCoder *)aDecoder
+//{
+//    self = [super init];
+//    if (self) {
+//        self.baseCurrencyName = [aDecoder decodeObjectForKey:kKeyBaseCurrencyName];
+//        self.rates = [aDecoder decodeObjectForKey:kKeyRates];
+//        self.lastUpdated = [aDecoder decodeObjectForKey:kKeyLastUpdated];
+//    }
+//    NSLog(@"解档基础汇率id 汇率 最后更新时间");
+//    return self;
+//}
+//
+//- (void)encodeWithCoder:(NSCoder *)aCoder
+//{
+//    [aCoder encodeObject:self.baseCurrencyName forKey:kKeyBaseCurrencyName];
+//    [aCoder encodeObject:self.rates forKey:kKeyRates];
+//    [aCoder encodeObject:self.lastUpdated forKey:kKeyLastUpdated];
+//    NSLog(@"用来归档 基础汇率国家代码 汇率 更新时间");
+//}
+
+#pragma mark - 汇率的一些操作
+//- (BOOL)save
+//{
+//    NSLog(@"存起来");
+//    BOOL result = [NSKeyedArchiver archiveRootObject:self toFile:[ExchangeRate filePath]];
+//    return result;
+//}
+//
+//+(NSString *)filePath
+//{
+//    NSString *docsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)objectAtIndex:0];
+//    NSString *filePath = [docsPath stringByAppendingString:@"rates"];
+//    NSLog(@"filePath is :%@",filePath);
+//    return filePath;
+//}
+//
+//- (BOOL)isStale
+//{
+//    NSLog(@"判断汇率是不是新的");
+//    BOOL result = [NSKeyedArchiver archiveRootObject:self toFile:[ExchangeRate filePath]];
+//    return result;
+//}
+//
+//+ (ExchangeRate *)load
+//{
+//    ExchangeRate *rate = [NSKeyedUnarchiver unarchiveObjectWithFile:[ExchangeRate filePath]];
+//    return rate;
+//}
+
+
 @end

@@ -11,12 +11,12 @@
 #import "AddCurrencyCell.h"
 #import "SettingViewController.h"
 #import "CurrencyManager.h"
-
+#import "ConvertViewController.h"
 @interface AddCurrencyViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>
 @property (retain, nonatomic) IBOutlet UISearchBar *searchBar;//搜索栏
 @property (retain, nonatomic) IBOutlet UITableView *addCurrencyTableView;//表格
 
-@property(strong,nonatomic)CurrencyManager *cManager;
+@property(strong,nonatomic)CurrencyManager *cManager;//模型层实例的对象
 
 @end
 
@@ -50,26 +50,26 @@
     self.searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 30)];
 }
 
-#pragma mark - 返回主界面的方法
+#pragma mark - delegate_返回主界面的方法
 - (IBAction)finishedPressed:(id)sender {
-    
-    NSLog(@"cancelPressed is called");
-    if ([self respondsToSelector:@selector(cancelled)]) {
-        [self cancelled];
+
+    NSLog(@"委托调用委托方法");
+    if ([self.delegate respondsToSelector:@selector(cancelled)]) {
+        
+        [self.delegate cancelled];
+        NSLog(@"YES");
     }
-    
+    else
+    {
+        NSLog(@"NO");
+    }
+
 }
-- (void)cancelled
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
 
 
-
-#pragma mark - Table view data source
+#pragma mark - 表格数据源
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"number of row");
     return _cManager.namesArray.count;
 }
 
@@ -89,30 +89,28 @@
 
     return cell;
 }
-#pragma mark - 表格主要的方法
+#pragma mark - 表格主要的方法！！！！！！！选中行动作的方法
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+//把选中的国家添加到 displayArray数组中去
+//    NSString *displayCurrenciesName = _cManager.namesArray[indexPath.row];
+//    [_cManager addDisplayCurrencyName:displayCurrenciesName];
+    
+    NSString *currencyCode = [_cManager.namesArray objectAtIndex:indexPath.row];
+    NSLog(@"选中了 %@ 国家",currencyCode);
+    
+    if ([self.delegate respondsToSelector:@selector(selectedCurrency:)]) {
+        [self.delegate selectedCurrency:currencyCode];
+        
+    }
+    
     
 }
 
 #pragma mark - 表格次要的方法
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-//{
-//    return 1;
-//}
-
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
-
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    return 60;
-//}
-
 
 
 

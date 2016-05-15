@@ -12,12 +12,15 @@
 #import "MainViewController.h"
 #import "CurrencyManager.h"
 #import "TrendViewController.h"
-@interface ConvertViewController ()
+#import "AddCurrencyViewController.h"
+#define DEFAULTS_KEY_TARGET_CURRENCIES @"currencyDisplay"
+
+@interface ConvertViewController ()<AddCurrencyViewControllerDelegate>
 @property (strong,nonatomic)UITextField *firstResponder;
 @property (assign,nonatomic)BOOL keyBoardShown;
 @property (strong,nonatomic)YahooFinanceClient *info;//用于传输抓取的信息
-@property (strong,nonatomic) NSMutableArray   * currencyDisplay;
-
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong,nonatomic) NSMutableArray *currencyDisplay;
 @property(strong,nonatomic)CurrencyManager *cManager;//实例对象
 
 //@property (weak,nonatomic)UITextField *inputNumField;
@@ -37,6 +40,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _cManager = [CurrencyManager sharedInstance];
+    _currencyDisplay = [[NSMutableArray alloc]initWithArray:_cManager.defaultsCountries copyItems:NO];
+    
+    NSLog(@"此时currencyDisplay的值来源于cManager中的defaultsCountries %@",_currencyDisplay);
+   
     [self initCuurenciesInfo];
     [self initTableViewSetting];
     
@@ -45,31 +53,12 @@
 #pragma mark - 一些初始化的方法
 - (void)initCuurenciesInfo
 {
-    //初始化汇率的数据
-    //目前来说还是静态设定的
-    //    以下数据均经网络由雅虎财经获取
-    //    有可能需要把每个国家的信息用字典来装载
-    //    提取出resultsDic里面所有的键
-    //把nameitems数组用作默认在主界面显示的几个汇率国家
-    
+    /*
+     将模型层的namesArray 传过来赋值给 namesitems
+     */
     NSLog(@"初始化nameitems---");
-//    nameitems = [@"CNY JPY EUR HKD" componentsSeparatedByString:@" "];
-    
-    //写一个判断，当首次打开应用的时候，此时的 自选国家 数组 里面是空的，就加载三个默认的国家
-//    以后呢就从数据模型那边获取已经选择和保存的nameArray
-    
-    
-    //先从数据层那边把 数据传过来
-    //再做以下这个判断，如果namesItems还是为空就跳到else去加载初始化的几个国家
-    
-    //namesitems = _namesArray
+
     nameitems = _cManager.namesArray;
-    if (!nameitems)
-    {
-        NSLog(@"用了自定义的国家");
-        nameitems = [@"CNY JPY EUR HKD" componentsSeparatedByString:@" "];
-    }
-    
     
 }
 
@@ -95,47 +84,54 @@
 }
 
 #pragma mark - 表格数据源--Data Source Delegate
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    //这里要是返回值为0的话 就不可能有任何内容出现在tableview中
+    NSLog(@"此时一共加载了%lu个国家",_cManager.defaultsCountries.count);
+    return _cManager.defaultsCountries.count;
+   
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
- 
+    NSLog(@"CellForRow is called");
+    
+    //显示自选的国家的信息
+    //cell的基本配置
     static NSString *reuseIdentifier = @"convertCell";
     ConvertCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
     if (cell == nil) {
         cell = [[ConvertCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     }
-    cell.backgroundColor = [UIColor whiteColor];
    
-    CurrencyManager *manager = [[CurrencyManager alloc]init];
-    ExchangeRate *exchange = [[ExchangeRate alloc]init];
-    
-    //以cell行号来索引nameitems数组
-    NSString *targetCountryName =[nameitems objectAtIndex:indexPath.row];
-    
-    NSLog(@"targetCountryName is %@",targetCountryName);
-    
-    cell.countryName.text = [manager nameForCurrency:targetCountryName];
-    cell.countryImage.image = [manager imageForCountriesFlag:targetCountryName];
-    cell.currencyUnit.text = [manager unitForCurrency:targetCountryName];
+
+    NSString *name = _currencyDisplay[indexPath.row];
+    NSLog(@"在上面这一行爆炸的 %@ ",name);
     
     
-   // NSString *name = _cManager.namesArray[indexPath.r]
     
+    NSInteger index = [_cManager.namesArray indexOfObject:name];
+    NSString *flagName = _cManager.flagImage[index];
     
+    cell.countryImage.image = [UIImage imageNamed:flagName];
+    cell.countryName.text = name;
+    cell.currencyUnit.text = _cManager.currencyUnit[index];
+    
+    NSLog(@"此时的国家是 %@",name);
     
     
     //转换汇率操作
+    ExchangeRate *exchange = [[ExchangeRate alloc]init];
     double baseAmount = [self baseAmount];
     MainViewController *mvc = [[MainViewController alloc]init];
     [mvc initDefaultBaseCurrency];
     id currentBaseRate = mvc.baseCurrency;
-    double targetAmount =[exchange convertRate:currentBaseRate to:[nameitems objectAtIndex:indexPath.row] with:baseAmount];
+    double targetAmount =[exchange convertRate:currentBaseRate to:[_currencyDisplay objectAtIndex:indexPath.row] with:baseAmount];
     cell.targetCurrency.text =[NSString stringWithFormat:@"%f",targetAmount];
 
     
     return cell;
 }
-
-
 
 #pragma mark - 选中该row即切换成基准利率
 
@@ -146,24 +142,9 @@
     
     [[NSNotificationCenter defaultCenter]postNotificationName:@"switchBaseCurrency" object:[self->nameitems objectAtIndex:indexPath.row]];
     
-    
-    
-    MainViewController *mvc = [[MainViewController alloc]init];
-//    [mvc initDefaultBaseCurrency];
-   
-    
-    //替换成当前主VC的基准汇率
-    //获取当前主vc的基准汇率
-//    [self->nameitems replaceObjectAtIndex:indexPath.row withObject:[mvc getCurrenctCountry]];
-
-    NSLog(@"卧槽：%@",mvc.baseCurrency);
     [self.tableView reloadData];
-
+    
 }
-
-
-
-
 
 #pragma mark - 编辑模式下的样式设置
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -190,14 +171,8 @@
 #pragma mark - 表格一些其它的设置
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-
+//    表格的区段数
     return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
-    NSLog(@"此时一共加载了%lu个国家",nameitems.count);
-    return nameitems.count;
 }
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
@@ -227,16 +202,16 @@
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    判断是否可以移动行
+
     return YES;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-//    NSLog(@"可以编辑行");
+
     return YES;
 }
 - (void)didReceiveMemoryWarning {
-    //接收内存警告
+
     [super didReceiveMemoryWarning];
     
 }
@@ -253,7 +228,60 @@
     [self presentViewController:trendVC animated:YES completion:nil];
     
 }
+#pragma mark - 添加国家的相关方法
+- (void)addTargetCurrency
+{
+    NSMutableArray *currencies = [[NSMutableArray alloc]init];
+    [currencies addObjectsFromArray:[[CurrencyManager sharedInstance] allCurrencyCodes]];
+    
+//    [currencies removeObjectsInArray:self.targetCurrencies];
+//    [currencies removeObject:self.sourceCurrency];
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    AddCurrencyViewController *avc = (AddCurrencyViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"AddCurrencyView"];
+    
+    avc.delegate = self;
+    avc.currencies = currencies;
+     NSLog(@"cvc注册成avc的代理");
+    
+    [self presentViewController:avc animated:YES completion:nil];
+    
+}
 
+- (void)selectedCurrency:(NSString *)selectedCurrencyCode
+{
+    //调用模型层的方法使得模型层的displayArray 添加当前选中的国家
+    NSLog(@"选中的国家是 %@",selectedCurrencyCode);
+    [_cManager addDisplayCurrencyName:selectedCurrencyCode];
+    //然后刷新
+    [self.tableView reloadData];
+    
+//    NSLog(@"select tableview is %@",self.tableView);
+    
+    [_currencyDisplay addObject:selectedCurrencyCode];
+    
+    NSLog(@"此时默认国家为 is %@",_cManager.defaultsCountries);
+    NSLog(@"此时默认国家为 is %@",_currencyDisplay);
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)persistTargetCurrencies
+{
+    NSLog(@"3 固定在主界面");
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:_cManager.defaultsCountries forKey:DEFAULTS_KEY_TARGET_CURRENCIES];
+    [defaults synchronize];
+    
+}
+
+#pragma mark - delegate --------
+- (void)cancelled
+{
+    NSLog(@"3-2关闭添加国家的view的方法实现");
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+#pragma mark - 添加国家
 
 
 

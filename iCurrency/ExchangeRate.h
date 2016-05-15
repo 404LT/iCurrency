@@ -13,10 +13,23 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ExchangeRate : NSObject
+@interface ExchangeRate : NSObject<NSCoding>
 
 - (double)convertRate:(NSString *)baseCurrencyName
                    to:(NSString *)targetCurrencyName
                  with:(float)number;
+
+
+@property (nonatomic,copy)NSString *baseCurrencyName;
+@property (nonatomic,copy)NSDictionary *rates;
+@property (nonatomic,copy)NSDate *lastUpdated;
+
+
+
+- (BOOL)save;
+- (BOOL)isStale;
+
++ (ExchangeRate *)load;
+
 
 @end

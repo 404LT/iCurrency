@@ -9,7 +9,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CurrencyManager : NSObject
+@interface CurrencyManager : NSObject//<NSCoding>
 
 - (NSArray *)allCurrencyCodes;
 
@@ -22,11 +22,24 @@
 
 @property (nonatomic,strong)NSDictionary *currencies;//用来存储汇率
 
-@property (strong,nonatomic)NSMutableArray *displayArray;//用来存储前台展示出来的国家，所有都应该用这个数组
-@property (strong,nonatomic)NSMutableArray *namesArray;//全部国家名字
 
-@property (strong,nonatomic,readonly)NSMutableArray *currencyUnit;//货币单位
-@property (strong,nonatomic,readonly)NSMutableArray *flagImage;//国旗
+@property (strong,nonatomic)NSMutableArray *namesArray;//全部国家名字
+@property (strong,nonatomic)NSMutableArray *currencyUnit;//货币单位
+@property (strong,nonatomic)NSMutableArray *flagImage;//国旗
+
+@property (nonatomic,strong)NSMutableArray *allCurrenciesInfo;//存储汇率信息的字典
 
 - (void)initLocalNameSortList;
+
+
+@property (strong,nonatomic)NSMutableArray *defaultsCountries;//用来存储前台默认展示出来的国家//自选操作
+- (void)addDisplayCurrencyName:(NSString *)name;
+- (void)removeDisplayCurrencyName:(NSString *)name;
+
+// 文件处理
+- (void)saveDisplay;
+- (void)loadDisplay;
+
+
+
 @end

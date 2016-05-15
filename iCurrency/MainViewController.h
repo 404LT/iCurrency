@@ -26,5 +26,7 @@
 - (void)jumpToSetting;
 - (void)setupBaseCurrency:(NSString *)countryName;
 - (void)initDefaultBaseCurrency;
-- (NSString *)getCurrenctCountry;
+
+
+
 @end
