@@ -22,7 +22,7 @@
 
 @implementation AddCurrencyViewController
 {
-    NSMutableArray *nameitems;//用于存储国家名称
+   
     NSArray *images;//用于存储国旗图片
 }
 
@@ -53,15 +53,8 @@
 #pragma mark - delegate_返回主界面的方法
 - (IBAction)finishedPressed:(id)sender {
 
-    NSLog(@"委托调用委托方法");
     if ([self.delegate respondsToSelector:@selector(cancelled)]) {
-        
         [self.delegate cancelled];
-        NSLog(@"YES");
-    }
-    else
-    {
-        NSLog(@"NO");
     }
 
 }
@@ -93,11 +86,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 //把选中的国家添加到 displayArray数组中去
-//    NSString *displayCurrenciesName = _cManager.namesArray[indexPath.row];
-//    [_cManager addDisplayCurrencyName:displayCurrenciesName];
-    
+    NSString *countryName = _cManager.namesArray[indexPath.row];
+    [_cManager addDisplayCurrencyName:countryName];
+
     NSString *currencyCode = [_cManager.namesArray objectAtIndex:indexPath.row];
-    NSLog(@"选中了 %@ 国家",currencyCode);
+
     
     if ([self.delegate respondsToSelector:@selector(selectedCurrency:)]) {
         [self.delegate selectedCurrency:currencyCode];

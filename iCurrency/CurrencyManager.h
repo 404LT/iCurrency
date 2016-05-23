@@ -13,26 +13,21 @@
 
 - (NSArray *)allCurrencyCodes;
 
-+ (id)sharedInstance;
++ (id)sharedInstance;//单例
 
-//用于定位plist里面存储的 国家名称  国旗   货币单位 
-- (UIImage *)imageForCountriesFlag:(NSString *)countryName;
-- (NSString *)nameForCurrency:(NSString *)countryName;
-- (NSString *)unitForCurrency:(NSString *)countryName;
+//用于定位plist里面存储的 国家名称  国旗   货币单位
 
 @property (nonatomic,strong)NSDictionary *currencies;//用来存储汇率
 
 
-@property (strong,nonatomic)NSMutableArray *namesArray;//全部国家名字
+@property (strong,nonatomic)NSMutableArray *defaultsCountries;//用来存储前台默认展示出来的自选国家。
+@property (strong,nonatomic)NSArray *namesArray;//全部国家名字
 @property (strong,nonatomic)NSMutableArray *currencyUnit;//货币单位
 @property (strong,nonatomic)NSMutableArray *flagImage;//国旗
-
-@property (nonatomic,strong)NSMutableArray *allCurrenciesInfo;//存储汇率信息的字典
-
-- (void)initLocalNameSortList;
+@property (strong, nonatomic) NSString *name;
+//- (void)initLocalNameSortList;//本类的初始化方法不应该暴露出共有接口？？
 
 
-@property (strong,nonatomic)NSMutableArray *defaultsCountries;//用来存储前台默认展示出来的国家//自选操作
 - (void)addDisplayCurrencyName:(NSString *)name;
 - (void)removeDisplayCurrencyName:(NSString *)name;
 

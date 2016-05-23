@@ -565,6 +565,13 @@
 			name = Others;
 			sourceTree = "<group>";
 		};
+		556CBB581CEDB6CB00484D7E /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Utility;
+			sourceTree = "<group>";
+		};
 		55A539E61C7C692D0035043F = {
 			isa = PBXGroup;
 			children = (
@@ -598,6 +605,7 @@
 				55CAAD0E1C848C2D00360F6B /* View */,
 				55FE1C551CBB9A1900EA1D84 /* Images */,
 				55A539F21C7C692D0035043F /* Supporting Files */,
+				556CBB581CEDB6CB00484D7E /* Utility */,
 			);
 			path = iCurrency;
 			sourceTree = "<group>";

@@ -27,7 +27,6 @@ NSString *const kKeyLastUpdated = @"lastUpdated";
 
     //    应该在这里使用解档的汇率
     YahooFinanceClient *financeClient = [[YahooFinanceClient alloc]init];
-
     NSDictionary *latestRateDictionary = [financeClient reserveLatestDic];
     
 
