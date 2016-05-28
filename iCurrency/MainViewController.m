@@ -25,40 +25,27 @@
 @end
 
 @implementation MainViewController
-
-//- (void)viewWillAppear:(BOOL)animated
-//{
-//    [super viewWillAppear:animated];
-//}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    //单例
     _cManager = [CurrencyManager sharedInstance];
     
+
+    //初始化
     [self initInputField];
     [self initAddSignToNavBar];
     [self initBarButtomItems];
-    [self initDefaultBaseCurrency];
-    //设置自己是委托方的被委托者
-   // [self initChangeBaseCurrencyDelegate];
     
-
-
+    //初始化基准汇率
+    [self initDefaultBaseCurrency];
 }
-
-
-
 
 #pragma mark - 一些需要初始化的方法
-- (void)initCommunicationWithYahoo
-{
-    //在view没有加载出来之前完成网络部分的操作。
-    YahooFinanceClient *yahooClient = [[YahooFinanceClient alloc]init];
-    [yahooClient getParsedDictionaryFromResults];
-    NSLog(@"成功从雅虎财经获取当前所有汇率");
-    
-}
+
+
+
+
 
 //添加按钮
 - (void)initAddSignToNavBar
@@ -69,7 +56,6 @@
     self.navigationItem.rightBarButtonItem = addBar;
     
 }
-
 
 -(void)initBarButtomItems
 {
@@ -179,14 +165,14 @@
 #pragma mark - 基准汇率计算过程
 - (double)baseAmount
 {
-    NSLog(@"基准汇率框的数字------sourceAmount");
+
     NSMutableString *baseString = [NSMutableString stringWithFormat:self.sourceCurrencyInputField.text];
     return [baseString doubleValue];
 }
 
 - (IBAction)sourceChanged:(id)sender {
     //    输入框一旦有变动就触发该事件
-    NSLog(@"基准汇率改变了~sourceChanged");
+
     ConvertViewController *cvc =(ConvertViewController *)[self.childViewControllers lastObject];
     cvc.baseAmount = [self baseAmount];
     [cvc.tableView reloadData];
@@ -197,34 +183,18 @@
 #pragma mark -  初始化基准汇率---------关键操作
 - (void)initDefaultBaseCurrency
 {
-    
-    //似乎在这里读出系统存储的默认设置的时候读取错了~~~~~
     NSString *baseCurrency = [[NSUserDefaults standardUserDefaults]objectForKey:DEFAULTS_KEY_SOURCE_CURRENCY];
-    
     if (baseCurrency) {
-        //关键操作：：：：：：：
-      //  NSLog(@"取回默认");
         [self setupBaseCurrency:baseCurrency];
     }
     else{
-        NSLog(@"自定义默认");
         [self setupBaseCurrency:@"USD"];
     }
     
     //在初始化默认汇率的同时，发送通知给convertvc 让它初始化那边的基准汇率
-    
     [[NSNotificationCenter defaultCenter]postNotificationName:@"initBase" object:baseCurrency];
-    
-    
-    
 }
 
-- (void)selectBaseCurrency:(NSString *)selectedBaseCurrencyName
-{
-//    NSLog(@"基准汇率更换成 ： %@",selectedBaseCurrencyName);
-    [self setupBaseCurrency:selectedBaseCurrencyName];
-    NSLog(@"2");
-}
 
 - (void)setupBaseCurrency:(NSString *)countryName
 {
@@ -238,24 +208,41 @@
     NSInteger index = [manager.namesArray indexOfObject:countryName];
     NSString *flagname = manager.flagImage[index];
     NSString *unit = manager.currencyUnit[index];
-
+    
     _sourceCurrencyName.text = countryName;
     _sourceCurrencyFlag.image = [UIImage imageNamed:flagname];//国旗
     _sourceCurrencyUnit.text =unit;//单位
-
     
    //发送当前基准汇率的通知
     [[NSNotificationCenter defaultCenter]postNotificationName:@"currenctBase" object:countryName];
-//     NSLog(@"通过NSNotification 发送当前基准汇率名 %@ %@ %@",countryName,flagname,unit);
-    
-    NSLog(@"3");
-    
-    
+
+    //对 UIView *baseCurrencyView 做一个重新加载的方法
+    //[self.baseCurrencyView refreshBaseView];
+    //接收来自cvc中 didselect 的方法 重新加载当前的baseCurrency
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(refreshBaseView:) name:@"refreshBaseCurrencyView" object:nil];
     
 }
 
+- (void)refreshBaseView:(NSNotification *)notification
+{
+    CurrencyManager *manager = [CurrencyManager sharedInstance];
+    NSInteger index = [manager.namesArray indexOfObject:self.baseCurrency];
+    NSString *flagname = manager.flagImage[index];
+    NSString *unit = manager.currencyUnit[index];
+    
+    _sourceCurrencyName.text = self.baseCurrency;
+    _sourceCurrencyFlag.image = [UIImage imageNamed:flagname];//国旗
+    _sourceCurrencyUnit.text =unit;//单位
+    
+    NSLog(@"调用了这个方法");
+}
 
-
+- (void)selectBaseCurrency:(NSString *)selectedBaseCurrencyName
+{
+//    NSLog(@"基准汇率更换成 ： %@",selectedBaseCurrencyName);
+    [self setupBaseCurrency:selectedBaseCurrencyName];
+    
+}
 
 #pragma mark - 添加汇率 
 //- (void)selectedCurrency:(NSString *)selectedCurrencyCode

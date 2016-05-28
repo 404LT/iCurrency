@@ -35,6 +35,12 @@
 #pragma mark - 界面生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //初始化从雅虎获取汇率的方法
+    [self initFetchDataFromYahoo];
+     NSLog(@"viewDidLoad");
+    
+    
     _cManager = [CurrencyManager sharedInstance];
     _currencyDisplay = [NSMutableArray arrayWithArray:_cManager.defaultsCountries];
     
@@ -45,9 +51,7 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(initBaseFromMvc:) name:@"initBase" object:nil];
     
     
-//    _baseCurrencyName = self.mainvc.baseCurrency;
-    NSLog(@"1初始化的baseCurrencyName: %@",self.baseCurrencyName);
-    
+ 
 }
 
 #pragma mark - 接收用于传递 当前基准汇率国家的通知
@@ -61,6 +65,11 @@
 
 
 #pragma mark - 一些初始化的方法
+- (void)initFetchDataFromYahoo
+{
+    YahooFinanceClient *yahoo = [[YahooFinanceClient alloc]init];
+    [yahoo getParsedDictionaryFromResults];
+}
 
 - (void)initTableViewSetting
 {
@@ -74,7 +83,7 @@
 {
     _baseAmount = baseAmount;
     [self.tableView reloadData];
-   // NSLog(@"设置基准汇率");
+   
     
 }
 
@@ -106,10 +115,11 @@
     //转换汇率操作
     ExchangeRate *exchange = [[ExchangeRate alloc]init];
     double baseAmount = [self baseAmount];
-    MainViewController *mvc = [[MainViewController alloc]init];
+    
     
     //每多一个row就要调用一次这个初始化方法，这样不行。。。。  更不能调用别的类的初始化方法。。
    //要改。。
+    MainViewController *mvc = [[MainViewController alloc]init];
     [mvc initDefaultBaseCurrency];
     
     id currentBaseRate = mvc.baseCurrency;
@@ -123,7 +133,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"1 基准汇率: %@",_baseCurrencyName);
+//    NSLog(@"1 基准汇率: %@",_baseCurrencyName);
     //注册代理
     [self registDelegate];
     //选中的国家：
@@ -134,38 +144,21 @@
         [_delegate selectBaseCurrency:baseCurrencyName];
         NSLog(@"第一部分已完成");
     }
-
-    
-    
-    
-    
-    
-    
-    
 //    接收传回来的基准汇率值
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getBaseName:) name:@"base" object:nil];
-    NSLog(@"4");
-    NSLog(@"2 基准汇率: %@",_baseCurrencyName);
-    
     //用未修改的值 替换 currencyDisplay数组
     [_currencyDisplay replaceObjectAtIndex:indexPath.row withObject:_baseCurrencyName];
     [self.tableView reloadData];
     
     
-//    [[NSNotificationCenter defaultCenter]postNotificationName:@"switchBase" object:baseCurrencyName];
+    //第二部分，发送一个通知 去刷新一下 baseCurrencyView
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"refreshBaseCurrencyView" object:nil];
     
-    //2、发消息通知baseView那边修改此时的信息
-}
-
-- (void)FromUnModifyBaseToTarget:(NSIndexPath *)indexPath
-{
+    
+    
+    
     
 }
-
-
-
-
 
 - (void)getBaseName:(NSNotification *)notification{
     NSString *baseName = notification.object;
@@ -177,22 +170,6 @@
 
 
 
-- (void)fromBaseToTarget
-{
-    
-}
-
-- (void)fromTargetToBase
-{
-    
-}
-
-
-- (void)replaceCurrencyDisplayWithBaseRate:(NSString *)baseCurrencyName
-{
-    //用目前基准汇率替代当前选中的国家
-    
-}
 
 
 - (void)registDelegate

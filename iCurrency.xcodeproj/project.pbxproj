@@ -31,6 +31,7 @@
 		55A53A1B1C7C692D0035043F /* iCurrencyUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A53A1A1C7C692D0035043F /* iCurrencyUITests.m */; };
 		55B81E701C89544500C668C3 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B81E6F1C89544500C668C3 /* SettingViewController.m */; };
 		55CAAD151C848CFA00360F6B /* ConvertCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55CAAD141C848CFA00360F6B /* ConvertCell.m */; };
+		55E2FA531CF9873100862920 /* BaseCurrency.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55E2FA521CF9873100862920 /* BaseCurrency.xib */; };
 		55FAE3A91C8E9EDC00B4C620 /* AddCurrencyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FAE3A81C8E9EDC00B4C620 /* AddCurrencyCell.m */; };
 		55FAE3AC1C8E9F0B00B4C620 /* AddCurrencyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FAE3AB1C8E9F0B00B4C620 /* AddCurrencyViewController.m */; };
 		55FAE3AF1C8E9F3300B4C620 /* ExchangeRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FAE3AE1C8E9F3300B4C620 /* ExchangeRate.m */; };
@@ -298,6 +299,7 @@
 		55B81E6F1C89544500C668C3 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		55CAAD131C848CFA00360F6B /* ConvertCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConvertCell.h; sourceTree = "<group>"; };
 		55CAAD141C848CFA00360F6B /* ConvertCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConvertCell.m; sourceTree = "<group>"; };
+		55E2FA521CF9873100862920 /* BaseCurrency.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseCurrency.xib; sourceTree = "<group>"; };
 		55FAE3A71C8E9EDC00B4C620 /* AddCurrencyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCurrencyCell.h; sourceTree = "<group>"; };
 		55FAE3A81C8E9EDC00B4C620 /* AddCurrencyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCurrencyCell.m; sourceTree = "<group>"; };
 		55FAE3AA1C8E9F0B00B4C620 /* AddCurrencyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCurrencyViewController.h; sourceTree = "<group>"; };
@@ -642,6 +644,7 @@
 				551763BE1CD5AB6200C4DC29 /* Keyboard */,
 				55A539FB1C7C692D0035043F /* Main.storyboard */,
 				55A53A031C7C692D0035043F /* LaunchScreen.storyboard */,
+				55E2FA521CF9873100862920 /* BaseCurrency.xib */,
 				55CAAD131C848CFA00360F6B /* ConvertCell.h */,
 				55CAAD141C848CFA00360F6B /* ConvertCell.m */,
 				55015C4E1C969E500079632F /* SettingCell.h */,
@@ -1110,6 +1113,7 @@
 				55FE1F581CBB9BC500EA1D84 /* United-Arab-Emirates.png in Resources */,
 				55FE1F501CBB9BC500EA1D84 /* Tonga.png in Resources */,
 				55FE1F6F1CBBCFDD00EA1D84 /* Mop.png in Resources */,
+				55E2FA531CF9873100862920 /* BaseCurrency.xib in Resources */,
 				55FE1EAA1CBB9BC500EA1D84 /* Azerbaijan.png in Resources */,
 				55FE1F361CBB9BC500EA1D84 /* Sao-Tome-and-Principe.png in Resources */,
 				55FE1EAD1CBB9BC500EA1D84 /* Bangladesh.png in Resources */,

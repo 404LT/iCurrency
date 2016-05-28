@@ -27,7 +27,7 @@
 
 
 - (BOOL)save;
-- (BOOL)isStale;
+
 
 + (ExchangeRate *)load;
 

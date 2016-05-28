@@ -58,6 +58,16 @@ NSString * yahoolURL=@"https://finance.yahoo.com/webservice/v1/symbols/allcurren
                     }
                 }
                 
+                ExchangeRate *exchange = [[ExchangeRate alloc]init];
+                //把获取回来的dic 赋值给对象 exchange的字典变量 rates 然后再归档起来
+                exchange.rates = parsedResults;
+                
+                dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                    
+                    [exchange save];
+                    //把当前的对象 exchange 给保存起来
+                    NSLog(@"获取汇率成功并保存 :");
+                });
                 
                 return parsedResults;
             }
@@ -69,26 +79,26 @@ NSString * yahoolURL=@"https://finance.yahoo.com/webservice/v1/symbols/allcurren
     return nil;
 }
 
-- (NSDictionary *)reserveLatestDic
-{
-    //要用到归档解档
-    //用的时候是直接用解档出来的结果
-    static NSDictionary *reserveLatestDic;
-    reserveLatestDic = [self getParsedDictionaryFromResults];
-    
-    ExchangeRate *exchange = [[ExchangeRate alloc]init];
-    exchange.rates = reserveLatestDic;
-    
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        [exchange save];
-        //保存当前的汇率
-    });
-    
-    
-    //做个字符串的设置 ex:    @"USD/%@",countryName
-    
-    return reserveLatestDic;
-}
+//- (NSDictionary *)reserveLatestDic
+//{
+//    //要用到归档解档
+//    //用的时候是直接用解档出来的结果
+//    static NSDictionary *reserveLatestDic;
+//    reserveLatestDic = [self getParsedDictionaryFromResults];
+//    
+//    ExchangeRate *exchange = [[ExchangeRate alloc]init];
+//    exchange.rates = reserveLatestDic;
+//    
+//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//        [exchange save];
+//        //保存当前的汇率
+//    });
+//    
+//    
+//    //做个字符串的设置 ex:    @"USD/%@",countryName
+//    
+//    return reserveLatestDic;
+//}
 
 
 @end

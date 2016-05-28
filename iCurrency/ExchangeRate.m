@@ -22,26 +22,26 @@ NSString *const kKeyLastUpdated = @"lastUpdated";
 
 
 #pragma mark - NSCoding
-
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
+    NSLog(@"NSCoding解档 ");
     self = [super init];
     if (self) {
         self.rates = [aDecoder decodeObjectForKey:kKeyRates];
     }
-    NSLog(@"解档基础汇率id 汇率 最后更新时间");
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
     [aCoder encodeObject:self.rates forKey:kKeyRates];
-    //NSLog(@"用来归档 基础汇率国家代码 汇率 更新时间");
+    NSLog(@"用来归档 ");
 }
-
 #pragma mark - 汇率的一些操作
 + (ExchangeRate *)load
 {
+    NSLog(@"load");
+    //把存储在本地document当中的rates给加载出来
     ExchangeRate *rate = [NSKeyedUnarchiver unarchiveObjectWithFile:[ExchangeRate filePath]];
     return rate;
 }
@@ -55,8 +55,8 @@ NSString *const kKeyLastUpdated = @"lastUpdated";
 +(NSString *)filePath
 {
     NSString *docsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)objectAtIndex:0];
-    NSString *filePath = [docsPath stringByAppendingString:@"rates"];
-//    NSLog(@"filePath is :%@",filePath);
+    NSString *filePath = [docsPath stringByAppendingString:@"rates.plist"];
+  //  NSLog(@"filePath is %@",filePath);
     return filePath;
 }
 //
@@ -74,26 +74,17 @@ NSString *const kKeyLastUpdated = @"lastUpdated";
                    to:(NSString *)targetCurrencyName
                  with:(float)number
 {
-    NSLog(@"换算中~~~~~~：");
-    NSLog(@"此刻基准汇率是 %@",baseCurrencyName);
-    //    应该在这里使用解档的汇率
-    YahooFinanceClient *financeClient = [[YahooFinanceClient alloc]init];
-    NSDictionary *latestRateDictionary = [financeClient reserveLatestDic];
-    
-    
-
-    NSLog(@"初始化汇率的dic");
-    
+    NSLog(@"换算中~~~~~~ rates is ：%@",self.rates);
     if([baseCurrencyName  isEqualToString:@"USD"])
     {
-        float targetRateValue = [[latestRateDictionary valueForKey:[NSString stringWithFormat:@"USD/%@",targetCurrencyName]]floatValue];
+        float targetRateValue = [[self.rates valueForKey:[NSString stringWithFormat:@"USD/%@",targetCurrencyName]]floatValue];
         float convertResult = targetRateValue * number;
         return convertResult;
     }
     else
     {
-        float baseTargetRate = [[latestRateDictionary valueForKey:[NSString stringWithFormat:@"USD/%@",baseCurrencyName]]floatValue];
-        float targetRateValue = [[latestRateDictionary valueForKey:[NSString stringWithFormat:@"USD/%@",targetCurrencyName]]floatValue];
+        float baseTargetRate = [[self.rates valueForKey:[NSString stringWithFormat:@"USD/%@",baseCurrencyName]]floatValue];
+        float targetRateValue = [[self.rates valueForKey:[NSString stringWithFormat:@"USD/%@",targetCurrencyName]]floatValue];
         float convertResult = targetRateValue/baseTargetRate*number;
         return convertResult;
     }
