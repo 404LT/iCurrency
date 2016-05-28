@@ -36,9 +36,7 @@
     [self loadDisplay];
     [self initCurrencyInfo];
         
-    NSLog(@"2defaultsCountries2 is %@",_defaultsCountries);
-     
-
+   // NSLog(@"2defaultsCountries2 is %@",_defaultsCountries);
     
     }
     return self;
@@ -77,8 +75,6 @@
     NSString *path = paths[0];
     NSString *filePath = [path stringByAppendingPathComponent:@"Data.plist"];
     
-//    NSLog(@"filePath is %@",filePath);
-    
     if ([[NSFileManager defaultManager]fileExistsAtPath:filePath]) {
         NSData *data = [[NSData alloc]initWithContentsOfFile:filePath];
         NSKeyedUnarchiver *unarchiever = [[NSKeyedUnarchiver alloc]initForReadingWithData:data];
@@ -105,39 +101,11 @@
     [data writeToFile:filePath atomically:YES];
     NSLog(@"Archiver 数据已存储.");
 }
-#pragma mark - <NSCoding>
-//
-//- (id)initWithCoder:(NSCoder *)aDecoder
-//{
-//    //解档
-//    NSLog(@"解档");
-//    if (self=[super init]) {
-//        self.defaultsCountries = [aDecoder decodeObjectForKey:@"defaultsCountries"];
-//        
-//    }
-//    return self;
-//}
-//
-//- (void)encodeWithCoder:(NSCoder *)aCoder
-//{
-//    NSLog(@"归档");
-//    [aCoder encodeObject:_defaultsCountries forKey:@"defaultsCountries"];
-//    
-//}
-
-
 
 #pragma mark - 往存储显示国家的数组里面添加和删除国家名称的方法
-// 添加自选货币，name是货币缩写
-//用这个displayArray来管理自选的货币
 
 - (void)addDisplayCurrencyName:(NSString *)name
 {
-    //_defaultsCountries = [[NSMutableArray alloc]initWithCapacity:200];
-   //如果这样的话 每次都会初始化一个数组。。。
-    
-    
-//    NSLog(@"1-defalutsCountries is %@",self.defaultsCountries);
     //防止多线程重复添加
     @synchronized(self)
     {
@@ -162,9 +130,7 @@
             [_defaultsCountries removeObject:name];
         }
     }
-//    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:name forKey:@"name"];
-//    [[NSNotificationCenter defaultCenter]postNotificationName:@"Remove" object:self userInfo:userInfo];
-   
+
     [self saveDisplay];
 }
 

@@ -57,6 +57,8 @@ NSString * yahoolURL=@"https://finance.yahoo.com/webservice/v1/symbols/allcurren
                         
                     }
                 }
+                
+                
                 return parsedResults;
             }
             
@@ -73,6 +75,18 @@ NSString * yahoolURL=@"https://finance.yahoo.com/webservice/v1/symbols/allcurren
     //用的时候是直接用解档出来的结果
     static NSDictionary *reserveLatestDic;
     reserveLatestDic = [self getParsedDictionaryFromResults];
+    
+    ExchangeRate *exchange = [[ExchangeRate alloc]init];
+    exchange.rates = reserveLatestDic;
+    
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        [exchange save];
+        //保存当前的汇率
+    });
+    
+    
+    //做个字符串的设置 ex:    @"USD/%@",countryName
+    
     return reserveLatestDic;
 }
 

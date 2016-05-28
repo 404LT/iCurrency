@@ -22,6 +22,9 @@
 //@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong,nonatomic) NSMutableArray *currencyDisplay;//用于存放展示在主界面的自选国家名称
 @property(strong,nonatomic)CurrencyManager *cManager;//实例对象
+@property(strong,nonatomic)MainViewController *mainvc;
+@property(strong,nonatomic)NSString *baseCurrencyName;
+
 @end
 
 @implementation ConvertViewController
@@ -37,18 +40,27 @@
     
     [self initTableViewSetting];
     self.tableView.tableFooterView = [[UIView alloc]init];
+    
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(initBaseFromMvc:) name:@"initBase" object:nil];
+    
+    
+//    _baseCurrencyName = self.mainvc.baseCurrency;
+    NSLog(@"1初始化的baseCurrencyName: %@",self.baseCurrencyName);
+    
 }
+
+#pragma mark - 接收用于传递 当前基准汇率国家的通知
+- (void)initBaseFromMvc:(NSNotification *)notification
+{
+    //初始化 cvc 中的baseCurrencyName
+    NSString *initBaseName = notification.object;
+    _baseCurrencyName = initBaseName;
+}
+
+
+
 #pragma mark - 一些初始化的方法
-//- (void)initTargetCurrencies
-//{
-//    //初始化自选的目标汇率国家
-//    _currencyDisplay = [[[NSUserDefaults standardUserDefaults]objectForKey:DEFAULTS_KEY_TARGET_CURRENCIES]mutableCopy];
-//    if (!_currencyDisplay) {
-//        _currencyDisplay = [[NSMutableArray alloc]init];
-//    }
-//    
-//    NSLog(@"初始化出来的currencyDisplay is %@",_currencyDisplay);
-//}
 
 - (void)initTableViewSetting
 {
@@ -73,25 +85,17 @@
 
 #pragma mark - 表格数据源--Data Source Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    //这里要是返回值为0的话 就不可能有任何内容出现在tableview中
-//    NSLog(@"此时一共加载了%lu个国家",_cManager.defaultsCountries.count);
     return self.currencyDisplay.count;
-   
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    //显示自选的国家的信息
-    //cell的基本配置
     static NSString *reuseIdentifier = @"convertCell";
     ConvertCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
     if (cell == nil) {
         cell = [[ConvertCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     }
    
-
     NSString *name = _currencyDisplay[indexPath.row];
     NSInteger index = [_cManager.namesArray indexOfObject:name];
     NSString *flagName = _cManager.flagImage[index];
@@ -99,10 +103,6 @@
     cell.countryImage.image = [UIImage imageNamed:flagName];
     cell.countryName.text = name;
     cell.currencyUnit.text = _cManager.currencyUnit[index];
-    
-   // NSLog(@"此时的国家是 %@",name);
-    
-    
     //转换汇率操作
     ExchangeRate *exchange = [[ExchangeRate alloc]init];
     double baseAmount = [self baseAmount];
@@ -112,12 +112,9 @@
    //要改。。
     [mvc initDefaultBaseCurrency];
     
-    
     id currentBaseRate = mvc.baseCurrency;
     double targetAmount =[exchange convertRate:currentBaseRate to:[_currencyDisplay objectAtIndex:indexPath.row] with:baseAmount];
     cell.targetCurrency.text =[NSString stringWithFormat:@"%f",targetAmount];
-    
-  //  NSLog(@"输出的结果是：%@,",cell.targetCurrency.text);
     
     return cell;
 }
@@ -126,25 +123,83 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"1 基准汇率: %@",_baseCurrencyName);
     //注册代理
     [self registDelegate];
+    //选中的国家：
     NSString *baseCurrencyName = [self.currencyDisplay objectAtIndex:indexPath.row];
-   
-   // NSLog(@"选中的当前国家是: %@",baseCurrencyName);
-    
+    //判断响应的方法selectBaseCurrency有没有实现
     if ([_delegate respondsToSelector:@selector(selectBaseCurrency:)]) {
+        //调用设置基准汇率的方法
         [_delegate selectBaseCurrency:baseCurrencyName];
-        
+        NSLog(@"第一部分已完成");
     }
+
+    
+    
+    
+    
+    
+    
+    
+//    接收传回来的基准汇率值
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getBaseName:) name:@"base" object:nil];
+    NSLog(@"4");
+    NSLog(@"2 基准汇率: %@",_baseCurrencyName);
+    
+    //用未修改的值 替换 currencyDisplay数组
+    [_currencyDisplay replaceObjectAtIndex:indexPath.row withObject:_baseCurrencyName];
+    [self.tableView reloadData];
+    
+    
+//    [[NSNotificationCenter defaultCenter]postNotificationName:@"switchBase" object:baseCurrencyName];
+    
+    //2、发消息通知baseView那边修改此时的信息
+}
+
+- (void)FromUnModifyBaseToTarget:(NSIndexPath *)indexPath
+{
     
 }
+
+
+
+
+
+- (void)getBaseName:(NSNotification *)notification{
+    NSString *baseName = notification.object;
+    _baseCurrencyName = baseName;
+    NSLog(@"getbase接受来自通知中的 基准汇率: %@",_baseCurrencyName);
+    NSLog(@"5");
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
+
+
+
+- (void)fromBaseToTarget
+{
+    
+}
+
+- (void)fromTargetToBase
+{
+    
+}
+
+
+- (void)replaceCurrencyDisplayWithBaseRate:(NSString *)baseCurrencyName
+{
+    //用目前基准汇率替代当前选中的国家
+    
+}
+
 
 - (void)registDelegate
 {
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     MainViewController *mvc = (MainViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"mainStoryboard"];
     [self setDelegate:mvc];
-  //  NSLog(@"注册一个delegate");
 }
 
 
@@ -240,8 +295,7 @@
     AddCurrencyViewController *avc = (AddCurrencyViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"AddCurrencyView"];
     
     avc.delegate = self;
-  //  avc.currencies = currencies;
-   //  NSLog(@"cvc注册成avc的代理");
+
     
     [self presentViewController:avc animated:YES completion:nil];
     

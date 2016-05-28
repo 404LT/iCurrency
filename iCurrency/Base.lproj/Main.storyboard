@@ -71,6 +71,7 @@
                     <navigationItem key="navigationItem" title="汇率转换" id="hZZ-uC-b7e" userLabel="汇率转换"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="baseCurrencyView" destination="eVq-R7-XId" id="TqV-Hp-4Xq"/>
                         <outlet property="baseView" destination="eVq-R7-XId" id="lCc-QB-OkN"/>
                         <outlet property="lastUpdateTime" destination="Y14-et-1rK" id="88u-Wu-2dO"/>
                         <outlet property="sourceCurrencyFlag" destination="f15-Dq-nsZ" id="oVR-yY-w24"/>

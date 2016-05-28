@@ -19,16 +19,17 @@
 
 @interface MainViewController ()<MCNumberKeyboardDelegate,AddCurrencyViewControllerDelegate,ConvertViewControllerDelegate>
 //遵守了自定义键盘的协议；添加汇率的协议；修改基础汇率的协议
+@property (weak, nonatomic) IBOutlet UIView *baseCurrencyView;
 @property(strong,nonatomic)CurrencyManager *cManager;
 @property(strong,nonatomic)ConvertViewController *convertVC;
 @end
 
 @implementation MainViewController
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
+//- (void)viewWillAppear:(BOOL)animated
+//{
+//    [super viewWillAppear:animated];
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -42,7 +43,7 @@
     //设置自己是委托方的被委托者
    // [self initChangeBaseCurrencyDelegate];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchBaseCurrency:) name:@"switchBaseCurrency" object:nil];
+
 
 }
 
@@ -50,15 +51,6 @@
 
 
 #pragma mark - 一些需要初始化的方法
-//- (void)initChangeBaseCurrencyDelegate
-//{
-//    //注册代理
-//    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    ConvertViewController *cvc = (ConvertViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"convertView"];
-//    cvc.delegate = self;
-//    NSLog(@"注册一个delegate");
-//}
-
 - (void)initCommunicationWithYahoo
 {
     //在view没有加载出来之前完成网络部分的操作。
@@ -81,8 +73,6 @@
 
 -(void)initBarButtomItems
 {
-    //初始化主界面导航栏的按钮
-    //设置按钮
     UIBarButtonItem *settingBar=[[UIBarButtonItem alloc]initWithTitle:@"设置" style:UIBarButtonItemStylePlain target:self action:@selector(jumpToSetting)];
     self.navigationItem.leftBarButtonItem=settingBar;
 }
@@ -137,7 +127,6 @@
 }
 
 #pragma mark - 自定义键盘的委托
-#pragma mark - NumberKeyboard Delegate
 
 - (void)numberKeyboardWillShow:(MCNumberKeyboard *)numberKeyboard
 {
@@ -208,8 +197,10 @@
 #pragma mark -  初始化基准汇率---------关键操作
 - (void)initDefaultBaseCurrency
 {
+    
     //似乎在这里读出系统存储的默认设置的时候读取错了~~~~~
     NSString *baseCurrency = [[NSUserDefaults standardUserDefaults]objectForKey:DEFAULTS_KEY_SOURCE_CURRENCY];
+    
     if (baseCurrency) {
         //关键操作：：：：：：：
       //  NSLog(@"取回默认");
@@ -219,65 +210,51 @@
         NSLog(@"自定义默认");
         [self setupBaseCurrency:@"USD"];
     }
-    //初始化为USD
-    //    [self setupBaseCurrency:@"USD"];
-}
-
-//-(void)switchBaseCurrency:(NSNotification*)notification
-//{
-//    //更改基础汇率
-//    NSString *receivedBaseRate = notification.object;
-//    [self setupBaseCurrency:receivedBaseRate];
-//    self.baseCurrency = receivedBaseRate;
-//}
-
-- (void)setupBaseCurrency:(NSString *)countryName
-{
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:countryName forKey:DEFAULTS_KEY_SOURCE_CURRENCY];
-    [defaults synchronize];
+    //在初始化默认汇率的同时，发送通知给convertvc 让它初始化那边的基准汇率
     
-    self.baseCurrency = countryName;
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"initBase" object:baseCurrency];
     
-    //CurrencyManager *manager = [CurrencyManager sharedInstance];
     
-    /*
-     NSString *name = _currencyDisplay[indexPath.row];
-     NSInteger index = [_cManager.namesArray indexOfObject:name];
-     NSString *flagName = _cManager.flagImage[index];
-     */
-    
-    //根据此时的基准汇率在namesArray当中检索出 图片名 单位
-    
-    NSString *name = countryName;
-    NSLog(@"name is %@",name);
-  //  NSLog(@"此时namesArray 是：%@",_cManager.namesArray);
-//    NSLog(@"此时flagImage 是：%@",_cManager.flagImage);
-//    NSLog(@"此时currencyUnit 是：%@",_cManager.currencyUnit);
-    
-    NSInteger index = [_cManager.namesArray indexOfObject:name];
-    NSString *flagname = _cManager.flagImage[index];
-    NSString *unit = _cManager.currencyUnit[index];
-
-    self.sourceCurrencyFlag.image = [UIImage imageNamed:flagname];//国旗
-    self.sourceCurrencyName.text = name;
-    self.sourceCurrencyUnit.text =unit;//单位
-    
-   // NSLog(@"设置基准汇率的信息 ： %@ %ld %@ %@",name,(long)index,flagname,unit);
     
 }
 
 - (void)selectBaseCurrency:(NSString *)selectedBaseCurrencyName
 {
-    NSLog(@"更换基准汇率");
-    NSLog(@"更换成 ： %@",selectedBaseCurrencyName);
-    
+//    NSLog(@"基准汇率更换成 ： %@",selectedBaseCurrencyName);
     [self setupBaseCurrency:selectedBaseCurrencyName];
+    NSLog(@"2");
+}
+
+- (void)setupBaseCurrency:(NSString *)countryName
+{
+    //如何刷新基准汇率的view呢
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:countryName forKey:DEFAULTS_KEY_SOURCE_CURRENCY];
+    [defaults synchronize];
+    self.baseCurrency = countryName;
+    
+    CurrencyManager *manager = [CurrencyManager sharedInstance];
+    NSInteger index = [manager.namesArray indexOfObject:countryName];
+    NSString *flagname = manager.flagImage[index];
+    NSString *unit = manager.currencyUnit[index];
+
+    _sourceCurrencyName.text = countryName;
+    _sourceCurrencyFlag.image = [UIImage imageNamed:flagname];//国旗
+    _sourceCurrencyUnit.text =unit;//单位
+
+    
+   //发送当前基准汇率的通知
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"currenctBase" object:countryName];
+//     NSLog(@"通过NSNotification 发送当前基准汇率名 %@ %@ %@",countryName,flagname,unit);
+    
+    NSLog(@"3");
     
     
     
 }
+
+
 
 
 #pragma mark - 添加汇率 
