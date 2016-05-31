@@ -20,7 +20,6 @@
     static dispatch_once_t onceToken;
     static CurrencyManager *instant = nil;
     dispatch_once(&onceToken,^{
-        
         instant = [[CurrencyManager alloc]init];
     });
     return instant;
@@ -32,45 +31,39 @@
     if (self = [super init])
     {
     _defaultsCountries = [[NSMutableArray alloc]initWithCapacity:200];
-    
     [self loadDisplay];
     [self initCurrencyInfo];
-        
-   // NSLog(@"2defaultsCountries2 is %@",_defaultsCountries);
-    
     }
     return self;
-    
 }
 
 - (void)initCurrencyInfo
 {
-        NSString *path = [[NSBundle mainBundle]pathForResource:@"Names" ofType:@"json"];
-        NSData *data = [NSData dataWithContentsOfFile:path];
-        NSDictionary *namesDic = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        NSArray *tempArray = [[NSArray alloc]initWithArray:[namesDic allKeys]copyItems:YES];
-        
+    NSString *path = [[NSBundle mainBundle]pathForResource:@"Names" ofType:@"json"];
+    NSData *data = [NSData dataWithContentsOfFile:path];
+    NSDictionary *namesDic = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+    NSArray *tempArray = [[NSArray alloc]initWithArray:[namesDic allKeys]copyItems:YES];
+    
 
-        _namesArray = [tempArray sortedArrayWithOptions:NSSortConcurrent usingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-        return [obj1 compare:obj2];
-    }];
-    
-        _flagImage = [[NSMutableArray alloc]initWithCapacity:200];
-        _currencyUnit = [[NSMutableArray alloc]initWithCapacity:200];
-    
-        for(NSString *name in _namesArray)
-        {
-            NSArray *array = namesDic[name];
-            [_flagImage addObject:array[0]];
-            [_currencyUnit addObject:array[1]];
-        }
+    _namesArray = [tempArray sortedArrayWithOptions:NSSortConcurrent usingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+    return [obj1 compare:obj2];
+}];
+
+    _flagImage = [[NSMutableArray alloc]initWithCapacity:200];
+    _currencyUnit = [[NSMutableArray alloc]initWithCapacity:200];
+
+    for(NSString *name in _namesArray)
+    {
+        NSArray *array = namesDic[name];
+        [_flagImage addObject:array[0]];
+        [_currencyUnit addObject:array[1]];
+    }
 }
 
 #pragma mark - 对defaultsCountries的一些操作
 
 - (void)loadDisplay
 {
-    
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *path = paths[0];
     NSString *filePath = [path stringByAppendingPathComponent:@"Data.plist"];

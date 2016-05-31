@@ -9,9 +9,6 @@
 /* Begin PBXBuildFile section */
 		55015C501C969E500079632F /* SettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55015C4F1C969E500079632F /* SettingCell.m */; };
 		55015C531C96E0780079632F /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55015C521C96E0780079632F /* MainViewController.m */; };
-		551763BC1CD5AB5700C4DC29 /* MCNumberKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 551763BA1CD5AB5700C4DC29 /* MCNumberKeyboard.m */; };
-		551763BD1CD5AB5700C4DC29 /* MCNumberKeyboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 551763BB1CD5AB5700C4DC29 /* MCNumberKeyboard.xib */; };
-		551763C11CD5DDC100C4DC29 /* MCCalculate.m in Sources */ = {isa = PBXBuildFile; fileRef = 551763C01CD5DDC100C4DC29 /* MCCalculate.m */; };
 		552F28141CCF47F6004FC902 /* TrendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 552F28131CCF47F6004FC902 /* TrendViewController.m */; };
 		552F281B1CCF4A47004FC902 /* trend1.png in Resources */ = {isa = PBXBuildFile; fileRef = 552F28161CCF4A47004FC902 /* trend1.png */; };
 		552F281C1CCF4A47004FC902 /* trend2.png in Resources */ = {isa = PBXBuildFile; fileRef = 552F28171CCF4A47004FC902 /* trend2.png */; };
@@ -264,11 +261,6 @@
 		55015C4F1C969E500079632F /* SettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingCell.m; sourceTree = "<group>"; };
 		55015C511C96E0780079632F /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		55015C521C96E0780079632F /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
-		551763B91CD5AB5700C4DC29 /* MCNumberKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCNumberKeyboard.h; sourceTree = "<group>"; };
-		551763BA1CD5AB5700C4DC29 /* MCNumberKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCNumberKeyboard.m; sourceTree = "<group>"; };
-		551763BB1CD5AB5700C4DC29 /* MCNumberKeyboard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCNumberKeyboard.xib; sourceTree = "<group>"; };
-		551763BF1CD5DDC100C4DC29 /* MCCalculate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCalculate.h; sourceTree = "<group>"; };
-		551763C01CD5DDC100C4DC29 /* MCCalculate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCalculate.m; sourceTree = "<group>"; };
 		552F28121CCF47F6004FC902 /* TrendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrendViewController.h; sourceTree = "<group>"; };
 		552F28131CCF47F6004FC902 /* TrendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrendViewController.m; sourceTree = "<group>"; };
 		552F28161CCF4A47004FC902 /* trend1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trend1.png; sourceTree = "<group>"; };
@@ -541,18 +533,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		551763BE1CD5AB6200C4DC29 /* Keyboard */ = {
-			isa = PBXGroup;
-			children = (
-				551763BF1CD5DDC100C4DC29 /* MCCalculate.h */,
-				551763C01CD5DDC100C4DC29 /* MCCalculate.m */,
-				551763B91CD5AB5700C4DC29 /* MCNumberKeyboard.h */,
-				551763BA1CD5AB5700C4DC29 /* MCNumberKeyboard.m */,
-				551763BB1CD5AB5700C4DC29 /* MCNumberKeyboard.xib */,
-			);
-			name = Keyboard;
-			sourceTree = "<group>";
-		};
 		552F28151CCF4A0F004FC902 /* Others */ = {
 			isa = PBXGroup;
 			children = (
@@ -641,7 +621,6 @@
 		55CAAD0E1C848C2D00360F6B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				551763BE1CD5AB6200C4DC29 /* Keyboard */,
 				55A539FB1C7C692D0035043F /* Main.storyboard */,
 				55A53A031C7C692D0035043F /* LaunchScreen.storyboard */,
 				55E2FA521CF9873100862920 /* BaseCurrency.xib */,
@@ -1048,7 +1027,6 @@
 				55FE1ED71CBB9BC500EA1D84 /* Eritrea.png in Resources */,
 				55FE1F251CBB9BC500EA1D84 /* Palau.png in Resources */,
 				55FE1EE01CBB9BC500EA1D84 /* Germany.png in Resources */,
-				551763BD1CD5AB5700C4DC29 /* MCNumberKeyboard.xib in Resources */,
 				55FE1EAB1CBB9BC500EA1D84 /* Bahamas.png in Resources */,
 				55FE1EFA1CBB9BC500EA1D84 /* Korea,-South.png in Resources */,
 				55FE1ECE1CBB9BC500EA1D84 /* Denmark.png in Resources */,
@@ -1319,9 +1297,7 @@
 				55FAE3B91C8F25DB00B4C620 /* YahooFinanceClient.m in Sources */,
 				55A539F71C7C692D0035043F /* AppDelegate.m in Sources */,
 				55015C501C969E500079632F /* SettingCell.m in Sources */,
-				551763BC1CD5AB5700C4DC29 /* MCNumberKeyboard.m in Sources */,
 				55FAE3AC1C8E9F0B00B4C620 /* AddCurrencyViewController.m in Sources */,
-				551763C11CD5DDC100C4DC29 /* MCCalculate.m in Sources */,
 				55015C531C96E0780079632F /* MainViewController.m in Sources */,
 				55A53A001C7C692D0035043F /* iCurrency.xcdatamodeld in Sources */,
 				55FAE3B51C8E9F5900B4C620 /* CurrencyManager.m in Sources */,

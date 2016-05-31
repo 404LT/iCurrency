@@ -5,8 +5,6 @@
 //  Created by 陆文韬 on 16/3/8.
 //  Copyright © 2016年 LunTao. All rights reserved.
 //
-
-
 #import <Foundation/Foundation.h>
 
 @interface CurrencyManager : NSObject//<NSCoding>
@@ -16,8 +14,7 @@
 + (id)sharedInstance;//单例
 
 //用于定位plist里面存储的 国家名称  国旗   货币单位
-
-@property (nonatomic,strong)NSDictionary *currencies;//用来存储汇率
+//@property (nonatomic,strong)NSDictionary *currencies;//用来存储汇率
 
 
 @property (strong,nonatomic)NSMutableArray *defaultsCountries;//用来存储前台默认展示出来的自选国家。

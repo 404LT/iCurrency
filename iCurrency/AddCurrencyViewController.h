@@ -14,7 +14,7 @@
 @end
 
 @interface AddCurrencyViewController : UIViewController
-@property (nonatomic,strong)NSArray *currencies;
+//@property (nonatomic,strong)NSArray *currencies;
 //委托方声明委托变量
 @property (nonatomic,weak) id<AddCurrencyViewControllerDelegate>delegate;
 

@@ -15,21 +15,19 @@
 
 @interface ExchangeRate : NSObject<NSCoding>
 
+@property (nonatomic,copy)NSString *baseCurrencyName;
+@property (nonatomic,copy)NSMutableDictionary *rates;
+@property (nonatomic,copy)NSDate *lastUpdated;
+
++ (ExchangeRate *)load;
+- (BOOL)save;
 - (double)convertRate:(NSString *)baseCurrencyName
                    to:(NSString *)targetCurrencyName
                  with:(float)number;
 
-
-@property (nonatomic,copy)NSString *baseCurrencyName;
-@property (nonatomic,copy)NSDictionary *rates;
-@property (nonatomic,copy)NSDate *lastUpdated;
-
-
-
-- (BOOL)save;
-
-
-+ (ExchangeRate *)load;
+//对rates的存储
+- (void)saveRates;
+- (void)loadRates;
 
 
 @end

@@ -16,7 +16,7 @@
 #define DEFAULTS_KEY_TARGET_CURRENCIES @"currencyDisplay"
 
 @interface ConvertViewController ()<AddCurrencyViewControllerDelegate>
-@property (strong,nonatomic)UITextField *firstResponder;
+//@property (strong,nonatomic)UITextField *firstResponder;
 @property (assign,nonatomic)BOOL keyBoardShown;
 
 //@property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -24,6 +24,7 @@
 @property(strong,nonatomic)CurrencyManager *cManager;//实例对象
 @property(strong,nonatomic)MainViewController *mainvc;
 @property(strong,nonatomic)NSString *baseCurrencyName;
+@property(strong,nonatomic)ExchangeRate *rates;
 
 @end
 
@@ -38,8 +39,6 @@
     
     //初始化从雅虎获取汇率的方法
     [self initFetchDataFromYahoo];
-     NSLog(@"viewDidLoad");
-    
     
     _cManager = [CurrencyManager sharedInstance];
     _currencyDisplay = [NSMutableArray arrayWithArray:_cManager.defaultsCountries];
@@ -49,8 +48,8 @@
     
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(initBaseFromMvc:) name:@"initBase" object:nil];
-    
-    
+//    NSLog(@"KKK");
+    NSLog(@"cvc-viewDidLoad");
  
 }
 
@@ -60,6 +59,7 @@
     //初始化 cvc 中的baseCurrencyName
     NSString *initBaseName = notification.object;
     _baseCurrencyName = initBaseName;
+   // NSLog(@"AAA");
 }
 
 
@@ -119,11 +119,16 @@
     
     //每多一个row就要调用一次这个初始化方法，这样不行。。。。  更不能调用别的类的初始化方法。。
    //要改。。
+    
     MainViewController *mvc = [[MainViewController alloc]init];
     [mvc initDefaultBaseCurrency];
-    
     id currentBaseRate = mvc.baseCurrency;
+    
+    
+    
     double targetAmount =[exchange convertRate:currentBaseRate to:[_currencyDisplay objectAtIndex:indexPath.row] with:baseAmount];
+    NSLog(@"cvc self.rates is %@ %@",self,_rates);
+    
     cell.targetCurrency.text =[NSString stringWithFormat:@"%f",targetAmount];
     
     return cell;
@@ -142,7 +147,7 @@
     if ([_delegate respondsToSelector:@selector(selectBaseCurrency:)]) {
         //调用设置基准汇率的方法
         [_delegate selectBaseCurrency:baseCurrencyName];
-        NSLog(@"第一部分已完成");
+        //NSLog(@"第一部分已完成");
     }
 //    接收传回来的基准汇率值
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getBaseName:) name:@"base" object:nil];
@@ -155,9 +160,6 @@
     [[NSNotificationCenter defaultCenter]postNotificationName:@"refreshBaseCurrencyView" object:nil];
     
     
-    
-    
-    
 }
 
 - (void)getBaseName:(NSNotification *)notification{
@@ -167,9 +169,6 @@
     NSLog(@"5");
     [[NSNotificationCenter defaultCenter]removeObserver:self];
 }
-
-
-
 
 
 - (void)registDelegate

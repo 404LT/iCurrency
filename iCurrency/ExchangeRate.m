@@ -5,7 +5,7 @@
 //  Created by 陆文韬 on 16/3/8.
 //  Copyright © 2016年 LunTao. All rights reserved.
 //
-#import "YahooFinanceClient.h"
+
 #import "ExchangeRate.h"
 
 NSString *const kKeyBaseCurrencyName = @"baseCurrencyName";
@@ -13,60 +13,73 @@ NSString *const kKeyRates = @"rates";
 NSString *const kKeyLastUpdated = @"lastUpdated";
 
 
-
-@interface ExchangeRate()
-@property(nonatomic,weak)YahooFinanceClient *yahooClient;
-@end
 @implementation ExchangeRate
 
-
-
-#pragma mark - NSCoding
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-    NSLog(@"NSCoding解档 ");
-    self = [super init];
-    if (self) {
-        self.rates = [aDecoder decodeObjectForKey:kKeyRates];
+- (instancetype)init{
+    
+    if (self = [super init]) {
+        _rates = [[NSMutableDictionary alloc]initWithCapacity:500];
+        
+        //写两个方法来初始化汇率字典
+        [self loadRates];
+        NSLog(@"init-Rates is %@",self.rates);
     }
     return self;
 }
-
-- (void)encodeWithCoder:(NSCoder *)aCoder
+#pragma mark - loadRates & initRates
+- (void)loadRates
 {
-    [aCoder encodeObject:self.rates forKey:kKeyRates];
-    NSLog(@"用来归档 ");
+    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)objectAtIndex:0];
+    NSString *filePath = [path stringByAppendingPathComponent:@"rateDic"];
+    
+    if ([[NSFileManager defaultManager]fileExistsAtPath:filePath]) {
+        NSData *data = [[NSData alloc]initWithContentsOfFile:filePath];
+        NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc]initForReadingWithData:data];
+        _rates = [unarchiver decodeObjectForKey:@"rates"];
+        [unarchiver finishDecoding];
+    }
+    
 }
+
+
+- (void)saveRates
+{
+//    NSLog(@"save-rates is %@",self.rates);
+    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)objectAtIndex:0];
+    NSString *filePath = [path stringByAppendingPathComponent:@"rateDic"];
+    NSMutableData *data = [[NSMutableData alloc]initWithCapacity:500];
+    NSKeyedArchiver *archiever = [[NSKeyedArchiver alloc]initForWritingWithMutableData:data];
+    [archiever encodeObject:_rates forKey:@"rates"];
+    [archiever finishEncoding];
+    [data writeToFile:filePath atomically:YES];
+    
+}
+
 #pragma mark - 汇率的一些操作
+
+- (BOOL)save
+{
+    //NSLog(@"存起来");
+    BOOL result = [NSKeyedArchiver archiveRootObject:self toFile:[ExchangeRate filePath]];
+   // NSLog(@"load-rates %@",self.rates);//YES
+    return result;
+}
 + (ExchangeRate *)load
 {
     NSLog(@"load");
     //把存储在本地document当中的rates给加载出来
     ExchangeRate *rate = [NSKeyedUnarchiver unarchiveObjectWithFile:[ExchangeRate filePath]];
+    
     return rate;
 }
-- (BOOL)save
-{
-    //NSLog(@"存起来");
-    BOOL result = [NSKeyedArchiver archiveRootObject:self toFile:[ExchangeRate filePath]];
-    return result;
-}
-
 +(NSString *)filePath
 {
     NSString *docsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)objectAtIndex:0];
-    NSString *filePath = [docsPath stringByAppendingString:@"rates.plist"];
+    NSString *filePath = [docsPath stringByAppendingString:@"rates"];
   //  NSLog(@"filePath is %@",filePath);
+    
     return filePath;
 }
-//
-//- (BOOL)isStale
-//{
-//    NSLog(@"判断汇率是不是新的");
-//    BOOL result = [NSKeyedArchiver archiveRootObject:self toFile:[ExchangeRate filePath]];
-//    return result;
-//}
-//
 
 
 #pragma mark - 转换方法
@@ -74,7 +87,7 @@ NSString *const kKeyLastUpdated = @"lastUpdated";
                    to:(NSString *)targetCurrencyName
                  with:(float)number
 {
-    NSLog(@"换算中~~~~~~ rates is ：%@",self.rates);
+    NSLog(@"换算中~~~~~~ rates is ：%@", self.rates);
     if([baseCurrencyName  isEqualToString:@"USD"])
     {
         float targetRateValue = [[self.rates valueForKey:[NSString stringWithFormat:@"USD/%@",targetCurrencyName]]floatValue];
@@ -89,7 +102,23 @@ NSString *const kKeyLastUpdated = @"lastUpdated";
         return convertResult;
     }
 }
+#pragma mark - NSCoding
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super init];
+    if (self) {
+        self.rates = [aDecoder decodeObjectForKey:kKeyRates];
+    }
+    // NSLog(@"initWithCoder 数组已有内容");//YES
+    return self;
+}
 
-
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:self.rates forKey:kKeyRates];
+    // NSLog(@"load-rates %@",self.rates);//YES
+    NSLog(@"用来归档 ");
+}
+//}
 
 @end

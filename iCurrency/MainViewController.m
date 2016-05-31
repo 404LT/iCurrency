@@ -13,11 +13,11 @@
 #import "ConvertViewController.h"
 #import "CurrencyManager.h"
 #import "SettingViewController.h"
-#import "MCNumberKeyboard.h"
+//#import "MCNumberKeyboard.h"
 
 #define DEFAULTS_KEY_SOURCE_CURRENCY @"baseCurrency"
 
-@interface MainViewController ()<MCNumberKeyboardDelegate,AddCurrencyViewControllerDelegate,ConvertViewControllerDelegate>
+@interface MainViewController ()<AddCurrencyViewControllerDelegate,ConvertViewControllerDelegate>
 //遵守了自定义键盘的协议；添加汇率的协议；修改基础汇率的协议
 @property (weak, nonatomic) IBOutlet UIView *baseCurrencyView;
 @property(strong,nonatomic)CurrencyManager *cManager;
@@ -31,7 +31,6 @@
     //单例
     _cManager = [CurrencyManager sharedInstance];
     
-
     //初始化
     [self initInputField];
     [self initAddSignToNavBar];
@@ -39,13 +38,11 @@
     
     //初始化基准汇率
     [self initDefaultBaseCurrency];
+    
+    NSLog(@"mvc-viewDidLoad");
 }
 
 #pragma mark - 一些需要初始化的方法
-
-
-
-
 
 //添加按钮
 - (void)initAddSignToNavBar
@@ -96,7 +93,7 @@
 #pragma mark - 输入框代理UITextFieldDelegate
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    //    监听输入框开始输入的方法
+    //  方案1  监听输入框开始输入的方法
     NSLog(@"输入框开始输入textFieldDidBeginEditing: is called ");
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
     tapGesture.delegate = self;
@@ -112,45 +109,47 @@
     
 }
 
+#pragma mark - 自定义键盘的委托-主要方法
+//-(void)numberKeyboardClickNumberButton:(MCNumberKeyboard *)numberKeyboard
+//{
+//    //点击数字按钮后向各国家返回计算结果
+//    //    [self.sourceCurrencyInputField setCount]
+//}
+//-(void)numberKeyboardClickClearButton:(MCNumberKeyboard *)numberKeyboard
+//{
+//    //配置清空按钮的功能
+//    [self.sourceCurrencyInputField clearsOnBeginEditing];
+//}
+
 #pragma mark - 自定义键盘的委托
+//- (void)numberKeyboardWillShow:(MCNumberKeyboard *)numberKeyboard
+//{
+//    //配置一些约束
+//}
+//
+//-(void)numberKeyboardDidShow:(MCNumberKeyboard *)numberKeyboard
+//{
+//    
+//}
+//
+//-(void)numberKeyboardWillDismiss:(MCNumberKeyboard *)numberKeyboard
+//{
+//    
+//}
+//-(void)numberKeyboardDidDismiss:(MCNumberKeyboard *)numberKeyboard
+//{
+//    
+//}
+//
+//-(void)numberKeyboardClickPointButton:(MCNumberKeyboard *)numberKeyboard
+//{
+//    
+//}
+//-(void)numberKeyboardClickOperationButton:(MCNumberKeyboard *)numberKeyboard
+//{
+//    
+//}
 
-- (void)numberKeyboardWillShow:(MCNumberKeyboard *)numberKeyboard
-{
-    //配置一些约束
-}
-
--(void)numberKeyboardDidShow:(MCNumberKeyboard *)numberKeyboard
-{
-    
-}
-
--(void)numberKeyboardWillDismiss:(MCNumberKeyboard *)numberKeyboard
-{
-    
-}
--(void)numberKeyboardDidDismiss:(MCNumberKeyboard *)numberKeyboard
-{
-    
-}
-
--(void)numberKeyboardClickPointButton:(MCNumberKeyboard *)numberKeyboard
-{
-    
-}
--(void)numberKeyboardClickOperationButton:(MCNumberKeyboard *)numberKeyboard
-{
-    
-}
--(void)numberKeyboardClickNumberButton:(MCNumberKeyboard *)numberKeyboard
-{
-    //点击数字按钮后向各国家返回计算结果
-    //    [self.sourceCurrencyInputField setCount]
-}
--(void)numberKeyboardClickClearButton:(MCNumberKeyboard *)numberKeyboard
-{
-    //配置清空按钮的功能
-    [self.sourceCurrencyInputField clearsOnBeginEditing];
-}
 
 
 #pragma mark - 隐藏键盘
@@ -234,7 +233,7 @@
     _sourceCurrencyFlag.image = [UIImage imageNamed:flagname];//国旗
     _sourceCurrencyUnit.text =unit;//单位
     
-    NSLog(@"调用了这个方法");
+    
 }
 
 - (void)selectBaseCurrency:(NSString *)selectedBaseCurrencyName
