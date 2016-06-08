@@ -21,10 +21,7 @@
 @end
 
 @implementation AddCurrencyViewController
-{
-   
-    NSArray *images;//用于存储国旗图片
-}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -91,12 +88,10 @@
 
     NSString *currencyCode = [_cManager.namesArray objectAtIndex:indexPath.row];
 
-    
     if ([self.delegate respondsToSelector:@selector(selectedCurrency:)]) {
         [self.delegate selectedCurrency:currencyCode];
         
     }
-    
     
 }
 
@@ -141,32 +136,6 @@
 //    }
 }
 
-
-
-
-
-
-
-//在搜索框内搜索内容，并展示搜索结果
-//- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
-//{
-//    //移除mArr2中所有元素，来存放搜索结果
-//    [self.mArr2removeAllObjects];
-//    //对数组mArr1遍历，看数组中是否包含搜索框里的内容
-//    for(NSString *pstrin self.mArr1)
-//    {
-//        //如果包含搜索框里的内容，就把数组中的元素添加到mArr2中
-//        if([pstr hasPrefix:searchBar.text])
-//        {
-//            [self.mArr2addObject:pstr];
-//        }
-//    }
-//    
-//    [self.mSearcherBarresignFirstResponder];
-//    //展示搜索结果
-//    [self.mTableViewreloadData];
-//    
-//}
 
 
 @end

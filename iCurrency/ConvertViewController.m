@@ -13,8 +13,9 @@
 #import "CurrencyManager.h"
 #import "TrendViewController.h"
 #import "AddCurrencyViewController.h"
+#import "AppDelegate.h"
 #define DEFAULTS_KEY_TARGET_CURRENCIES @"currencyDisplay"
-
+#define DEFAULTS_KEY_SOURCE_CURRENCY @"baseCurrency"
 @interface ConvertViewController ()<AddCurrencyViewControllerDelegate>
 //@property (strong,nonatomic)UITextField *firstResponder;
 @property (assign,nonatomic)BOOL keyBoardShown;
@@ -48,8 +49,10 @@
     
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(initBaseFromMvc:) name:@"initBase" object:nil];
-//    NSLog(@"KKK");
-    NSLog(@"cvc-viewDidLoad");
+
+    
+    //self.tableView.backgroundColor = BASIC_COLOR;
+    
  
 }
 
@@ -89,6 +92,7 @@
 
 - (void)setBaseCurrency:(NSString *)baseCurrency
 {
+//    ！！！！！！
     self.baseCurrency = baseCurrency;
 }
 
@@ -99,6 +103,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    //method2 获取本地的base
+    NSString *currentBaseRate = [[NSUserDefaults standardUserDefaults]objectForKey:DEFAULTS_KEY_SOURCE_CURRENCY];
+    
     static NSString *reuseIdentifier = @"convertCell";
     ConvertCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
     if (cell == nil) {
@@ -109,6 +116,7 @@
     NSInteger index = [_cManager.namesArray indexOfObject:name];
     NSString *flagName = _cManager.flagImage[index];
     
+   // cell.backgroundColor = BASIC_COLOR;
     cell.countryImage.image = [UIImage imageNamed:flagName];
     cell.countryName.text = name;
     cell.currencyUnit.text = _cManager.currencyUnit[index];
@@ -117,18 +125,13 @@
     double baseAmount = [self baseAmount];
     
     
-    //每多一个row就要调用一次这个初始化方法，这样不行。。。。  更不能调用别的类的初始化方法。。
-   //要改。。
+    //method1
+    //    MainViewController *mvc = [[MainViewController alloc]init];
+    //    [mvc initDefaultBaseCurrency];
+    //    id currentBaseRate = mvc.baseCurrency;
     
-    MainViewController *mvc = [[MainViewController alloc]init];
-    [mvc initDefaultBaseCurrency];
-    id currentBaseRate = mvc.baseCurrency;
-    
-    
-    
+
     double targetAmount =[exchange convertRate:currentBaseRate to:[_currencyDisplay objectAtIndex:indexPath.row] with:baseAmount];
-    NSLog(@"cvc self.rates is %@ %@",self,_rates);
-    
     cell.targetCurrency.text =[NSString stringWithFormat:@"%f",targetAmount];
     
     return cell;
@@ -138,29 +141,43 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    NSLog(@"1 基准汇率: %@",_baseCurrencyName);
+    //旧的汇率已经同步，现在解决baseView
+    NSString *exBase = [[NSUserDefaults standardUserDefaults]objectForKey:DEFAULTS_KEY_SOURCE_CURRENCY];
+
     //注册代理
     [self registDelegate];
     //选中的国家：
     NSString *baseCurrencyName = [self.currencyDisplay objectAtIndex:indexPath.row];
+    NSLog(@"选中的国家 %@",baseCurrencyName);
+    
     //判断响应的方法selectBaseCurrency有没有实现
+    
     if ([_delegate respondsToSelector:@selector(selectBaseCurrency:)]) {
-        //调用设置基准汇率的方法
+        NSLog(@"self - from disSelect (CONVERT) %@",self);
         [_delegate selectBaseCurrency:baseCurrencyName];
         //NSLog(@"第一部分已完成");
     }
-//    接收传回来的基准汇率值
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getBaseName:) name:@"base" object:nil];
-    //用未修改的值 替换 currencyDisplay数组
-    [_currencyDisplay replaceObjectAtIndex:indexPath.row withObject:_baseCurrencyName];
+    //重写一个方法用来响应Main那边那个setupBaseCurrencyByConvertViewController:
+    
+    
+    
+    
+    
+    
+    
+    [_currencyDisplay replaceObjectAtIndex:indexPath.row withObject:exBase];
     [self.tableView reloadData];
     
     
-    //第二部分，发送一个通知 去刷新一下 baseCurrencyView
-    [[NSNotificationCenter defaultCenter]postNotificationName:@"refreshBaseCurrencyView" object:nil];
-    
-    
 }
+
+
+
+
+
+
+
+
 
 - (void)getBaseName:(NSNotification *)notification{
     NSString *baseName = notification.object;

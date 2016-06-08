@@ -59,10 +59,8 @@ NSString * yahoolURL=@"https://finance.yahoo.com/webservice/v1/symbols/allcurren
                 ExchangeRate *exchange = [[ExchangeRate alloc]init];
                 exchange.rates = parsedResults;
                 
-                
                 dispatch_async(dispatch_get_global_queue(0, 0), ^{
                     [exchange saveRates];
-                    //把当前的对象 exchange 给保存起来
                     NSLog(@"获取汇率成功并保存 :");
                 });
                 return parsedResults;

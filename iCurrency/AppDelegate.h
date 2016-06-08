@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
+#define TOP_COLOR [UIColor colorWithRed:0.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0];
+
+#define BASIC_COLOR [UIColor colorWithRed:151.0/255.0 green:255.0/255.0 blue:226.0/255.0 alpha:1.0];
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;

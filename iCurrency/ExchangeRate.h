@@ -13,7 +13,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ExchangeRate : NSObject<NSCoding>
+@interface ExchangeRate : NSObject//<NSCoding>
 
 @property (nonatomic,copy)NSString *baseCurrencyName;
 @property (nonatomic,copy)NSMutableDictionary *rates;

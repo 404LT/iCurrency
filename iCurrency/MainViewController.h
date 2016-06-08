@@ -10,11 +10,11 @@
 
 @interface MainViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UIImageView *sourceCurrencyFlag;
-@property (weak, nonatomic) IBOutlet UILabel *sourceCurrencyName;
-@property (weak, nonatomic) IBOutlet UILabel *sourceCurrencyUnit;
-@property (weak, nonatomic) IBOutlet UITextField *sourceCurrencyInputField;
-@property (weak, nonatomic) IBOutlet UIView *sourceCurrencyView;
+@property (strong, nonatomic) IBOutlet UIImageView *sourceCurrencyFlag;
+@property (strong, nonatomic) IBOutlet UILabel *sourceCurrencyName;
+@property (strong, nonatomic) IBOutlet UILabel *sourceCurrencyUnit;
+@property (strong, nonatomic) IBOutlet UITextField *sourceCurrencyInputField;
+@property (strong, nonatomic) IBOutlet UIView *sourceCurrencyView;
 @property (weak, nonatomic) IBOutlet UILabel *lastUpdateTime;
 
 @property (weak, nonatomic) IBOutlet UIView *convertView;

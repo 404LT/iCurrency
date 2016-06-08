@@ -13,6 +13,7 @@
 #import "ConvertViewController.h"
 #import "CurrencyManager.h"
 #import "SettingViewController.h"
+#import "AppDelegate.h"
 //#import "MCNumberKeyboard.h"
 
 #define DEFAULTS_KEY_SOURCE_CURRENCY @"baseCurrency"
@@ -38,11 +39,18 @@
     
     //初始化基准汇率
     [self initDefaultBaseCurrency];
-    
+   // [self initColors];
     NSLog(@"mvc-viewDidLoad");
 }
 
 #pragma mark - 一些需要初始化的方法
+- (void)initColors
+{
+    self.view.backgroundColor = TOP_COLOR;
+    self.sourceCurrencyView.backgroundColor = TOP_COLOR;
+    self.navigationController.navigationBar.barTintColor = TOP_COLOR;
+}
+
 
 //添加按钮
 - (void)initAddSignToNavBar
@@ -100,56 +108,7 @@
     [self.view addGestureRecognizer:tapGesture];
     
     
-//   方案2 自定义键盘
-//    NSLog(@"调用自定义键盘");
-//    MCNumberKeyboard *keyboardView=[[NSBundle mainBundle]loadNibNamed:@"MCNumberKeyboard" owner:nil options:nil][0];
-//    keyboardView.delegate=self;
-//    [keyboardView showInView:self.navigationController.view];
-    
-    
 }
-
-#pragma mark - 自定义键盘的委托-主要方法
-//-(void)numberKeyboardClickNumberButton:(MCNumberKeyboard *)numberKeyboard
-//{
-//    //点击数字按钮后向各国家返回计算结果
-//    //    [self.sourceCurrencyInputField setCount]
-//}
-//-(void)numberKeyboardClickClearButton:(MCNumberKeyboard *)numberKeyboard
-//{
-//    //配置清空按钮的功能
-//    [self.sourceCurrencyInputField clearsOnBeginEditing];
-//}
-
-#pragma mark - 自定义键盘的委托
-//- (void)numberKeyboardWillShow:(MCNumberKeyboard *)numberKeyboard
-//{
-//    //配置一些约束
-//}
-//
-//-(void)numberKeyboardDidShow:(MCNumberKeyboard *)numberKeyboard
-//{
-//    
-//}
-//
-//-(void)numberKeyboardWillDismiss:(MCNumberKeyboard *)numberKeyboard
-//{
-//    
-//}
-//-(void)numberKeyboardDidDismiss:(MCNumberKeyboard *)numberKeyboard
-//{
-//    
-//}
-//
-//-(void)numberKeyboardClickPointButton:(MCNumberKeyboard *)numberKeyboard
-//{
-//    
-//}
-//-(void)numberKeyboardClickOperationButton:(MCNumberKeyboard *)numberKeyboard
-//{
-//    
-//}
-
 
 
 #pragma mark - 隐藏键盘
@@ -182,8 +141,11 @@
 #pragma mark -  初始化基准汇率---------关键操作
 - (void)initDefaultBaseCurrency
 {
+    //从NSUserdefaults中取出之前存储在本地的base，然后调用设置的方法
     NSString *baseCurrency = [[NSUserDefaults standardUserDefaults]objectForKey:DEFAULTS_KEY_SOURCE_CURRENCY];
     if (baseCurrency) {
+        
+        NSLog(@"self - from -initDefaults %@",self);
         [self setupBaseCurrency:baseCurrency];
     }
     else{
@@ -194,61 +156,61 @@
     [[NSNotificationCenter defaultCenter]postNotificationName:@"initBase" object:baseCurrency];
 }
 
+- (void)selectBaseCurrency:(NSString *)selectedBaseCurrencyName
+{
+    NSLog(@"self - from -selectBase (MAIN) %@",self);
+//    [self setupBaseCurrency:selectedBaseCurrencyName];
+    [self setupBaseCurrencyByConvertViewController:selectedBaseCurrencyName];
+    
+    
+}
 
 - (void)setupBaseCurrency:(NSString *)countryName
 {
-    //如何刷新基准汇率的view呢
+    //这个方法给本类和CVC类调用，本类只会在初始化的时候调用一次，CVC会经常调用。。
+    
+    //每次有值传过来 都固定在本地
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:countryName forKey:DEFAULTS_KEY_SOURCE_CURRENCY];
     [defaults synchronize];
+    NSLog(@"更新操作后最新的Base是  %@",countryName);
+    //设置基准汇率
     self.baseCurrency = countryName;
     
+    //配置控件的属性
     CurrencyManager *manager = [CurrencyManager sharedInstance];
     NSInteger index = [manager.namesArray indexOfObject:countryName];
     NSString *flagname = manager.flagImage[index];
     NSString *unit = manager.currencyUnit[index];
-    
     _sourceCurrencyName.text = countryName;
     _sourceCurrencyFlag.image = [UIImage imageNamed:flagname];//国旗
     _sourceCurrencyUnit.text =unit;//单位
     
-   //发送当前基准汇率的通知
-    [[NSNotificationCenter defaultCenter]postNotificationName:@"currenctBase" object:countryName];
-
-    //对 UIView *baseCurrencyView 做一个重新加载的方法
-    //[self.baseCurrencyView refreshBaseView];
-    //接收来自cvc中 didselect 的方法 重新加载当前的baseCurrency
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(refreshBaseView:) name:@"refreshBaseCurrencyView" object:nil];
-    
+    NSLog(@"控件属性配置 - self (MAIN)  :%@ %@ %@ %@",self,_sourceCurrencyName.text,_sourceCurrencyFlag.image,_sourceCurrencyUnit.text);
 }
 
-- (void)refreshBaseView:(NSNotification *)notification
+//重写一个setupBaseCurrencyForConvertVC
+
+- (void)setupBaseCurrencyByConvertViewController:(NSString *)countryName
 {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:countryName forKey:DEFAULTS_KEY_SOURCE_CURRENCY];
+    [defaults synchronize];
+    NSLog(@"设置By CVC %@",countryName);
+    self.baseCurrency = countryName;
+    //配置控件的属性
     CurrencyManager *manager = [CurrencyManager sharedInstance];
-    NSInteger index = [manager.namesArray indexOfObject:self.baseCurrency];
+    //单例。。。。。
+    NSInteger index = [manager.namesArray indexOfObject:countryName];
     NSString *flagname = manager.flagImage[index];
     NSString *unit = manager.currencyUnit[index];
-    
-    _sourceCurrencyName.text = self.baseCurrency;
+    _sourceCurrencyName.text = countryName;
     _sourceCurrencyFlag.image = [UIImage imageNamed:flagname];//国旗
     _sourceCurrencyUnit.text =unit;//单位
     
-    
+        NSLog(@"控件属性配置 - self by CVC (MAIN)  :%@ %@ %@ %@",self,_sourceCurrencyName.text,_sourceCurrencyFlag.image,_sourceCurrencyUnit.text);
 }
 
-- (void)selectBaseCurrency:(NSString *)selectedBaseCurrencyName
-{
-//    NSLog(@"基准汇率更换成 ： %@",selectedBaseCurrencyName);
-    [self setupBaseCurrency:selectedBaseCurrencyName];
-    
-}
 
-#pragma mark - 添加汇率 
-//- (void)selectedCurrency:(NSString *)selectedCurrencyCode
-//{
-//    NSLog(@"更换基准汇率");
-//    //    根据countryCode来设置基准汇率，还是以USD为基础汇率。。
-//    [self setupSourceCurrency:selectedCurrencyCode];
-//    [self dismissViewControllerAnimated:YES completion:nil];
-//}
+
 @end
