@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		55015C501C969E500079632F /* SettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55015C4F1C969E500079632F /* SettingCell.m */; };
 		55015C531C96E0780079632F /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55015C521C96E0780079632F /* MainViewController.m */; };
+		552A40631D0D526A00F39AB0 /* LWTHttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 552A40621D0D526A00F39AB0 /* LWTHttpRequest.m */; };
+		552A40661D0D55BA00F39AB0 /* LWTBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 552A40651D0D55BA00F39AB0 /* LWTBaseRequest.m */; };
+		552B7C331D09929B0069B892 /* HudView.m in Sources */ = {isa = PBXBuildFile; fileRef = 552B7C321D09929B0069B892 /* HudView.m */; };
 		552F28141CCF47F6004FC902 /* TrendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 552F28131CCF47F6004FC902 /* TrendViewController.m */; };
 		552F281B1CCF4A47004FC902 /* trend1.png in Resources */ = {isa = PBXBuildFile; fileRef = 552F28161CCF4A47004FC902 /* trend1.png */; };
 		552F281C1CCF4A47004FC902 /* trend2.png in Resources */ = {isa = PBXBuildFile; fileRef = 552F28171CCF4A47004FC902 /* trend2.png */; };
@@ -34,7 +37,6 @@
 		55FAE3AF1C8E9F3300B4C620 /* ExchangeRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FAE3AE1C8E9F3300B4C620 /* ExchangeRate.m */; };
 		55FAE3B51C8E9F5900B4C620 /* CurrencyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FAE3B41C8E9F5900B4C620 /* CurrencyManager.m */; };
 		55FAE3B91C8F25DB00B4C620 /* YahooFinanceClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FAE3B81C8F25DB00B4C620 /* YahooFinanceClient.m */; };
-		55FE1C541CBB987700EA1D84 /* currencies.plist in Resources */ = {isa = PBXBuildFile; fileRef = 55FE1C531CBB987700EA1D84 /* currencies.plist */; };
 		55FE1EA11CBB9BC500EA1D84 /* Afghanistan.png in Resources */ = {isa = PBXBuildFile; fileRef = 55FE1DDE1CBB9BC400EA1D84 /* Afghanistan.png */; };
 		55FE1EA21CBB9BC500EA1D84 /* Albania.png in Resources */ = {isa = PBXBuildFile; fileRef = 55FE1DDF1CBB9BC400EA1D84 /* Albania.png */; };
 		55FE1EA31CBB9BC500EA1D84 /* Algeria.png in Resources */ = {isa = PBXBuildFile; fileRef = 55FE1DE01CBB9BC400EA1D84 /* Algeria.png */; };
@@ -261,6 +263,12 @@
 		55015C4F1C969E500079632F /* SettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingCell.m; sourceTree = "<group>"; };
 		55015C511C96E0780079632F /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		55015C521C96E0780079632F /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		552A40611D0D526A00F39AB0 /* LWTHttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWTHttpRequest.h; sourceTree = "<group>"; };
+		552A40621D0D526A00F39AB0 /* LWTHttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWTHttpRequest.m; sourceTree = "<group>"; };
+		552A40641D0D55BA00F39AB0 /* LWTBaseRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWTBaseRequest.h; sourceTree = "<group>"; };
+		552A40651D0D55BA00F39AB0 /* LWTBaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWTBaseRequest.m; sourceTree = "<group>"; };
+		552B7C311D09929B0069B892 /* HudView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HudView.h; sourceTree = "<group>"; };
+		552B7C321D09929B0069B892 /* HudView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HudView.m; sourceTree = "<group>"; };
 		552F28121CCF47F6004FC902 /* TrendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrendViewController.h; sourceTree = "<group>"; };
 		552F28131CCF47F6004FC902 /* TrendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrendViewController.m; sourceTree = "<group>"; };
 		552F28161CCF4A47004FC902 /* trend1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trend1.png; sourceTree = "<group>"; };
@@ -302,7 +310,6 @@
 		55FAE3B41C8E9F5900B4C620 /* CurrencyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrencyManager.m; sourceTree = "<group>"; };
 		55FAE3B71C8F25DB00B4C620 /* YahooFinanceClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YahooFinanceClient.h; sourceTree = "<group>"; };
 		55FAE3B81C8F25DB00B4C620 /* YahooFinanceClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YahooFinanceClient.m; sourceTree = "<group>"; };
-		55FE1C531CBB987700EA1D84 /* currencies.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = currencies.plist; sourceTree = "<group>"; };
 		55FE1DDE1CBB9BC400EA1D84 /* Afghanistan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Afghanistan.png; sourceTree = "<group>"; };
 		55FE1DDF1CBB9BC400EA1D84 /* Albania.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Albania.png; sourceTree = "<group>"; };
 		55FE1DE01CBB9BC400EA1D84 /* Algeria.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Algeria.png; sourceTree = "<group>"; };
@@ -533,6 +540,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		552A405E1D0D51E400F39AB0 /* NetWorkService */ = {
+			isa = PBXGroup;
+			children = (
+				552A40611D0D526A00F39AB0 /* LWTHttpRequest.h */,
+				552A40621D0D526A00F39AB0 /* LWTHttpRequest.m */,
+				552A40641D0D55BA00F39AB0 /* LWTBaseRequest.h */,
+				552A40651D0D55BA00F39AB0 /* LWTBaseRequest.m */,
+			);
+			name = NetWorkService;
+			sourceTree = "<group>";
+		};
 		552F28151CCF4A0F004FC902 /* Others */ = {
 			isa = PBXGroup;
 			children = (
@@ -621,6 +639,8 @@
 		55CAAD0E1C848C2D00360F6B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				552B7C311D09929B0069B892 /* HudView.h */,
+				552B7C321D09929B0069B892 /* HudView.m */,
 				55A539FB1C7C692D0035043F /* Main.storyboard */,
 				55A53A031C7C692D0035043F /* LaunchScreen.storyboard */,
 				55E2FA521CF9873100862920 /* BaseCurrency.xib */,
@@ -655,13 +675,13 @@
 		55FAE3B61C8E9F6200B4C620 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				552A405E1D0D51E400F39AB0 /* NetWorkService */,
+				55FAE3B71C8F25DB00B4C620 /* YahooFinanceClient.h */,
+				55FAE3B81C8F25DB00B4C620 /* YahooFinanceClient.m */,
 				55FAE3B31C8E9F5900B4C620 /* CurrencyManager.h */,
 				55FAE3B41C8E9F5900B4C620 /* CurrencyManager.m */,
 				55FAE3AD1C8E9F3300B4C620 /* ExchangeRate.h */,
 				55FAE3AE1C8E9F3300B4C620 /* ExchangeRate.m */,
-				55FAE3B71C8F25DB00B4C620 /* YahooFinanceClient.h */,
-				55FAE3B81C8F25DB00B4C620 /* YahooFinanceClient.m */,
-				55FE1C531CBB987700EA1D84 /* currencies.plist */,
 				55FFBF871CD9CE2800E77FAE /* Names.json */,
 				55A539FE1C7C692D0035043F /* iCurrency.xcdatamodeld */,
 			);
@@ -907,12 +927,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 55A53A1F1C7C692D0035043F /* Build configuration list for PBXNativeTarget "iCurrency" */;
 			buildPhases = (
-				5A8AC6BF9D28AFB85FCFF531 /* Check Pods Manifest.lock */,
+				5A8AC6BF9D28AFB85FCFF531 /* [CP] Check Pods Manifest.lock */,
 				55A539EB1C7C692D0035043F /* Sources */,
 				55A539EC1C7C692D0035043F /* Frameworks */,
 				55A539ED1C7C692D0035043F /* Resources */,
-				395DB9F53CAF0D59F22B92C5 /* Embed Pods Frameworks */,
-				2F5A607FC58EFBB634E49937 /* Copy Pods Resources */,
+				395DB9F53CAF0D59F22B92C5 /* [CP] Embed Pods Frameworks */,
+				2F5A607FC58EFBB634E49937 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -965,6 +985,7 @@
 		55A539E71C7C692D0035043F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = LWT;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = LunTao;
 				TargetAttributes = {
@@ -1140,7 +1161,6 @@
 				552F281B1CCF4A47004FC902 /* trend1.png in Resources */,
 				55FE1EC41CBB9BC500EA1D84 /* Colombia.png in Resources */,
 				55FE1F301CBB9BC500EA1D84 /* Rwanda.png in Resources */,
-				55FE1C541CBB987700EA1D84 /* currencies.plist in Resources */,
 				55FE1EB71CBB9BC500EA1D84 /* Brazil.png in Resources */,
 				55FE1F431CBB9BC500EA1D84 /* Spain.png in Resources */,
 				55FE1EA71CBB9BC500EA1D84 /* Armenia.png in Resources */,
@@ -1241,14 +1261,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2F5A607FC58EFBB634E49937 /* Copy Pods Resources */ = {
+		2F5A607FC58EFBB634E49937 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1256,14 +1276,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iCurrency/Pods-iCurrency-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		395DB9F53CAF0D59F22B92C5 /* Embed Pods Frameworks */ = {
+		395DB9F53CAF0D59F22B92C5 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1271,14 +1291,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iCurrency/Pods-iCurrency-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5A8AC6BF9D28AFB85FCFF531 /* Check Pods Manifest.lock */ = {
+		5A8AC6BF9D28AFB85FCFF531 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1304,9 +1324,12 @@
 				55FAE3A91C8E9EDC00B4C620 /* AddCurrencyCell.m in Sources */,
 				5568E30B1C7F0254002266D0 /* ConvertViewController.m in Sources */,
 				55FAE3AF1C8E9F3300B4C620 /* ExchangeRate.m in Sources */,
+				552A40631D0D526A00F39AB0 /* LWTHttpRequest.m in Sources */,
+				552A40661D0D55BA00F39AB0 /* LWTBaseRequest.m in Sources */,
 				55A539F41C7C692D0035043F /* main.m in Sources */,
 				55CAAD151C848CFA00360F6B /* ConvertCell.m in Sources */,
 				55B81E701C89544500C668C3 /* SettingViewController.m in Sources */,
+				552B7C331D09929B0069B892 /* HudView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

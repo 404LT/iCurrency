@@ -21,8 +21,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *baseView;
 @property (nonatomic, strong) NSString *baseCurrency;//基准汇率
-//view转跳的方法
-//- (void)jumpToAdd;
+
 - (void)jumpToSetting;
 - (void)setupBaseCurrency:(NSString *)countryName;//设置基准汇率 
 - (void)initDefaultBaseCurrency;

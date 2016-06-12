@@ -7,6 +7,7 @@
 //
 #import "ExchangeRate.h"
 #import "YahooFinanceClient.h"
+#import <AFNetworking.h>
 NSString * yahoolURL=@"https://finance.yahoo.com/webservice/v1/symbols/allcurrencies/quote?format=json&";
 
 @implementation YahooFinanceClient
@@ -23,7 +24,16 @@ NSString * yahoolURL=@"https://finance.yahoo.com/webservice/v1/symbols/allcurren
     NSError *error2;
     NSMutableDictionary *parsedResults = [[NSMutableDictionary alloc]init];
     NSData *data = [[NSString stringWithContentsOfURL:[NSURL URLWithString:yahoolURL] encoding:NSUTF8StringEncoding error:nil]dataUsingEncoding:NSUTF8StringEncoding];
-    //    NSLog(@"--------------------------%@",data);
+    
+    //做一个错误处理
+    NSError *_Nonnull errorF;
+    if (data == nil) {
+        NSLog(@"网络错误 %@",errorF.localizedDescription);
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"TimeOut" object:nil];
+    }
+    ////////////////////
+    
+    
     
     id jsonObject = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error2];
     
@@ -52,13 +62,11 @@ NSString * yahoolURL=@"https://finance.yahoo.com/webservice/v1/symbols/allcurren
                                 [parsedResults setValue:price_number forKey:name];
                             }
                         }
-                        
                     }
                 }
                 
                 ExchangeRate *exchange = [[ExchangeRate alloc]init];
                 exchange.rates = parsedResults;
-                
                 dispatch_async(dispatch_get_global_queue(0, 0), ^{
                     [exchange saveRates];
                     NSLog(@"获取汇率成功并保存 :");

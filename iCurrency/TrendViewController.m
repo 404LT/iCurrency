@@ -16,12 +16,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-   
-    
-    
-
-
 }
 
 

@@ -14,19 +14,22 @@
 #import "CurrencyManager.h"
 #import "SettingViewController.h"
 #import "AppDelegate.h"
-//#import "MCNumberKeyboard.h"
+#import "HudView.h"
 
 #define DEFAULTS_KEY_SOURCE_CURRENCY @"baseCurrency"
 
 @interface MainViewController ()<AddCurrencyViewControllerDelegate,ConvertViewControllerDelegate>
-//遵守了自定义键盘的协议；添加汇率的协议；修改基础汇率的协议
 @property (weak, nonatomic) IBOutlet UIView *baseCurrencyView;
 @property(strong,nonatomic)CurrencyManager *cManager;
 @property(strong,nonatomic)ConvertViewController *convertVC;
+// HUDView
+@property (strong, nonatomic) HudView *hudView;
+
 @end
 
 @implementation MainViewController
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
     //单例
@@ -40,6 +43,10 @@
     //初始化基准汇率
     [self initDefaultBaseCurrency];
    // [self initColors];
+    
+    //超时
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(dataTimeOut) name:@"TimeOut" object:nil];
+    
     NSLog(@"mvc-viewDidLoad");
 }
 
@@ -106,8 +113,6 @@
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
     tapGesture.delegate = self;
     [self.view addGestureRecognizer:tapGesture];
-    
-    
 }
 
 
@@ -123,19 +128,18 @@
 #pragma mark - 基准汇率计算过程
 - (double)baseAmount
 {
-
     NSMutableString *baseString = [NSMutableString stringWithFormat:self.sourceCurrencyInputField.text];
     return [baseString doubleValue];
 }
 
-- (IBAction)sourceChanged:(id)sender {
+- (IBAction)sourceChanged:(id)sender
+{
+    
     //    输入框一旦有变动就触发该事件
-
     ConvertViewController *cvc =(ConvertViewController *)[self.childViewControllers lastObject];
     cvc.baseAmount = [self baseAmount];
     [cvc.tableView reloadData];
     NSLog(@"输入了新的数字 %f",cvc.baseAmount);
-    
 }
 
 #pragma mark -  初始化基准汇率---------关键操作
@@ -159,38 +163,34 @@
 - (void)selectBaseCurrency:(NSString *)selectedBaseCurrencyName
 {
     NSLog(@"self - from -selectBase (MAIN) %@",self);
-//    [self setupBaseCurrency:selectedBaseCurrencyName];
-    [self setupBaseCurrencyByConvertViewController:selectedBaseCurrencyName];
-    
+    [self setupBaseCurrency:selectedBaseCurrencyName];
+   // [self setupBaseCurrencyByConvertViewController:selectedBaseCurrencyName];
     
 }
 
 - (void)setupBaseCurrency:(NSString *)countryName
 {
-    //这个方法给本类和CVC类调用，本类只会在初始化的时候调用一次，CVC会经常调用。。
-    
+    //这个方法给本类和CVC类调用，本类只会在初始化的时候调用一次，CVC会经常调用
     //每次有值传过来 都固定在本地
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:countryName forKey:DEFAULTS_KEY_SOURCE_CURRENCY];
     [defaults synchronize];
     NSLog(@"更新操作后最新的Base是  %@",countryName);
-    //设置基准汇率
     self.baseCurrency = countryName;
-    
-    //配置控件的属性
     CurrencyManager *manager = [CurrencyManager sharedInstance];
     NSInteger index = [manager.namesArray indexOfObject:countryName];
     NSString *flagname = manager.flagImage[index];
     NSString *unit = manager.currencyUnit[index];
-    _sourceCurrencyName.text = countryName;
-    _sourceCurrencyFlag.image = [UIImage imageNamed:flagname];//国旗
-    _sourceCurrencyUnit.text =unit;//单位
     
-    NSLog(@"控件属性配置 - self (MAIN)  :%@ %@ %@ %@",self,_sourceCurrencyName.text,_sourceCurrencyFlag.image,_sourceCurrencyUnit.text);
+    //配置控件信息
+    self.sourceCurrencyName.text = countryName;
+    self.sourceCurrencyFlag.image = [UIImage imageNamed:flagname];//国旗
+    self.sourceCurrencyUnit.text =unit;//单位
+    
+    NSLog(@"控件属性配置 - self (MAIN)  :%@ %@ %@ %@",self,self.sourceCurrencyName.text,self.sourceCurrencyFlag.image,self.sourceCurrencyUnit.text);
 }
 
 //重写一个setupBaseCurrencyForConvertVC
-
 - (void)setupBaseCurrencyByConvertViewController:(NSString *)countryName
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -204,13 +204,26 @@
     NSInteger index = [manager.namesArray indexOfObject:countryName];
     NSString *flagname = manager.flagImage[index];
     NSString *unit = manager.currencyUnit[index];
-    _sourceCurrencyName.text = countryName;
-    _sourceCurrencyFlag.image = [UIImage imageNamed:flagname];//国旗
-    _sourceCurrencyUnit.text =unit;//单位
+    //以上都没有问题
     
-        NSLog(@"控件属性配置 - self by CVC (MAIN)  :%@ %@ %@ %@",self,_sourceCurrencyName.text,_sourceCurrencyFlag.image,_sourceCurrencyUnit.text);
+    self.sourceCurrencyName.text = countryName;
+    self.sourceCurrencyFlag.image = [UIImage imageNamed:flagname];//国旗
+    self.sourceCurrencyUnit.text =unit;//单位
+    
+    NSLog(@"控件属性配置 - self by CVC (MAIN)  :%@ %@ %@ %@",self,self.sourceCurrencyName.text,self.sourceCurrencyFlag.image,self.sourceCurrencyUnit.text);
 }
 
+- (void)dataTimeOut
+{
+    if (_hudView != nil) {
+        [_hudView setHudViewImage:[UIImage imageNamed:@"cross"] text:@"连接超时"];
+        [_hudView setNeedsDisplay];
+        [_hudView dismissHudViewAfterDelay:0.7 completion:^{
+            self.navigationController.view.userInteractionEnabled = YES;
+            _hudView = nil;
+        }];
+    }
+}
 
 
 @end

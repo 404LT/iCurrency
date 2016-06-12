@@ -14,6 +14,7 @@
 #import "TrendViewController.h"
 #import "AddCurrencyViewController.h"
 #import "AppDelegate.h"
+#import <MJRefresh.h>
 #define DEFAULTS_KEY_TARGET_CURRENCIES @"currencyDisplay"
 #define DEFAULTS_KEY_SOURCE_CURRENCY @"baseCurrency"
 @interface ConvertViewController ()<AddCurrencyViewControllerDelegate>
@@ -26,6 +27,11 @@
 @property(strong,nonatomic)MainViewController *mainvc;
 @property(strong,nonatomic)NSString *baseCurrencyName;
 @property(strong,nonatomic)ExchangeRate *rates;
+
+@property(nonatomic)BOOL updating;
+@property(nonatomic,strong)UIRefreshControl *refreshControl;//界面刷新
+@property(nonatomic,strong)UIActivityIndicatorView *loadingSpinner;
+@property(nonatomic,strong)YahooFinanceClient *yahoo;
 
 @end
 
@@ -44,17 +50,92 @@
     _cManager = [CurrencyManager sharedInstance];
     _currencyDisplay = [NSMutableArray arrayWithArray:_cManager.defaultsCountries];
     
+    //[self initRefresh];//plan1
+    
+    
+    
     [self initTableViewSetting];
     self.tableView.tableFooterView = [[UIView alloc]init];
     
-    
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(initBaseFromMvc:) name:@"initBase" object:nil];
-
-    
     //self.tableView.backgroundColor = BASIC_COLOR;
     
- 
 }
+#pragma mark - 初始化下拉刷新功能plan2
+- (void)addRefreshComponent
+{
+    //使用MJRefresh框架
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadData)];
+    [self.tableView.mj_header beginRefreshing];
+    
+}
+
+- (void)loadData{
+    
+    //获取数据成功后success block的第一步就是 调用endRefreshing方法
+    
+    
+    
+}
+
+
+
+
+
+#pragma mark - 初始化下拉刷新功能plan1
+- (void)initRefresh
+{
+    self.refreshControl = [[UIRefreshControl alloc]init];
+    self.refreshControl.tintColor = [UIColor whiteColor];
+    [self.refreshControl addTarget:self action:@selector(updateExchangeRates) forControlEvents:UIControlEventValueChanged];
+    
+    [self updateExchangeRates];
+    
+    [self showSpinner];
+    
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(appCameToForeground:) name:UIApplicationDidBecomeActiveNotification object:nil];
+    
+    
+    
+}
+
+- (void)appCameToForeground:(NSNotification *)notification
+{
+    [self updateExchangeRates];
+}
+
+- (void)updateExchangeRates
+{
+    //调用YahooClient那边获取的方法
+    //并且与UIRefreshControl联动
+    
+    if (!self.updating) {
+        self.updating = YES;
+        __weak ConvertViewController *weakSelf = self;
+        
+        
+        
+    }
+    
+    
+    
+    
+}
+
+//加载旋转标识
+- (void)showSpinner
+{
+    self.loadingSpinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    self.loadingSpinner.frame = CGRectMake(CGRectGetMidX(self.view.frame)-50, 50, 100, 100);
+    [self.view addSubview:self.loadingSpinner];
+    [self.loadingSpinner startAnimating];
+    [[UIApplication sharedApplication]beginIgnoringInteractionEvents];
+    
+}
+
+
+
 
 #pragma mark - 接收用于传递 当前基准汇率国家的通知
 - (void)initBaseFromMvc:(NSNotification *)notification
@@ -86,7 +167,6 @@
 {
     _baseAmount = baseAmount;
     [self.tableView reloadData];
-   
     
 }
 
@@ -97,7 +177,8 @@
 }
 
 #pragma mark - 表格数据源--Data Source Delegate
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     return self.currencyDisplay.count;
 }
 
@@ -124,12 +205,10 @@
     ExchangeRate *exchange = [[ExchangeRate alloc]init];
     double baseAmount = [self baseAmount];
     
-    
     //method1
     //    MainViewController *mvc = [[MainViewController alloc]init];
     //    [mvc initDefaultBaseCurrency];
     //    id currentBaseRate = mvc.baseCurrency;
-    
 
     double targetAmount =[exchange convertRate:currentBaseRate to:[_currencyDisplay objectAtIndex:indexPath.row] with:baseAmount];
     cell.targetCurrency.text =[NSString stringWithFormat:@"%f",targetAmount];
@@ -143,41 +222,20 @@
 {
     //旧的汇率已经同步，现在解决baseView
     NSString *exBase = [[NSUserDefaults standardUserDefaults]objectForKey:DEFAULTS_KEY_SOURCE_CURRENCY];
-
     //注册代理
     [self registDelegate];
     //选中的国家：
     NSString *baseCurrencyName = [self.currencyDisplay objectAtIndex:indexPath.row];
-    NSLog(@"选中的国家 %@",baseCurrencyName);
-    
-    //判断响应的方法selectBaseCurrency有没有实现
-    
+
     if ([_delegate respondsToSelector:@selector(selectBaseCurrency:)]) {
         NSLog(@"self - from disSelect (CONVERT) %@",self);
         [_delegate selectBaseCurrency:baseCurrencyName];
-        //NSLog(@"第一部分已完成");
+
     }
-    //重写一个方法用来响应Main那边那个setupBaseCurrencyByConvertViewController:
-    
-    
-    
-    
-    
-    
     
     [_currencyDisplay replaceObjectAtIndex:indexPath.row withObject:exBase];
     [self.tableView reloadData];
-    
-    
 }
-
-
-
-
-
-
-
-
 
 - (void)getBaseName:(NSNotification *)notification{
     NSString *baseName = notification.object;
@@ -238,7 +296,6 @@
     [_currencyDisplay removeObjectAtIndex:sourceIndexPath.row];
 }
 
-// 用于告诉系统开启的编辑模式是什么模式
 -(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
     //编辑模式用于删除cell
     return UITableViewCellEditingStyleDelete;
@@ -262,19 +319,15 @@
 {
     return YES;
 }
-- (void)didReceiveMemoryWarning {
-
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
-    
 }
 
 #pragma mark - 转跳到历史趋势页面
 - (IBAction)segueToTrend:(id)sender {
     
     NSLog(@"走势被点击了");
-//    TrendViewController *trendVC = [[TrendViewController alloc]init];
-//    [self.navigationController pushViewController:trendVC animated:YES];
-
     UIStoryboard *trendStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     TrendViewController *trendVC = (TrendViewController *)[trendStoryboard instantiateViewControllerWithIdentifier:@"Trend"];
     [self presentViewController:trendVC animated:YES completion:nil];
@@ -284,12 +337,8 @@
 - (void)addTargetCurrency
 {
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    
     AddCurrencyViewController *avc = (AddCurrencyViewController *)[mainStoryboard instantiateViewControllerWithIdentifier:@"AddCurrencyView"];
-    
     avc.delegate = self;
-
-    
     [self presentViewController:avc animated:YES completion:nil];
     
 }
@@ -297,18 +346,13 @@
 - (void)selectedCurrency:(NSString *)selectedCurrencyCode
 {
     //调用模型层的方法使得模型层的displayArray 添加当前选中的国家
-    NSLog(@"选中的国家是 %@",selectedCurrencyCode);
-    
+    NSLog(@"选中的国家是 %@ ----------------------------",selectedCurrencyCode);
     [_cManager addDisplayCurrencyName:selectedCurrencyCode];
     [_currencyDisplay addObject:selectedCurrencyCode];
     
-
     [self.tableView reloadData];
     
     NSLog(@"此时defaultsCountries为 is %@ currencyDisplay is %@",_cManager.defaultsCountries,_currencyDisplay);
-
-    
-    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -328,7 +372,5 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 #pragma mark - 添加国家
-
-
 
 @end

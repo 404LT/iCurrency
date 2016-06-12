@@ -54,7 +54,6 @@
         cell = [[SettingCell alloc] init];
     }
     
-    cell.countryName.text = @"aaa";
     
     return cell;
 }

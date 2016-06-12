@@ -19,8 +19,7 @@
 @property (nonatomic,copy)NSMutableDictionary *rates;
 @property (nonatomic,copy)NSDate *lastUpdated;
 
-+ (ExchangeRate *)load;
-- (BOOL)save;
+
 - (double)convertRate:(NSString *)baseCurrencyName
                    to:(NSString *)targetCurrencyName
                  with:(float)number;
