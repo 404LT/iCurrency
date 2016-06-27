@@ -22,19 +22,13 @@ NSString * yahoolURL=@"https://finance.yahoo.com/webservice/v1/symbols/allcurren
 - (NSDictionary *)getParsedDictionaryFromResults
 {
     NSError *error2;
+    
+    //1、网络请求，最终返回一个JSON格式存储在NSData中
     NSMutableDictionary *parsedResults = [[NSMutableDictionary alloc]init];
     NSData *data = [[NSString stringWithContentsOfURL:[NSURL URLWithString:yahoolURL] encoding:NSUTF8StringEncoding error:nil]dataUsingEncoding:NSUTF8StringEncoding];
     
-    //做一个错误处理
-    NSError *_Nonnull errorF;
-    if (data == nil) {
-        NSLog(@"网络错误 %@",errorF.localizedDescription);
-        [[NSNotificationCenter defaultCenter]postNotificationName:@"TimeOut" object:nil];
-    }
-    ////////////////////
     
-    
-    
+    //2、解析JSON请求，最终把解析后的结果存放在一个字典里面
     id jsonObject = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error2];
     
     if([jsonObject isKindOfClass:[NSDictionary class]]) {
@@ -64,6 +58,8 @@ NSString * yahoolURL=@"https://finance.yahoo.com/webservice/v1/symbols/allcurren
                         }
                     }
                 }
+                
+                //3、把字典保存到本地
                 
                 ExchangeRate *exchange = [[ExchangeRate alloc]init];
                 exchange.rates = parsedResults;

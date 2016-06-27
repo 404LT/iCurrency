@@ -16,6 +16,10 @@
 #import "AppDelegate.h"
 #import "HudView.h"
 
+#import <AFNetworking.h>
+#import "LWTBaseRequest.h"
+#import "LWTHttpRequest.h"
+
 #define DEFAULTS_KEY_SOURCE_CURRENCY @"baseCurrency"
 
 @interface MainViewController ()<AddCurrencyViewControllerDelegate,ConvertViewControllerDelegate>
@@ -47,7 +51,23 @@
     //超时
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(dataTimeOut) name:@"TimeOut" object:nil];
     
+    
+    [self initNetworkRequest];
+    
     NSLog(@"mvc-viewDidLoad");
+}
+
+- (void)initNetworkRequest
+{
+    NSString * yahoolURL=@"https://finance.yahoo.com/webservice/v1/symbols/allcurrencies/quote?format=json&";
+    
+   
+    
+    
+    
+    
+    
+    
 }
 
 #pragma mark - 一些需要初始化的方法

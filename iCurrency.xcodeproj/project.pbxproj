@@ -21,6 +21,13 @@
 		552F28211CCF584D004FC902 /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 552F28201CCF584D004FC902 /* refresh.png */; };
 		552F28231CCF821A004FC902 /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 552F28221CCF821A004FC902 /* cancel.png */; };
 		5568E30B1C7F0254002266D0 /* ConvertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5568E30A1C7F0254002266D0 /* ConvertViewController.m */; };
+		55770A3E1D1E78470024AB52 /* LWTObtainTrendData.m in Sources */ = {isa = PBXBuildFile; fileRef = 55770A3D1D1E78470024AB52 /* LWTObtainTrendData.m */; };
+		55770A411D1E79A10024AB52 /* LWTTrendManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 55770A401D1E79A10024AB52 /* LWTTrendManager.m */; };
+		559D6A9F1D20D0B900A4491C /* BEMAverageLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 559D6A961D20D0B900A4491C /* BEMAverageLine.m */; };
+		559D6AA01D20D0B900A4491C /* BEMCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 559D6A981D20D0B900A4491C /* BEMCircle.m */; };
+		559D6AA11D20D0B900A4491C /* BEMLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 559D6A9A1D20D0B900A4491C /* BEMLine.m */; };
+		559D6AA21D20D0B900A4491C /* BEMPermanentPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 559D6A9C1D20D0B900A4491C /* BEMPermanentPopupView.m */; };
+		559D6AA31D20D0B900A4491C /* BEMSimpleLineGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 559D6A9E1D20D0B900A4491C /* BEMSimpleLineGraphView.m */; };
 		55A539F41C7C692D0035043F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A539F31C7C692D0035043F /* main.m */; };
 		55A539F71C7C692D0035043F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A539F61C7C692D0035043F /* AppDelegate.m */; };
 		55A539FD1C7C692D0035043F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55A539FB1C7C692D0035043F /* Main.storyboard */; };
@@ -280,15 +287,29 @@
 		552F28221CCF821A004FC902 /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel.png; sourceTree = "<group>"; };
 		5568E3091C7F0254002266D0 /* ConvertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConvertViewController.h; sourceTree = "<group>"; };
 		5568E30A1C7F0254002266D0 /* ConvertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConvertViewController.m; sourceTree = "<group>"; };
+		55770A3C1D1E78470024AB52 /* LWTObtainTrendData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWTObtainTrendData.h; sourceTree = "<group>"; };
+		55770A3D1D1E78470024AB52 /* LWTObtainTrendData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWTObtainTrendData.m; sourceTree = "<group>"; };
+		55770A3F1D1E79A10024AB52 /* LWTTrendManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWTTrendManager.h; sourceTree = "<group>"; };
+		55770A401D1E79A10024AB52 /* LWTTrendManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWTTrendManager.m; sourceTree = "<group>"; };
+		559D6A951D20D0B900A4491C /* BEMAverageLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMAverageLine.h; sourceTree = "<group>"; };
+		559D6A961D20D0B900A4491C /* BEMAverageLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMAverageLine.m; sourceTree = "<group>"; };
+		559D6A971D20D0B900A4491C /* BEMCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMCircle.h; sourceTree = "<group>"; };
+		559D6A981D20D0B900A4491C /* BEMCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMCircle.m; sourceTree = "<group>"; };
+		559D6A991D20D0B900A4491C /* BEMLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMLine.h; sourceTree = "<group>"; };
+		559D6A9A1D20D0B900A4491C /* BEMLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMLine.m; sourceTree = "<group>"; };
+		559D6A9B1D20D0B900A4491C /* BEMPermanentPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMPermanentPopupView.h; sourceTree = "<group>"; };
+		559D6A9C1D20D0B900A4491C /* BEMPermanentPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMPermanentPopupView.m; sourceTree = "<group>"; };
+		559D6A9D1D20D0B900A4491C /* BEMSimpleLineGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMSimpleLineGraphView.h; sourceTree = "<group>"; };
+		559D6A9E1D20D0B900A4491C /* BEMSimpleLineGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMSimpleLineGraphView.m; sourceTree = "<group>"; };
 		55A539EF1C7C692D0035043F /* iCurrency.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iCurrency.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55A539F31C7C692D0035043F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		55A539F51C7C692D0035043F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = iCurrency/AppDelegate.h; sourceTree = "<group>"; };
-		55A539F61C7C692D0035043F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = iCurrency/AppDelegate.m; sourceTree = "<group>"; };
+		55A539F51C7C692D0035043F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		55A539F61C7C692D0035043F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		55A539FC1C7C692D0035043F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		55A539FF1C7C692D0035043F /* iCurrency.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iCurrency.xcdatamodel; sourceTree = "<group>"; };
 		55A53A011C7C692D0035043F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		55A53A041C7C692D0035043F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		55A53A061C7C692D0035043F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = iCurrency/Info.plist; sourceTree = "<group>"; };
+		55A53A061C7C692D0035043F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55A53A0B1C7C692D0035043F /* iCurrencyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iCurrencyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		55A53A0F1C7C692D0035043F /* iCurrencyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iCurrencyTests.m; sourceTree = "<group>"; };
 		55A53A111C7C692D0035043F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -540,13 +561,53 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		552279791D17DD4900E675A0 /* Convert */ = {
+			isa = PBXGroup;
+			children = (
+				55FAE3B31C8E9F5900B4C620 /* CurrencyManager.h */,
+				55FAE3B41C8E9F5900B4C620 /* CurrencyManager.m */,
+				55FAE3AD1C8E9F3300B4C620 /* ExchangeRate.h */,
+				55FAE3AE1C8E9F3300B4C620 /* ExchangeRate.m */,
+				55770A3F1D1E79A10024AB52 /* LWTTrendManager.h */,
+				55770A401D1E79A10024AB52 /* LWTTrendManager.m */,
+			);
+			name = Convert;
+			sourceTree = "<group>";
+		};
+		5522797A1D17DD8800E675A0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				55FE1C551CBB9A1900EA1D84 /* Images */,
+				55FFBF871CD9CE2800E77FAE /* Names.json */,
+				55A539FE1C7C692D0035043F /* iCurrency.xcdatamodeld */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		5522797B1D17DDBD00E675A0 /* CustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				55CAAD131C848CFA00360F6B /* ConvertCell.h */,
+				55CAAD141C848CFA00360F6B /* ConvertCell.m */,
+				55015C4E1C969E500079632F /* SettingCell.h */,
+				55015C4F1C969E500079632F /* SettingCell.m */,
+				55FAE3A71C8E9EDC00B4C620 /* AddCurrencyCell.h */,
+				55FAE3A81C8E9EDC00B4C620 /* AddCurrencyCell.m */,
+			);
+			name = CustomCell;
+			sourceTree = "<group>";
+		};
 		552A405E1D0D51E400F39AB0 /* NetWorkService */ = {
 			isa = PBXGroup;
 			children = (
+				55770A3C1D1E78470024AB52 /* LWTObtainTrendData.h */,
+				55770A3D1D1E78470024AB52 /* LWTObtainTrendData.m */,
 				552A40611D0D526A00F39AB0 /* LWTHttpRequest.h */,
 				552A40621D0D526A00F39AB0 /* LWTHttpRequest.m */,
 				552A40641D0D55BA00F39AB0 /* LWTBaseRequest.h */,
 				552A40651D0D55BA00F39AB0 /* LWTBaseRequest.m */,
+				55FAE3B71C8F25DB00B4C620 /* YahooFinanceClient.h */,
+				55FAE3B81C8F25DB00B4C620 /* YahooFinanceClient.m */,
 			);
 			name = NetWorkService;
 			sourceTree = "<group>";
@@ -565,20 +626,27 @@
 			name = Others;
 			sourceTree = "<group>";
 		};
-		556CBB581CEDB6CB00484D7E /* Utility */ = {
+		559D6A941D20D0B900A4491C /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				559D6A951D20D0B900A4491C /* BEMAverageLine.h */,
+				559D6A961D20D0B900A4491C /* BEMAverageLine.m */,
+				559D6A971D20D0B900A4491C /* BEMCircle.h */,
+				559D6A981D20D0B900A4491C /* BEMCircle.m */,
+				559D6A991D20D0B900A4491C /* BEMLine.h */,
+				559D6A9A1D20D0B900A4491C /* BEMLine.m */,
+				559D6A9B1D20D0B900A4491C /* BEMPermanentPopupView.h */,
+				559D6A9C1D20D0B900A4491C /* BEMPermanentPopupView.m */,
+				559D6A9D1D20D0B900A4491C /* BEMSimpleLineGraphView.h */,
+				559D6A9E1D20D0B900A4491C /* BEMSimpleLineGraphView.m */,
 			);
-			name = Utility;
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		55A539E61C7C692D0035043F = {
 			isa = PBXGroup;
 			children = (
 				55A539F11C7C692D0035043F /* iCurrency */,
-				55A539F51C7C692D0035043F /* AppDelegate.h */,
-				55A539F61C7C692D0035043F /* AppDelegate.m */,
-				55A53A061C7C692D0035043F /* Info.plist */,
 				55A53A0E1C7C692D0035043F /* iCurrencyTests */,
 				55A53A191C7C692D0035043F /* iCurrencyUITests */,
 				55A539F01C7C692D0035043F /* Products */,
@@ -603,9 +671,8 @@
 				55FAE3B61C8E9F6200B4C620 /* Model */,
 				55CAAD0F1C848C3400360F6B /* Controller */,
 				55CAAD0E1C848C2D00360F6B /* View */,
-				55FE1C551CBB9A1900EA1D84 /* Images */,
 				55A539F21C7C692D0035043F /* Supporting Files */,
-				556CBB581CEDB6CB00484D7E /* Utility */,
+				5522797A1D17DD8800E675A0 /* Resources */,
 			);
 			path = iCurrency;
 			sourceTree = "<group>";
@@ -613,6 +680,9 @@
 		55A539F21C7C692D0035043F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				55A539F51C7C692D0035043F /* AppDelegate.h */,
+				55A539F61C7C692D0035043F /* AppDelegate.m */,
+				55A53A061C7C692D0035043F /* Info.plist */,
 				55A539F31C7C692D0035043F /* main.m */,
 			);
 			name = "Supporting Files";
@@ -639,17 +709,13 @@
 		55CAAD0E1C848C2D00360F6B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				559D6A941D20D0B900A4491C /* Classes */,
+				5522797B1D17DDBD00E675A0 /* CustomCell */,
 				552B7C311D09929B0069B892 /* HudView.h */,
 				552B7C321D09929B0069B892 /* HudView.m */,
 				55A539FB1C7C692D0035043F /* Main.storyboard */,
 				55A53A031C7C692D0035043F /* LaunchScreen.storyboard */,
 				55E2FA521CF9873100862920 /* BaseCurrency.xib */,
-				55CAAD131C848CFA00360F6B /* ConvertCell.h */,
-				55CAAD141C848CFA00360F6B /* ConvertCell.m */,
-				55015C4E1C969E500079632F /* SettingCell.h */,
-				55015C4F1C969E500079632F /* SettingCell.m */,
-				55FAE3A71C8E9EDC00B4C620 /* AddCurrencyCell.h */,
-				55FAE3A81C8E9EDC00B4C620 /* AddCurrencyCell.m */,
 				55A53A011C7C692D0035043F /* Assets.xcassets */,
 			);
 			name = View;
@@ -675,15 +741,8 @@
 		55FAE3B61C8E9F6200B4C620 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				552279791D17DD4900E675A0 /* Convert */,
 				552A405E1D0D51E400F39AB0 /* NetWorkService */,
-				55FAE3B71C8F25DB00B4C620 /* YahooFinanceClient.h */,
-				55FAE3B81C8F25DB00B4C620 /* YahooFinanceClient.m */,
-				55FAE3B31C8E9F5900B4C620 /* CurrencyManager.h */,
-				55FAE3B41C8E9F5900B4C620 /* CurrencyManager.m */,
-				55FAE3AD1C8E9F3300B4C620 /* ExchangeRate.h */,
-				55FAE3AE1C8E9F3300B4C620 /* ExchangeRate.m */,
-				55FFBF871CD9CE2800E77FAE /* Names.json */,
-				55A539FE1C7C692D0035043F /* iCurrency.xcdatamodeld */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1313,20 +1372,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				559D6AA11D20D0B900A4491C /* BEMLine.m in Sources */,
 				552F28141CCF47F6004FC902 /* TrendViewController.m in Sources */,
 				55FAE3B91C8F25DB00B4C620 /* YahooFinanceClient.m in Sources */,
+				55770A411D1E79A10024AB52 /* LWTTrendManager.m in Sources */,
 				55A539F71C7C692D0035043F /* AppDelegate.m in Sources */,
 				55015C501C969E500079632F /* SettingCell.m in Sources */,
 				55FAE3AC1C8E9F0B00B4C620 /* AddCurrencyViewController.m in Sources */,
 				55015C531C96E0780079632F /* MainViewController.m in Sources */,
+				55770A3E1D1E78470024AB52 /* LWTObtainTrendData.m in Sources */,
+				559D6AA01D20D0B900A4491C /* BEMCircle.m in Sources */,
 				55A53A001C7C692D0035043F /* iCurrency.xcdatamodeld in Sources */,
 				55FAE3B51C8E9F5900B4C620 /* CurrencyManager.m in Sources */,
+				559D6A9F1D20D0B900A4491C /* BEMAverageLine.m in Sources */,
 				55FAE3A91C8E9EDC00B4C620 /* AddCurrencyCell.m in Sources */,
+				559D6AA31D20D0B900A4491C /* BEMSimpleLineGraphView.m in Sources */,
 				5568E30B1C7F0254002266D0 /* ConvertViewController.m in Sources */,
 				55FAE3AF1C8E9F3300B4C620 /* ExchangeRate.m in Sources */,
 				552A40631D0D526A00F39AB0 /* LWTHttpRequest.m in Sources */,
 				552A40661D0D55BA00F39AB0 /* LWTBaseRequest.m in Sources */,
 				55A539F41C7C692D0035043F /* main.m in Sources */,
+				559D6AA21D20D0B900A4491C /* BEMPermanentPopupView.m in Sources */,
 				55CAAD151C848CFA00360F6B /* ConvertCell.m in Sources */,
 				55B81E701C89544500C668C3 /* SettingViewController.m in Sources */,
 				552B7C331D09929B0069B892 /* HudView.m in Sources */,

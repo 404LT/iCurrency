@@ -12,12 +12,15 @@
 
 +(void)get:(NSString *)url params:(NSDictionary *)params success:(void (^)(id))success failure:(void (^)(NSError *))failure
 {
+    //对AFN二次封装。。
     //获得请求管理者
     AFHTTPSessionManager *manage = [AFHTTPSessionManager manager];
     //申明返回的结果是text html类型
     manage.responseSerializer = [AFHTTPResponseSerializer serializer];
     //发送GET请求
-    [manage GET:url parameters:params progress:^(NSProgress * _Nonnull downloadProgress){
+    [manage GET:url
+     parameters:params
+       progress:^(NSProgress * _Nonnull downloadProgress){
     }success:^(NSURLSessionDataTask * _Nonnull task,id _Nullable responseObject){
         if (success) {
             success(responseObject);
@@ -50,7 +53,6 @@
             failure(error);
         }
     }];
-    
 }
 
 

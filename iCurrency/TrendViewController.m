@@ -7,6 +7,8 @@
 //
 
 #import "TrendViewController.h"
+#import "LWTObtainTrendData.h"
+#import "LWTTrendManager.h"
 
 @interface TrendViewController ()
 
