@@ -1,2 +1,4 @@
-# iCurrency
+# $Currency
 A simple currency converter
+
+
